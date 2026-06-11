@@ -235,7 +235,8 @@
     transition: width 0.4s ease;
   }
 
-  .sidebar-links a:hover::after {
+  .sidebar-links a:hover::after,
+  .sidebar-links a.is-active::after {
     width: 100%;
   }
 
@@ -467,7 +468,7 @@
 
 <aside class="sidebar" id="sidebar" aria-hidden="true">
   <ul class="sidebar-links">
-    <li><a href="projects.html" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
+    <li><a href="projects.html" class="is-active" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
     <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
     <li><a href="index.html#about" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
     <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
