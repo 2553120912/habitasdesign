@@ -1,0 +1,6 @@
+# Local source media kept out of GitHub's 100 MB file limit.
+videos/hero-original-large.mp4
+
+# OS/editor noise.
+.DS_Store
+Thumbs.db

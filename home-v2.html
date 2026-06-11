@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habitas Design | 建筑事务所</title>
+<style>
+  @font-face {
+    font-family: 'News Gothic';
+    src: url('fonts/news-gothic-regular.woff2') format('woff2'),
+         url('fonts/news-gothic-regular.woff')  format('woff'),
+         url('fonts/news-gothic-regular.ttf')   format('truetype'),
+         url('fonts/news-gothic-regular.otf')   format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'News Gothic';
+    src: url('fonts/news-gothic-bold.woff2') format('woff2'),
+         url('fonts/news-gothic-bold.woff')  format('woff'),
+         url('fonts/news-gothic-bold.ttf')   format('truetype'),
+         url('fonts/news-gothic-bold.otf')   format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+  }
+
+  body {
+    font-family: "News Gothic", "News Gothic MT", "Trade Gothic", "Helvetica Neue", Arial, sans-serif;
+    color: #2a2520;
+    background: #f4efe6;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── 导航 ── */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(244,239,230,0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid #e5e0d8;
+  }
+  .nav-logo {
+    display: block;
+    line-height: 0;
+  }
+  .nav-logo img {
+    display: block;
+    height: 36px;
+    width: auto;
+    transition: opacity 0.3s;
+  }
+  .nav-logo:hover img {
+    opacity: 0.6;
+  }
+  .lang-switch {
+    display: flex;
+    gap: 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #6b6058;
+  }
+  .lang-switch button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: inherit;
+    padding: 0 4px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+    font-size: 13px;
+  }
+  .lang-switch button.active {
+    opacity: 1;
+  }
+  .lang-switch button:hover {
+    opacity: 0.8;
+  }
+  .lang-switch span {
+    opacity: 0.25;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 32px 80px;
+    position: relative;
+    overflow: hidden;
+    background: #3a2f26;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(35,28,20,0.50);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .hero h1,
+  .hero .tagline,
+  .hero .scroll-hint {
+    position: relative;
+    z-index: 2;
+  }
+  .hero h1 {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    font-size: clamp(40px, 8vw, 88px);
+    font-weight: normal;
+    letter-spacing: 10px;
+    color: #faf8f5;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: heroFadeIn 3s ease-out forwards;
+  }
+  .hero .tagline {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    font-size: clamp(14px, 2vw, 18px);
+    letter-spacing: 5px;
+    color: rgba(250,248,245,0.55);
+    max-width: 500px;
+    line-height: 1.8;
+    opacity: 0;
+    animation: heroFadeIn 3s ease-out 0.3s forwards;
+  }
+  .hero .scroll-hint {
+    position: absolute;
+    bottom: 48px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: rgba(250,248,245,0.35);
+    animation: fadeInOut 2.5s ease-in-out infinite;
+    z-index: 2;
+  }
+  @keyframes fadeInOut {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.55; }
+  }
+  @keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── 滚动渐入 ── */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+  }
+  .scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── 通用板块 ── */
+  .section {
+    padding: 120px 48px;
+    position: relative;
+  }
+  .section > :where(*) {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .section-label {
+    font-family: "News Gothic", "News Gothic MT", "Trade Gothic", "Helvetica Neue", Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: #9b9088;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+  }
+
+  /* ── 设计哲学 ── */
+  .philosophy {
+    background: #f4efe6;
+  }
+  .philosophy-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 72px;
+    align-items: center;
+  }
+  .philosophy-inner > *,
+  .works-grid > *,
+  .contact-grid > *,
+  .contact-meta > * {
+    min-width: 0;
+  }
+  .philosophy-image {
+    position: relative;
+    overflow: hidden;
+    background: #e8e0d5;
+  }
+  .philosophy-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 4 / 3;
+  }
+  .philosophy-text {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .philosophy-title {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: normal;
+    letter-spacing: 5px;
+    line-height: 1.5;
+    color: #2a2520;
+  }
+  .philosophy-body {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    font-size: clamp(15px, 1.4vw, 17px);
+    color: #6b6058;
+    line-height: 2;
+    max-width: 400px;
+  }
+
+  /* ── 故事横条（暖驼色） ── */
+  .story-band {
+    background: #e8e0d5;
+    padding: 80px 64px;
+    text-align: center;
+  }
+  .story-band-inner {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .story-title {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    font-size: clamp(28px, 4.5vw, 52px);
+    font-weight: normal;
+    letter-spacing: 6px;
+    line-height: 1.6;
+    color: #2a2520;
+    margin-bottom: 40px;
+  }
+  .story-line {
+    width: 40px;
+    height: 1px;
+    background: #9b9088;
+    margin: 0 auto 32px;
+  }
+  .story-sub {
+    font-family: "News Gothic", "News Gothic MT", "Trade Gothic", "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: #6b6058;
+    text-transform: uppercase;
+  }
+
+  /* ── 精选作品 ── */
+  .works {
+    background: #f4efe6;
+  }
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px 40px;
+  }
+  .works-card {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    cursor: default;
+  }
+  .works-card-image {
+    position: relative;
+    overflow: hidden;
+    background: #e8e0d5;
+    aspect-ratio: 4 / 3;
+  }
+  .works-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s ease, filter 0.8s ease;
+  }
+  .works-card:hover .works-card-image img {
+    transform: scale(1.04);
+    filter: brightness(1.08);
+  }
+  .works-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(42,37,32,0.45);
+    color: #faf8f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 28px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .works-card:hover .works-card-overlay {
+    opacity: 1;
+  }
+  .works-card-overlay-title {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    font-size: clamp(20px, 2vw, 26px);
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+  }
+  .works-card-overlay-info {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: rgba(250,248,245,0.7);
+  }
+  .works-card-status {
+    font-family: "News Gothic", "News Gothic MT", "Trade Gothic", "Helvetica Neue", Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #9b9088;
+    text-transform: uppercase;
+  }
+  .works-card-title {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    font-size: clamp(20px, 2vw, 26px);
+    font-weight: normal;
+    letter-spacing: 3px;
+    line-height: 1.25;
+  }
+  .works-card-info {
+    font-family: "News Gothic", "News Gothic MT", "Trade Gothic", "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #6b6058;
+  }
+
+  /* ── 关于 ── */
+  .about {
+    background: #f4efe6;
+  }
+  .about-content {
+    max-width: 640px;
+  }
+  .about-content p {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: #6b6058;
+    margin-bottom: 24px;
+    line-height: 2;
+  }
+
+  /* ── 联系 ── */
+  .contact {
+    background: #f0ece6;
+    padding: 80px 48px 64px;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #ddd8cf;
+  }
+  .contact-item h4 {
+    font-family: "News Gothic", "News Gothic MT", "Trade Gothic", "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    letter-spacing: 3px;
+    color: #9b9088;
+    margin-bottom: 14px;
+  }
+  .contact-item p {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    line-height: 2.2;
+    color: #2a2520;
+  }
+  .contact-phone {
+    margin-top: 8px;
+  }
+  .contact-item a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .contact-item a:hover {
+    opacity: 0.6;
+  }
+  .contact-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px;
+    margin-top: 48px;
+  }
+
+  /* ── 页脚 ── */
+  .footer {
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    background: #f0ece6;
+    color: #9b9088;
+    border-top: 1px solid #ddd8cf;
+  }
+
+  /* ── 移动端 ── */
+  @media (max-width: 1024px) {
+    .philosophy-inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .works-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 40px 32px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      padding: 16px 24px;
+    }
+    .nav-logo img {
+      height: 28px;
+    }
+    .section {
+      padding: 64px 24px;
+    }
+    .philosophy-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .philosophy-image img {
+      aspect-ratio: 4 / 3;
+    }
+    .story-band {
+      padding: 56px 24px;
+    }
+    .story-title {
+      letter-spacing: 4px;
+      margin-bottom: 28px;
+    }
+    .works-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .contact {
+      padding: 56px 24px 48px;
+    }
+    .contact-grid,
+    .contact-meta {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .hero h1 {
+      letter-spacing: 6px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- 导航 -->
+<nav class="nav">
+  <a href="#" class="nav-logo" aria-label="Habitas Design">
+    <img src="images/logo.png" alt="Habitas Design">
+  </a>
+  <div class="lang-switch">
+    <button id="btn-cn" class="active" onclick="switchLang('cn')">中</button>
+    <span>/</span>
+    <button id="btn-en" onclick="switchLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <img class="hero-bg" src="images/lovell-house/00-hero.png" alt="">
+  <h1 data-i18n="hero-title">Habitas Design</h1>
+  <p class="tagline" data-i18n="hero-tagline">空间为生活而存在 &nbsp;/&nbsp; 设计为体验而思考</p>
+  <span class="scroll-hint" data-i18n="hero-scroll">↓ 向下浏览</span>
+</section>
+
+<!-- 设计哲学 -->
+<section class="philosophy section scroll-reveal">
+  <div class="philosophy-inner">
+    <div class="philosophy-image">
+      <img src="images/web-03.jpg" alt="">
+    </div>
+    <div class="philosophy-text">
+      <h2 class="philosophy-title" data-i18n="philosophy-title">空间 · 场所 · 生活</h2>
+      <p class="philosophy-body" data-i18n="philosophy-body">每一个项目都始于对土地的阅读。我们相信建筑不是强加于场地的物体，而是从环境中生长出来的存在。光线、材料、尺度——这些最根本的元素，构成了我们设计语言的基石。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 故事横条 -->
+<section class="story-band scroll-reveal">
+  <div class="story-band-inner">
+    <h2 class="story-title" data-i18n="story-title">匠心独运<br>卓越设计屡获殊荣</h2>
+    <div class="story-line"></div>
+    <p class="story-sub" data-i18n="story-sub">我们的故事</p>
+  </div>
+</section>
+
+<!-- 精选作品 -->
+<section class="works section scroll-reveal">
+  <p class="section-label" data-i18n="works-label">精选作品</p>
+  <div class="works-grid" id="works-grid">
+  </div>
+</section>
+
+<!-- 关于 -->
+<section class="about section scroll-reveal">
+  <p class="section-label" data-i18n="section-about">关于我们</p>
+  <div class="about-content">
+    <p data-i18n="about-p1">我们从一个注重协作的小团队开始，逐渐成长为墨尔本备受信赖的定制住宅建造团队之一，以将创造力与精准执行相结合而闻名。</p>
+    <p data-i18n="about-p2">我们的成功建立在关系之上。客户的信任、合作伙伴的用心，以及团队的投入，共同塑造了我们交付的每一座住宅。每一座住宅都讲述着一个故事，而我们的故事始于一个信念：建造的过程应当和最终成果一样被细致对待。</p>
+  </div>
+</section>
+
+<!-- 联系 -->
+<section class="contact scroll-reveal">
+  <p class="section-label" data-i18n="section-contact">联系</p>
+  <div class="contact-grid">
+    <div class="contact-item">
+      <h4 data-i18n="contact-melbourne-label">墨尔本</h4>
+      <p data-i18n="contact-melbourne">U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia</p>
+      <p class="contact-phone" data-i18n="contact-melbourne-phone">+61 422 501 811</p>
+    </div>
+    <div class="contact-item">
+      <h4 data-i18n="contact-shanghai-label">上海</h4>
+      <p data-i18n="contact-shanghai">中国 上海市<br>苏州南路 1295 号</p>
+      <p class="contact-phone" data-i18n="contact-shanghai-phone">+86 159 0199 9004</p>
+    </div>
+  </div>
+
+  <div class="contact-meta">
+    <div class="contact-item">
+      <h4 data-i18n="contact-email-label">邮箱</h4>
+      <p><a href="mailto:studio@habitasdesign.com" data-i18n="contact-email">studio@habitasdesign.com</a></p>
+    </div>
+    <div class="contact-item">
+      <h4 data-i18n="contact-web-label">网站</h4>
+      <p><a href="https://habitasdesign.com" target="_blank" rel="noopener" data-i18n="contact-web">habitasdesign.com</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer">
+  <span data-i18n="footer-copy">&copy; 2026 Habitas Design. All rights reserved.</span>
+</footer>
+
+<script>
+/* ── i18n ── */
+const t = {
+  'hero-title':       ['Habitas Design', 'Habitas Design'],
+  'hero-tagline':     ['空间为生活而存在 &nbsp;/&nbsp; 设计为体验而思考', 'Space for living &nbsp;/&nbsp; Design through experience'],
+  'hero-scroll':      ['↓ 向下浏览', '↓ Scroll'],
+  'philosophy-title': ['空间 · 场所 · 生活', 'Space · Place · Life'],
+  'philosophy-body':  ['每一个项目都始于对土地的阅读。我们相信建筑不是强加于场地的物体，而是从环境中生长出来的存在。光线、材料、尺度——这些最根本的元素，构成了我们设计语言的基石。',
+                       'Every project begins with reading the land. We believe architecture is not an object imposed on a site, but something that grows from its surroundings. Light, material, scale — these fundamental elements form the foundation of our design language.'],
+  'story-title':      ['匠心独运<br>卓越设计屡获殊荣', 'Crafted with intent<br>Recognised by design'],
+  'story-sub':        ['我们的故事', 'Our Story'],
+  'works-label':      ['精选作品', 'Selected Works'],
+  'section-about':    ['关于我们', 'About Us'],
+  'about-p1':         ['我们从一个注重协作的小团队开始，逐渐成长为墨尔本备受信赖的定制住宅建造团队之一，以将创造力与精准执行相结合而闻名。', 'What started as a small team focused on collaboration has grown into one of Melbourne\'s most trusted custom home builders, known for blending creativity with precision.'],
+  'about-p2':         ['我们的成功建立在关系之上。客户的信任、合作伙伴的用心，以及团队的投入，共同塑造了我们交付的每一座住宅。每一座住宅都讲述着一个故事，而我们的故事始于一个信念：建造的过程应当和最终成果一样被细致对待。', 'Our success is built on relationships. The trust of our clients, the care of our partners and the dedication of our team shape every home we deliver. Every home tells a story. Ours began with a belief that the journey should feel as considered as the result.'],
+  'section-contact':  ['联系', 'Contact'],
+  'contact-melbourne-label': ['墨尔本', 'Melbourne'],
+  'contact-melbourne':       ['U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia', 'U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia'],
+  'contact-melbourne-phone': ['+61 422 501 811', '+61 422 501 811'],
+  'contact-shanghai-label':  ['上海', 'Shanghai'],
+  'contact-shanghai':        ['中国 上海市<br>苏州南路 1295 号', '1295 Suzhou South Road<br>Shanghai, China'],
+  'contact-shanghai-phone':  ['+86 159 0199 9004', '+86 159 0199 9004'],
+  'contact-email-label':     ['邮箱', 'Email'],
+  'contact-email':           ['studio@habitasdesign.com', 'studio@habitasdesign.com'],
+  'contact-web-label':       ['网站', 'Website'],
+  'contact-web':             ['habitasdesign.com', 'habitasdesign.com'],
+  'footer-copy':             ['&copy; 2026 Habitas Design. All rights reserved.', '&copy; 2026 Habitas Design. All rights reserved.']
+};
+
+const worksProjects = [
+  {
+    image: 'images/lovell-house/精选卡/秋天perspective.png',
+    title:  { cn: 'Lovell House', en: 'Lovell House' },
+    info:   { cn: '住宅 · 2024',  en: 'Residence · 2024' },
+    status: { cn: '已完工',       en: 'COMPLETED' },
+  },
+  {
+    image: 'images/web-01.jpg',
+    title:  { cn: 'Brighton 住宅', en: 'Brighton Residence' },
+    info:   { cn: '住宅 · 2023', en: 'Residence · 2023' },
+    status: { cn: '已完工',  en: 'COMPLETED' },
+  },
+  {
+    image: 'images/web-02.webp',
+    title:  { cn: 'Kew 商业空间', en: 'Kew Commercial' },
+    info:   { cn: '商业 · 2023', en: 'Commercial · 2023' },
+    status: { cn: '已完工',  en: 'COMPLETED' },
+  },
+  {
+    image: 'images/web-05.png',
+    title:  { cn: 'Glen Waverley 住宅', en: 'Glen Waverley Residence' },
+    info:   { cn: '住宅 · 2026', en: 'Residence · 2026' },
+    status: { cn: '进行中',  en: 'IN PROGRESS' },
+  },
+];
+
+let lang = localStorage.getItem('hb-lang') || 'cn';
+
+function renderWorks() {
+  const grid = document.getElementById('works-grid');
+  if (!grid) return;
+  grid.innerHTML = worksProjects.map(p => `
+    <div class="works-card">
+      <span class="works-card-status">${p.status[lang]}</span>
+      <h3 class="works-card-title">${p.title[lang]}</h3>
+      <div class="works-card-image">
+        <img src="${p.image}" alt="${p.title.en}">
+        <div class="works-card-overlay">
+          <span class="works-card-overlay-title">${p.title[lang]}</span>
+          <span class="works-card-overlay-info">${p.info[lang]}</span>
+        </div>
+      </div>
+      <p class="works-card-info">${p.info[lang]}</p>
+    </div>
+  `).join('');
+}
+
+function switchLang(l) {
+  if (l === lang) return;
+  lang = l;
+  localStorage.setItem('hb-lang', lang);
+  applyLang();
+}
+
+function applyLang() {
+  const idx = lang === 'cn' ? 0 : 1;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.innerHTML = t[key][idx];
+  });
+  document.getElementById('btn-cn').classList.toggle('active', lang === 'cn');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang === 'cn' ? 'zh-CN' : 'en';
+  renderWorks();
+}
+
+applyLang();
+renderWorks();
+
+/* ── 滚动渐入 ── */
+(() => {
+  const targets = document.querySelectorAll('.scroll-reveal');
+  if (!targets.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach(t => t.classList.add('is-revealed'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  targets.forEach(t => observer.observe(t));
+})();
+</script>
+
+</body>
+</html>

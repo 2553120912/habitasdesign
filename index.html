@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habitas Design | 建筑事务所</title>
+<script>
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+</script>
+<style>
+  @font-face {
+    font-family: 'News Gothic';
+    src: url('fonts/news-gothic-regular.woff2') format('woff2'),
+         url('fonts/news-gothic-regular.woff')  format('woff'),
+         url('fonts/news-gothic-regular.ttf')   format('truetype'),
+         url('fonts/news-gothic-regular.otf')   format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'News Gothic';
+    src: url('fonts/news-gothic-bold.woff2') format('woff2'),
+         url('fonts/news-gothic-bold.woff')  format('woff'),
+         url('fonts/news-gothic-bold.ttf')   format('truetype'),
+         url('fonts/news-gothic-bold.otf')   format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    font-family: "News Gothic", "News Gothic MT", "Trade Gothic", "Franklin Gothic Book", "Helvetica Neue", Arial, "Noto Serif SC", "Source Han Serif SC", "SimSun", sans-serif;
+    color: #1a1a1a;
+    background: #f4efe6;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── 导航 ── */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 110;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    color: #fafaf8;
+    background: #1a1a1a;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .nav-logo {
+    display: block;
+    line-height: 0;
+  }
+  .nav-logo img {
+    display: block;
+    height: 44px;
+    width: auto;
+    filter: invert(1);
+    transition: opacity 0.3s;
+  }
+  .nav-logo:hover img {
+    opacity: 0.7;
+  }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .lang-switch {
+    display: flex;
+    gap: 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .lang-switch button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: inherit;
+    padding: 0 4px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+  }
+  #btn-cn { font-size: 13px; }
+  #btn-en { font-size: 13px; }
+  .lang-switch button.active {
+    opacity: 1;
+  }
+  .lang-switch button:hover {
+    opacity: 0.8;
+  }
+  .lang-switch span {
+    opacity: 0.25;
+  }
+
+  /* ── 汉堡按钮 ── */
+  .nav-toggle {
+    position: fixed;
+    top: 30px;
+    right: 48px;
+    z-index: 140;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+  }
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    width: 22px;
+    background: #fafaf8;
+    transition: transform 0.35s ease, opacity 0.25s ease;
+    transform-origin: center;
+  }
+  .nav-toggle.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ── 侧栏抽屉 ── */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 340px;
+    max-width: 100%;
+    height: 100vh;
+    background: rgba(42, 42, 42, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fafaf8;
+    z-index: 130;
+    padding: 120px 48px 48px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, 0, 0);
+    transition: visibility 0s linear 1.5s;
+    will-change: opacity;
+    backface-visibility: hidden;
+    contain: paint;
+  }
+  .sidebar.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    animation: sidebarFadeIn 1.5s cubic-bezier(0.19, 1, 0.22, 1) both;
+    transition: visibility 0s;
+  }
+  .sidebar-links {
+    opacity: 0;
+    transition: opacity 1.1s cubic-bezier(0.19, 1, 0.22, 1) 0.15s;
+    will-change: opacity;
+  }
+  .sidebar.is-open .sidebar-links {
+    opacity: 1;
+  }
+  @keyframes sidebarFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    z-index: 120;
+  }
+  .sidebar-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .sidebar-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .sidebar-links a {
+    position: relative;
+    color: #fafaf8;
+    text-decoration: none;
+    font-size: 24px;
+    letter-spacing: 4px;
+    display: inline-block;
+  }
+  .sidebar-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 1px;
+    background: #fafaf8;
+    transition: width 0.4s ease;
+  }
+  .sidebar-links a:hover::after {
+    width: 100%;
+  }
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 32px 80px;
+    background: #1a1a1a;
+    color: #fafaf8;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .hero h1,
+  .hero .tagline,
+  .hero .scroll-hint {
+    z-index: 2;
+  }
+  .hero h1,
+  .hero .tagline {
+    position: relative;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 7vw, 80px);
+    font-weight: normal;
+    letter-spacing: 8px;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: heroFadeIn 4s ease-out forwards;
+  }
+  .hero .tagline {
+    font-size: clamp(14px, 2vw, 18px);
+    letter-spacing: 6px;
+    color: rgba(250,250,248,0.55);
+    max-width: 480px;
+    opacity: 0;
+    animation: heroFadeIn 4s ease-out forwards;
+  }
+  .hero .scroll-hint {
+    position: absolute;
+    bottom: 48px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: rgba(250,250,248,0.35);
+    animation: fadeInOut 2.5s ease-in-out infinite;
+  }
+  @keyframes fadeInOut {
+    0%, 100% { opacity: 0.25; }
+    50% { opacity: 0.6; }
+  }
+  @keyframes heroFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ── 模块滚动渐入（仅文字） ── */
+  .scroll-reveal :where(h1, h2, h3, h4, p, span) {
+    opacity: 0;
+    transition: opacity 2s ease-out;
+  }
+  .scroll-reveal.is-revealed :where(h1, h2, h3, h4, p, span) {
+    opacity: 1;
+  }
+
+  /* ── 通用板块 ── */
+  .section {
+    padding: 120px 48px;
+    background: #f4efe6;
+    position: relative;
+    z-index: 2;
+  }
+  .section > :where(*) {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .section-label {
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: #999;
+    margin-bottom: 48px;
+    text-transform: uppercase;
+  }
+
+  /* ── 服务流程板块 ── */
+  .service-process {
+    background: #f4efe6;
+    position: relative;
+    z-index: 2;
+    padding: 64px 64px 64px 48px;
+  }
+  .service-process-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    gap: 64px;
+    align-items: stretch;
+    min-height: 88vh;
+  }
+  .service-process-inner > *,
+  .works-feature-inner > * {
+    min-width: 0;
+  }
+  .service-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 32px;
+  }
+  .carousel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .carousel-frame {
+    position: relative;
+    flex: 1;
+    background: #e8e6e1;
+    overflow: hidden;
+  }
+  .carousel-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+  .carousel-slide.is-active { opacity: 1; }
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .carousel-slide.placeholder { background: #d4d1cb; }
+  .carousel-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    margin-top: 8px;
+  }
+  .carousel-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: none;
+    border: none;
+    padding: 0;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    font-family: inherit;
+  }
+  .carousel-btn:hover { opacity: 0.45; }
+  .carousel-btn svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .service-slogan {
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: normal;
+    letter-spacing: 4px;
+    margin-bottom: 32px;
+    line-height: 1.4;
+    overflow-wrap: break-word;
+  }
+  .service-intro {
+    font-size: clamp(15px, 1.4vw, 17px);
+    color: #888;
+    max-width: 360px;
+    margin-bottom: 40px;
+    line-height: 1.9;
+  }
+  .service-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+    align-self: flex-start;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .service-cta:hover { opacity: 0.55; }
+  .service-cta-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #1a1a1a;
+    border-radius: 50%;
+    color: #1a1a1a;
+  }
+  .cta-arrow {
+    width: 14px;
+    height: 14px;
+    display: block;
+  }
+
+  /* ── 故事板块（黑色叙事条） ── */
+  .story-band {
+    background: #1a1a1a;
+    color: #fafaf8;
+    padding: 80px 64px;
+    position: relative;
+    z-index: 2;
+  }
+  .story-band-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .story-title {
+    font-size: clamp(28px, 4.5vw, 52px);
+    font-weight: normal;
+    letter-spacing: 6px;
+    line-height: 1.6;
+    margin-bottom: 48px;
+  }
+  .story-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fafaf8;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .story-cta:hover { opacity: 0.55; }
+  .story-cta-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #fafaf8;
+    border-radius: 50%;
+    color: #fafaf8;
+  }
+
+  /* ── 精选项目（入口式） ── */
+  .works-feature {
+    background: #f4efe6;
+    padding: 64px 48px 64px 64px;
+    position: relative;
+    z-index: 2;
+  }
+  .works-feature-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr);
+    gap: 64px;
+    align-items: stretch;
+    min-height: 88vh;
+  }
+  .works-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .works-slogan {
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: normal;
+    letter-spacing: 4px;
+    margin-bottom: 32px;
+    line-height: 1.4;
+    overflow-wrap: break-word;
+  }
+  .works-intro {
+    font-size: clamp(15px, 1.4vw, 17px);
+    color: #888;
+    max-width: 360px;
+    margin-bottom: 40px;
+    line-height: 1.9;
+  }
+  .works-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    align-self: flex-start;
+    margin-top: auto;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .works-cta:hover { opacity: 0.55; }
+  .works-cta-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #1a1a1a;
+    border-radius: 50%;
+  }
+  .works-carousel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+    align-items: stretch;
+    height: 100%;
+  }
+  .works-card {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 16px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+  .works-card-status {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #777;
+    text-transform: uppercase;
+  }
+  .works-card-title {
+    font-size: clamp(20px, 2vw, 28px);
+    font-weight: normal;
+    letter-spacing: 3px;
+    line-height: 1.25;
+    margin: 0;
+    overflow-wrap: break-word;
+  }
+  .works-card-image {
+    position: relative;
+    overflow: hidden;
+    background: #e8e6e1;
+    min-height: 0;
+  }
+  .works-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .works-card:hover .works-card-image img {
+    transform: scale(1.03);
+  }
+  .works-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fafaf8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 28px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .works-card:hover .works-card-overlay {
+    opacity: 1;
+  }
+  .works-card-overlay-title {
+    font-size: clamp(20px, 2vw, 28px);
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+  }
+  .works-card-overlay-info {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: rgba(250, 250, 248, 0.7);
+  }
+  .works-card-info {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #666;
+    margin: 0;
+  }
+  .works-card--preview {
+    opacity: 0.45;
+    filter: grayscale(0.4);
+    transition: opacity 0.5s ease, filter 0.5s ease;
+  }
+  .works-card--preview:hover {
+    opacity: 0.8;
+  }
+
+  /* ── 关于 ── */
+  .about-content {
+    max-width: 640px;
+  }
+  .about-content p {
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: #555;
+    margin-bottom: 24px;
+  }
+
+  /* ── 关于我们（黑底） ── */
+  .about-feature {
+    background: #1a1a1a;
+    padding: 48px 64px 48px;
+    position: relative;
+    z-index: 2;
+  }
+  .about-feature .section-label {
+    color: #999;
+  }
+  .about-feature .about-content p {
+    color: #fafaf8;
+  }
+
+  /* ── 联系 ── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #e0ded8;
+  }
+  .contact-grid > *,
+  .contact-meta > * {
+    min-width: 0;
+  }
+  .contact-item h4 {
+    font-size: 13px;
+    font-weight: normal;
+    letter-spacing: 3px;
+    color: #999;
+    margin-bottom: 14px;
+  }
+  .contact-item p {
+    font-size: 16px;
+    letter-spacing: 1px;
+    line-height: 2.2;
+  }
+  .contact-phone {
+    margin-top: 8px;
+  }
+  .contact-item a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .contact-item a:hover {
+    opacity: 0.6;
+  }
+  .contact-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px;
+    margin-top: 48px;
+  }
+
+  /* ── 联系（黑底） ── */
+  .contact-feature {
+    background: #1a1a1a;
+    padding: 48px 64px 80px;
+    position: relative;
+    z-index: 2;
+  }
+  .contact-feature .section-label {
+    color: #999;
+  }
+  .contact-feature .contact-grid {
+    border-top-color: rgba(255, 255, 255, 0.15);
+  }
+  .contact-feature .contact-item h4 {
+    color: #999;
+  }
+  .contact-feature .contact-item p,
+  .contact-feature .contact-item a {
+    color: #fafaf8;
+  }
+  .contact-feature .contact-item a:hover {
+    opacity: 0.6;
+  }
+
+  /* ── 页脚 ── */
+  .footer {
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    background: #1a1a1a;
+    color: #666;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── 移动端 ── */
+  @media (max-width: 1100px) {
+    .service-process,
+    .works-feature {
+      padding: 48px 32px;
+    }
+    .service-process-inner,
+    .works-feature-inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      min-height: auto;
+    }
+    .carousel-frame {
+      aspect-ratio: 4 / 3;
+      height: auto;
+    }
+    .service-text,
+    .works-text {
+      justify-content: flex-start;
+      padding-bottom: 0;
+    }
+    .works-carousel {
+      height: auto;
+    }
+    .works-card-image {
+      aspect-ratio: 4 / 5;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      padding: 20px 24px;
+    }
+    .nav-logo img {
+      height: 32px;
+    }
+    .nav-left {
+      gap: 24px;
+    }
+    .nav-toggle {
+      top: 20px;
+      right: 24px;
+    }
+    .sidebar {
+      width: 100%;
+      padding: 100px 32px 40px;
+    }
+    .sidebar-links a {
+      font-size: 20px;
+    }
+    .section {
+      padding: 80px 24px;
+    }
+    .service-process {
+      padding: 32px 24px 16px;
+    }
+    .service-process-inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      min-height: auto;
+    }
+    .carousel-frame {
+      aspect-ratio: 4 / 3;
+      height: auto;
+    }
+    .service-text {
+      padding-bottom: 0;
+      justify-content: flex-start;
+    }
+    .story-band {
+      padding: 56px 24px;
+    }
+    .story-title {
+      margin-bottom: 32px;
+      letter-spacing: 4px;
+    }
+    .works-feature {
+      padding: 32px 24px 32px;
+    }
+    .about-feature {
+      padding: 32px 24px 32px;
+    }
+    .contact-feature {
+      padding: 32px 24px 48px;
+    }
+    .works-feature-inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      min-height: auto;
+    }
+    .works-carousel {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      height: auto;
+    }
+    .works-card-image {
+      aspect-ratio: 4 / 5;
+    }
+    .works-card--preview {
+      opacity: 0.7;
+      filter: none;
+    }
+    .works-text {
+      justify-content: flex-start;
+    }
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .contact-meta {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .hero h1 {
+      letter-spacing: 4px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- 导航 -->
+<nav class="nav">
+  <div class="nav-left">
+    <a href="#" class="nav-logo" aria-label="Habitas Design">
+      <img src="images/logo.png" alt="Habitas Design">
+    </a>
+    <div class="lang-switch">
+      <button id="btn-cn" class="active" onclick="switchLang('cn')">中</button>
+      <span>/</span>
+      <button id="btn-en" onclick="switchLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="toggleMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<div class="sidebar-overlay" onclick="closeMenu()" aria-hidden="true"></div>
+
+<aside class="sidebar" id="sidebar" aria-hidden="true">
+  <ul class="sidebar-links">
+    <li><a href="projects.html" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
+    <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
+    <li><a href="#about"   data-i18n="nav-about"   onclick="closeMenu()">关于我们</a></li>
+    <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
+    <li><a href="#"        data-i18n="nav-stories" onclick="closeMenu()">故事</a></li>
+  </ul>
+</aside>
+
+<!-- Hero -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <source src="videos/hero.mp4" type="video/mp4">
+  </video>
+  <h1 data-i18n="hero-title">Habitas Design</h1>
+  <p class="tagline" data-i18n="hero-tagline">空间为生活而存在 &nbsp;/&nbsp; 设计为体验而思考</p>
+  <span class="scroll-hint" data-i18n="hero-scroll">↓ 向下浏览</span>
+</section>
+
+<!-- 服务流程 -->
+<section class="service-process scroll-reveal" id="process">
+  <div class="service-process-inner">
+    <div class="carousel" id="carousel">
+      <div class="carousel-frame"></div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="carousel-prev" aria-label="Previous">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+            <line x1="4" y1="16" x2="26" y2="16"/>
+            <polyline points="14,8 4,16 14,24"/>
+          </svg>
+        </button>
+        <button class="carousel-btn" id="carousel-next" aria-label="Next">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+            <line x1="6" y1="16" x2="28" y2="16"/>
+            <polyline points="18,8 28,16 18,24"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="service-text">
+      <h2 class="service-slogan" data-i18n="service-slogan">空间 · 场所 · 生活</h2>
+      <p class="service-intro" data-i18n="service-intro">我们相信设计的力量能够促进健康生活，缔造长久的合作关系，并营造让世界比我们初见时更美好的建筑。</p>
+      <a href="process.html" class="service-cta">
+        <span data-i18n="service-cta">服务流程</span>
+        <span class="service-cta-circle" aria-hidden="true">
+          <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="6" y1="12" x2="18" y2="12"/>
+            <polyline points="13,7 18,12 13,17"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 故事板块（黑色叙事条） -->
+<section class="story-band scroll-reveal">
+  <div class="story-band-inner">
+    <h2 class="story-title" data-i18n="story-title">匠心独运<br>卓越设计屡获殊荣</h2>
+    <a href="#" class="story-cta">
+      <span data-i18n="story-cta">我们的故事</span>
+      <span class="story-cta-circle" aria-hidden="true">
+        <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="6" y1="12" x2="18" y2="12"/>
+          <polyline points="13,7 18,12 13,17"/>
+        </svg>
+      </span>
+    </a>
+  </div>
+</section>
+
+<!-- 作品 -->
+<section id="works" class="works-feature scroll-reveal">
+  <div class="works-feature-inner">
+    <div class="works-text">
+      <h2 class="works-slogan" data-i18n="works-slogan">作品 · 见证</h2>
+      <p class="works-intro" data-i18n="works-intro">从城市住宅到文化建筑，我们以建筑回应场地、光线与人的行为。每一个项目都是一次对生活方式的重新阅读。</p>
+      <a href="projects.html" class="works-cta">
+        <span data-i18n="works-cta">查看项目</span>
+        <span class="works-cta-circle" aria-hidden="true">
+          <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="6" y1="12" x2="18" y2="12"/>
+            <polyline points="13,7 18,12 13,17"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+    <div class="works-carousel">
+      <a href="projects.html" class="works-card works-card--active" data-role="active">
+        <span class="works-card-status"></span>
+        <h3 class="works-card-title"></h3>
+        <div class="works-card-image">
+          <img alt="">
+          <div class="works-card-overlay">
+            <span class="works-card-overlay-title"></span>
+            <span class="works-card-overlay-info"></span>
+          </div>
+        </div>
+        <p class="works-card-info"></p>
+      </a>
+      <a href="#" class="works-card works-card--preview" data-role="preview">
+        <span class="works-card-status"></span>
+        <h3 class="works-card-title"></h3>
+        <div class="works-card-image">
+          <img alt="">
+          <div class="works-card-overlay">
+            <span class="works-card-overlay-title"></span>
+            <span class="works-card-overlay-info"></span>
+          </div>
+        </div>
+        <p class="works-card-info"></p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 关于 -->
+<section id="about" class="about-feature scroll-reveal">
+  <p class="section-label" data-i18n="section-about">关于我们</p>
+  <div class="about-content">
+    <p data-i18n="about-p1">Habitas Design 植根于当代设计的理念，同时坚守对经典特质的追求。我们希望在每一个项目中，找到隽永气质与建筑表达之间的平衡。</p>
+    <p data-i18n="about-p2">3000 Corporation 与 Habitas Design 携手合作，汇聚了 35 年商业建筑经验与 20 年住宅设计经验。我们以家族对设计的执着、专注的客户服务，以及对品质的坚守，在墨尔本打造高端豪宅。</p>
+    <p data-i18n="about-p3">我们亦携手墨尔本最具创意的建筑师、室内与产品设计师、景观设计师及营造团队，为您提供量身定制的设计与建造一体化服务。</p>
+    <p data-i18n="about-p4">我们为客户与合作伙伴汇聚了 55 年的综合经验，涵盖开发、设计、建造与产品国际进口等领域。</p>
+  </div>
+</section>
+
+<!-- 联系 -->
+<section id="contact" class="contact-feature scroll-reveal">
+  <p class="section-label" data-i18n="section-contact">联系</p>
+  <div class="contact-grid">
+    <div class="contact-item">
+      <h4 data-i18n="contact-melbourne-label">墨尔本</h4>
+      <p data-i18n="contact-melbourne">U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia</p>
+      <p class="contact-phone" data-i18n="contact-melbourne-phone">+61 422 501 811</p>
+    </div>
+    <div class="contact-item">
+      <h4 data-i18n="contact-shanghai-label">上海</h4>
+      <p data-i18n="contact-shanghai">中国 上海市<br>苏州南路 1295 号</p>
+      <p class="contact-phone" data-i18n="contact-shanghai-phone">+86 159 0199 9004</p>
+    </div>
+  </div>
+
+  <div class="contact-meta">
+    <div class="contact-item">
+      <h4 data-i18n="contact-email-label">邮箱</h4>
+      <p><a href="mailto:studio@habitasdesign.com" data-i18n="contact-email">studio@habitasdesign.com</a></p>
+    </div>
+    <div class="contact-item">
+      <h4 data-i18n="contact-web-label">网站</h4>
+      <p><a href="https://habitasdesign.com" target="_blank" rel="noopener" data-i18n="contact-web">habitasdesign.com</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer">
+  <span data-i18n="footer-copy">&copy; 2026 Habitas Design. All rights reserved.</span>
+</footer>
+
+<script>
+// 进入页面时强制从顶部开始（除非用户访问带 #xxx 的 URL）
+if (!location.hash) {
+  const html = document.documentElement;
+  const prev = html.style.scrollBehavior;
+  html.style.scrollBehavior = 'auto';
+  window.scrollTo(0, 0);
+  html.style.scrollBehavior = prev;
+}
+
+const t = {
+  'nav-works':       ['作品',     'Projects'],
+  'nav-process':     ['服务流程', 'Process'],
+  'nav-about':       ['关于我们', 'About us'],
+  'nav-contact':     ['联系我们', 'Contact'],
+  'nav-stories':     ['故事',     'Stories'],
+  'service-label':   ['服务流程 / OUR PROCESS', 'OUR PROCESS'],
+  'service-slogan':  ['空间 · 场所 · 生活',     'Space · Place · Life'],
+  'service-intro':   ['我们相信设计的力量能够促进健康生活，缔造长久的合作关系，并营造让世界比我们初见时更美好的建筑。',
+                      'We believe in the power of design that promotes healthy living, creating lasting collaborations and Buildings that leave the world better than how we found it.'],
+  'service-cta':     ['服务流程',                'OUR PROCESS'],
+  'hero-title':      ['Habitas Design', 'Habitas Design'],
+  'hero-tagline':    ['空间为生活而存在 &nbsp;/&nbsp; 设计为体验而思考', 'Space for living &nbsp;/&nbsp; Design through experience'],
+  'hero-scroll':     ['↓ 向下浏览', '↓ Scroll'],
+  'story-title':     ['匠心独运<br>卓越设计屡获殊荣', 'Crafted with intent<br>Recognised by design'],
+  'story-cta':       ['我们的故事', 'OUR STORY'],
+  'works-slogan':    ['作品 · 见证', 'Works · Witness'],
+  'works-intro':     ['从城市住宅到文化建筑，我们以建筑回应场地、光线与人的行为。每一个项目都是一次对生活方式的重新阅读。',
+                      'From urban residences to cultural buildings, our architecture responds to site, light, and human behavior. Each project is a renewed reading of how we live.'],
+  'works-cta':       ['查看项目', 'View Projects'],
+  'section-about':   ['关于我们', 'About Us'],
+  'about-p1':        ['Habitas Design 植根于当代设计的理念，同时坚守对经典特质的追求。我们希望在每一个项目中，找到隽永气质与建筑表达之间的平衡。', 'Habitas Design is grounded in the values of contemporary design whilst maintaining a commitment to Classic characteristics.  We wish to find the balance of timeless qualities and Architectural expression in each project.'],
+  'about-p2':        ['3000 Corporation 与 Habitas Design 携手合作，汇聚了 35 年商业建筑经验与 20 年住宅设计经验。我们以家族对设计的执着、专注的客户服务，以及对品质的坚守，在墨尔本打造高端豪宅。', '3000 corporation & Habitas Design are bringing together 35 years of commercial construction experience & 20 years of Residential Architecture experience by a family commitment to Design, dedicated client service and quality construction of luxury homes in Melbourne.'],
+  'about-p3':        ['我们亦携手墨尔本最具创意的建筑师、室内与产品设计师、景观设计师及营造团队，为您提供量身定制的设计与建造一体化服务。', 'We also collaborate with some of Melbourne\'s most creative Architects, interior & product designers, Landscape Architects &  Builders to offer a Design & Build service that is personalized.'],
+  'about-p4':        ['我们为客户与合作伙伴汇聚了 55 年的综合经验，涵盖开发、设计、建造与产品国际进口等领域。', 'We offer 55 combined years of experience in developing, designing, building and international import of products to our clients & partners.'],
+  'section-contact': ['联系', 'Contact'],
+  'contact-melbourne-label': ['墨尔本', 'Melbourne'],
+  'contact-melbourne':       ['U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia', 'U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia'],
+  'contact-melbourne-phone': ['+61 422 501 811', '+61 422 501 811'],
+  'contact-shanghai-label':  ['上海', 'Shanghai'],
+  'contact-shanghai':        ['中国 上海市<br>苏州南路 1295 号', '1295 Suzhou South Road<br>Shanghai, China'],
+  'contact-shanghai-phone':  ['+86 159 0199 9004', '+86 159 0199 9004'],
+  'contact-email-label':     ['邮箱', 'Email'],
+  'contact-email':           ['studio@habitasdesign.com', 'studio@habitasdesign.com'],
+  'contact-web-label':       ['网站', 'Website'],
+  'contact-web':             ['habitasdesign.com', 'habitasdesign.com'],
+  'footer-copy':     ['&copy; 2026 Habitas Design. All rights reserved.', '&copy; 2026 Habitas Design. All rights reserved.']
+};
+
+let lang = localStorage.getItem('hb-lang') || 'cn';
+
+const worksProjects = [
+  {
+    id: 'lovell-house',
+    image: 'images/lovell-house/精选卡/秋天perspective.png',
+    href: 'lovell-house.html',
+    title:  { cn: 'Lovell House', en: 'Lovell House' },
+    info:   { cn: '住宅 · 2024',  en: 'Residence · 2024' },
+    status: { cn: '已完工',       en: 'COMPLETED' },
+  },
+  {
+    id: 'myrtle-house',
+    image: 'images/myrtle-house/精选卡/side elevation.png',
+    imagePosition: '54% center',
+    href: 'myrtle-house.html',
+    title:  { cn: 'Myrtle House', en: 'Myrtle House' },
+    info:   { cn: '住宅 · 2025',  en: 'Residence · 2025' },
+    status: { cn: '已完工',       en: 'COMPLETED' },
+  },
+  {
+    id: 'knutsford-house',
+    image: 'images/knutsford-house/精选卡/1.png',
+    href: 'knutsford-house.html',
+    title:  { cn: 'Knutsford House', en: 'Knutsford House' },
+    info:   { cn: '住宅 · 2025',     en: 'Residence · 2025' },
+    status: { cn: '已完工',          en: 'COMPLETED' },
+  },
+];
+
+let worksActiveIdx = 0;
+
+function fillCard(cardEl, project) {
+  cardEl.querySelector('.works-card-status').textContent = project.status[lang];
+  cardEl.querySelector('.works-card-title').textContent  = project.title[lang];
+  cardEl.querySelector('.works-card-info').textContent   = project.info[lang];
+  const img = cardEl.querySelector('.works-card-image img');
+  img.src = project.image;
+  img.alt = project.title.en;
+  img.style.objectPosition = project.imagePosition || 'center center';
+  cardEl.querySelector('.works-card-overlay-title').textContent = project.title[lang];
+  cardEl.querySelector('.works-card-overlay-info').textContent  = project.info[lang];
+}
+
+function renderWorksCarousel() {
+  if (!worksProjects.length) return;
+  const carousel = document.querySelector('.works-carousel');
+  if (!carousel) return;
+  const activeCard  = carousel.querySelector('.works-card--active');
+  const previewCard = carousel.querySelector('.works-card--preview');
+  const N = worksProjects.length;
+  fillCard(activeCard,  worksProjects[worksActiveIdx]);
+  fillCard(previewCard, worksProjects[(worksActiveIdx + 1) % N]);
+  activeCard.setAttribute('href', worksProjects[worksActiveIdx].href);
+  previewCard.setAttribute('href', '#');
+}
+
+function switchLang(l) {
+  if (l === lang) return;
+  lang = l;
+  localStorage.setItem('hb-lang', lang);
+  applyLang();
+}
+
+function applyLang() {
+  const idx = lang === 'cn' ? 0 : 1;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.innerHTML = t[key][idx];
+  });
+  document.getElementById('btn-cn').classList.toggle('active', lang === 'cn');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang === 'cn' ? 'zh-CN' : 'en';
+  renderWorksCarousel();
+}
+
+applyLang();
+
+const worksCarousel = document.querySelector('.works-carousel');
+if (worksCarousel) {
+  worksCarousel.addEventListener('click', e => {
+    const preview = e.target.closest('.works-card--preview');
+    if (!preview) return;
+    e.preventDefault();
+    worksActiveIdx = (worksActiveIdx + 1) % worksProjects.length;
+    renderWorksCarousel();
+  });
+}
+
+function toggleMenu() {
+  const isOpen = document.body.classList.toggle('menu-open');
+  const toggle = document.querySelector('.nav-toggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.querySelector('.sidebar-overlay');
+  toggle.classList.toggle('is-open', isOpen);
+  toggle.setAttribute('aria-expanded', isOpen);
+  sidebar.classList.toggle('is-open', isOpen);
+  sidebar.setAttribute('aria-hidden', !isOpen);
+  overlay.classList.toggle('is-open', isOpen);
+  overlay.setAttribute('aria-hidden', !isOpen);
+}
+
+function closeMenu() {
+  if (document.body.classList.contains('menu-open')) {
+    toggleMenu();
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeMenu();
+});
+
+/* ── 服务流程轮播 ── */
+(function() {
+  const frame = document.querySelector('.carousel-frame');
+  const prev  = document.getElementById('carousel-prev');
+  const next  = document.getElementById('carousel-next');
+  if (!frame || !prev || !next) return;
+
+  // 加图时按数字递增追加文件名（如 '3.png', '4.png'）
+  const images = ['1.png', '2.png'];
+  const basePath = 'images/轮播图/';
+
+  frame.innerHTML = images.map((name, i) =>
+    `<div class="carousel-slide${i === 0 ? ' is-active' : ''}"><img src="${basePath}${name}" alt="Carousel ${i + 1}"></div>`
+  ).join('');
+
+  const slides = frame.querySelectorAll('.carousel-slide');
+  if (!slides.length) return;
+
+  let current = 0;
+  let timer = null;
+  const INTERVAL = 5000;
+
+  function show(i) {
+    current = (i + slides.length) % slides.length;
+    slides.forEach((s, idx) => s.classList.toggle('is-active', idx === current));
+  }
+  function startAuto() {
+    stopAuto();
+    timer = setInterval(() => show(current + 1), INTERVAL);
+  }
+  function stopAuto() {
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+
+  prev.addEventListener('click', () => { show(current - 1); startAuto(); });
+  next.addEventListener('click', () => { show(current + 1); startAuto(); });
+
+  startAuto();
+})();
+
+/* ── 模块滚动渐入（每个模块首次进入视口时） ── */
+(() => {
+  const targets = document.querySelectorAll('.scroll-reveal');
+  if (!targets.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach(t => t.classList.add('is-revealed'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  targets.forEach(t => observer.observe(t));
+})();
+</script>
+
+</body>
+</html>

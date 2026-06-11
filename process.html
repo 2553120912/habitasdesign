@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>服务流程 | Habitas Design</title>
+<style>
+  @font-face {
+    font-family: 'News Gothic';
+    src: url('fonts/news-gothic-regular.woff2') format('woff2'),
+         url('fonts/news-gothic-regular.woff') format('woff'),
+         url('fonts/news-gothic-regular.ttf') format('truetype'),
+         url('fonts/news-gothic-regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'News Gothic';
+    src: url('fonts/news-gothic-bold.woff2') format('woff2'),
+         url('fonts/news-gothic-bold.woff') format('woff'),
+         url('fonts/news-gothic-bold.ttf') format('truetype'),
+         url('fonts/news-gothic-bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    font-family: "News Gothic", "Helvetica Neue", Arial, "Noto Sans SC", "Microsoft YaHei", sans-serif;
+    color: #1a1a1a;
+    background: #151515;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 110;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    color: #fafaf8;
+    background: #1a1a1a;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .nav-logo {
+    display: block;
+    line-height: 0;
+  }
+  .nav-logo img {
+    display: block;
+    height: 44px;
+    width: auto;
+    filter: invert(1);
+    transition: opacity 0.3s;
+  }
+  .nav-logo:hover img {
+    opacity: 0.7;
+  }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .lang-switch {
+    display: flex;
+    gap: 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .lang-switch button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: inherit;
+    padding: 0 4px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+    font-size: 13px;
+  }
+  .lang-switch button.active {
+    opacity: 1;
+  }
+  .lang-switch button:hover {
+    opacity: 0.8;
+  }
+  .lang-switch span {
+    opacity: 0.25;
+  }
+
+  .nav-toggle {
+    position: fixed;
+    top: 30px;
+    right: 48px;
+    z-index: 140;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+  }
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    width: 22px;
+    background: #fafaf8;
+    transition: transform 0.35s ease, opacity 0.25s ease;
+    transform-origin: center;
+  }
+  .nav-toggle.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 340px;
+    max-width: 100%;
+    height: 100vh;
+    background: rgba(42, 42, 42, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fafaf8;
+    z-index: 130;
+    padding: 120px 48px 48px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: visibility 0s linear 1.5s;
+  }
+  .sidebar.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    animation: sidebarFadeIn 1.5s cubic-bezier(0.19, 1, 0.22, 1) both;
+    transition: visibility 0s;
+  }
+  .sidebar-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    opacity: 0;
+    transition: opacity 1.1s cubic-bezier(0.19, 1, 0.22, 1) 0.15s;
+  }
+  .sidebar.is-open .sidebar-links {
+    opacity: 1;
+  }
+  @keyframes sidebarFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    z-index: 120;
+  }
+  .sidebar-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .sidebar-links a {
+    position: relative;
+    color: #fafaf8;
+    text-decoration: none;
+    font-size: 24px;
+    letter-spacing: 4px;
+    display: inline-block;
+  }
+  .sidebar-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 1px;
+    background: #fafaf8;
+    transition: width 0.4s ease;
+  }
+  .sidebar-links a:hover::after,
+  .sidebar-links a.is-active::after {
+    width: 100%;
+  }
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  .process-hero-media {
+    background: #f4efe6;
+    padding-top: 92px;
+  }
+  .process-hero-media img {
+    display: block;
+    width: 100%;
+    height: clamp(360px, 54vw, 760px);
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .process-intro {
+    background: #f4efe6;
+    padding: 112px clamp(32px, 4vw, 64px) 112px;
+  }
+  .process-intro-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: clamp(48px, 8vw, 160px);
+    align-items: end;
+  }
+  .process-intro-inner > * {
+    min-width: 0;
+  }
+  .process-title {
+    max-width: 520px;
+    font-size: 56px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.28;
+    color: #222;
+    overflow-wrap: break-word;
+  }
+  .process-copy {
+    display: grid;
+    gap: 28px;
+    max-width: 720px;
+    min-width: 0;
+  }
+  .process-copy p {
+    font-size: 18px;
+    line-height: 1.95;
+    color: #2b2b2b;
+    overflow-wrap: break-word;
+  }
+
+  .process-main {
+    background: #151515;
+    color: #f5f2ec;
+    padding: 96px 0 112px;
+  }
+  .process-main-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+  .process-section-title {
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
+    margin-bottom: 48px;
+  }
+  .accordion {
+    border-top: 1px solid rgba(245, 242, 236, 0.28);
+  }
+  .accordion-item {
+    border-bottom: 1px solid rgba(245, 242, 236, 0.28);
+  }
+  .accordion-trigger {
+    width: 100%;
+    min-height: 96px;
+    display: grid;
+    grid-template-columns: minmax(72px, 0.14fr) minmax(0, 1fr) 44px;
+    gap: 32px;
+    align-items: center;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+    padding: 0;
+    transition: background-color 0.35s ease, padding-left 0.35s ease, padding-right 0.35s ease;
+  }
+  .accordion-trigger:hover,
+  .accordion-trigger:focus-visible {
+    background: rgba(245, 242, 236, 0.055);
+    padding-left: 24px;
+    padding-right: 24px;
+    outline: none;
+  }
+  .accordion-number {
+    min-width: 0;
+    font-size: 28px;
+    line-height: 1;
+    color: rgba(245, 242, 236, 0.86);
+  }
+  .accordion-name {
+    min-width: 0;
+    font-size: 44px;
+    line-height: 1.15;
+    color: #f5f2ec;
+    overflow-wrap: break-word;
+  }
+  .accordion-icon {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(245, 242, 236, 0.72);
+    border-radius: 50%;
+    position: relative;
+    justify-self: end;
+    transition: transform 0.35s ease, border-color 0.35s ease;
+  }
+  .accordion-icon::before,
+  .accordion-icon::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 15px;
+    height: 1px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+  }
+  .accordion-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  .accordion-item.is-open .accordion-icon {
+    transform: rotate(45deg);
+    border-color: #f5f2ec;
+  }
+  .accordion-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.42s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .accordion-item.is-open .accordion-panel {
+    grid-template-rows: 1fr;
+  }
+  .accordion-panel-inner {
+    overflow: hidden;
+  }
+  .accordion-panel p {
+    max-width: 720px;
+    margin-left: calc(max(72px, 14%) + 32px);
+    padding: 0 0 38px;
+    font-size: 17px;
+    line-height: 2;
+    color: rgba(245, 242, 236, 0.72);
+    overflow-wrap: break-word;
+  }
+
+  .process-closing {
+    min-height: 420px;
+    display: grid;
+    place-items: center;
+    background: #f4efe6;
+    padding: 128px clamp(32px, 5vw, 72px);
+  }
+  .process-closing-text {
+    max-width: 980px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.72;
+    color: #222;
+    overflow-wrap: break-word;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    background: #151515;
+    color: #777;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  @media (max-width: 1180px) {
+    .process-title {
+      font-size: 48px;
+    }
+    .process-copy p {
+      font-size: 17px;
+    }
+    .accordion-name {
+      font-size: 38px;
+    }
+  }
+
+  @media (max-width: 980px) {
+    .process-hero-media {
+      padding-top: 72px;
+    }
+    .process-hero-media img {
+      height: 62vw;
+      min-height: 360px;
+    }
+    .process-intro {
+      padding: 88px 32px 72px;
+    }
+    .process-intro-inner {
+      grid-template-columns: 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+    .process-title {
+      max-width: 680px;
+      font-size: 42px;
+    }
+    .process-main {
+      padding: 72px 0 88px;
+    }
+    .process-main-inner {
+      padding: 0 32px;
+    }
+    .process-section-title {
+      font-size: 40px;
+      margin-bottom: 40px;
+    }
+    .process-closing {
+      min-height: 360px;
+      padding: 104px 32px;
+    }
+    .process-closing-text {
+      font-size: 24px;
+    }
+    .accordion-trigger {
+      grid-template-columns: 52px minmax(0, 1fr) 34px;
+      gap: 18px;
+      min-height: 84px;
+    }
+    .accordion-trigger:hover,
+    .accordion-trigger:focus-visible {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+    .accordion-icon {
+      width: 30px;
+      height: 30px;
+    }
+    .accordion-number {
+      font-size: 22px;
+    }
+    .accordion-name {
+      font-size: 32px;
+    }
+    .accordion-panel p {
+      margin-left: 70px;
+      padding-bottom: 30px;
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      padding: 20px 24px;
+    }
+    .nav-logo img {
+      height: 32px;
+    }
+    .nav-left {
+      gap: 24px;
+    }
+    .nav-toggle {
+      top: 20px;
+      right: 24px;
+    }
+    .sidebar {
+      width: 100%;
+      padding: 100px 32px 40px;
+    }
+    .sidebar-links a {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .process-hero-media img {
+      height: 280px;
+      min-height: 0;
+    }
+    .process-intro {
+      padding: 80px 22px 60px;
+    }
+    .process-title {
+      font-size: 34px;
+      line-height: 1.34;
+    }
+    .process-copy {
+      gap: 22px;
+    }
+    .process-main-inner {
+      padding: 0 22px;
+    }
+    .process-copy p {
+      font-size: 15px;
+      line-height: 1.85;
+    }
+    .process-section-title {
+      font-size: 32px;
+      margin-bottom: 34px;
+    }
+    .process-closing {
+      min-height: 300px;
+      padding: 80px 22px;
+    }
+    .process-closing-text {
+      font-size: 20px;
+      line-height: 1.75;
+    }
+    .accordion-trigger {
+      grid-template-columns: 42px minmax(0, 1fr) 30px;
+      gap: 12px;
+      min-height: 76px;
+    }
+    .accordion-number {
+      font-size: 18px;
+    }
+    .accordion-name {
+      font-size: 26px;
+    }
+    .accordion-panel p {
+      margin-left: 54px;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .process-intro {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+    .process-hero-media img {
+      height: 240px;
+    }
+    .process-main-inner {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+    .process-title {
+      font-size: 30px;
+    }
+    .process-closing {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+    .process-closing-text {
+      font-size: 18px;
+    }
+    .accordion-trigger {
+      grid-template-columns: 36px minmax(0, 1fr) 28px;
+      gap: 10px;
+    }
+    .accordion-name {
+      font-size: 23px;
+    }
+    .accordion-panel p {
+      margin-left: 46px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-logo" aria-label="Habitas Design">
+      <img src="images/logo.png" alt="Habitas Design">
+    </a>
+    <div class="lang-switch">
+      <button id="btn-cn" class="active" onclick="switchLang('cn')">中</button>
+      <span>/</span>
+      <button id="btn-en" onclick="switchLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="toggleMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<div class="sidebar-overlay" onclick="closeMenu()" aria-hidden="true"></div>
+
+<aside class="sidebar" id="sidebar" aria-hidden="true">
+  <ul class="sidebar-links">
+    <li><a href="projects.html" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
+    <li><a href="process.html" class="is-active" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
+    <li><a href="index.html#about" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
+    <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
+    <li><a href="#" data-i18n="nav-stories" onclick="closeMenu()">故事</a></li>
+  </ul>
+</aside>
+
+<main>
+  <section class="process-hero-media" aria-label="Process visual">
+    <img src="images/process/1.png" alt="">
+  </section>
+
+  <section class="process-intro" aria-labelledby="process-title">
+    <div class="process-intro-inner">
+      <div>
+        <h1 class="process-title" id="process-title" data-i18n="intro-title">无隙、无忧、无缺<br>打造伴随式筑家之旅</h1>
+      </div>
+      <div class="process-copy">
+        <p data-i18n="intro-p1">在匠心淬炼中走过四十余载筑宅之路，Habitas Design 形成了全方位的住宅定制化流程。从前期了解到交付与入住，我们以专业且优质的服务确保每一个阶段顺利进行。</p>
+        <p data-i18n="intro-p2">每一个为您量身定制的步骤，都满载您对未来之家的憧憬期盼。在卓越的建筑设计与精湛的施工技艺融合下，圆一个您所向往的、永恒的、住进幸福的梦。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="process-main" aria-labelledby="accordion-title">
+    <div class="process-main-inner">
+      <h2 class="process-section-title" id="accordion-title" data-i18n="process-heading">服务流程</h2>
+      <div class="accordion" id="process-accordion">
+        <article class="accordion-item">
+          <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-01" id="trigger-01">
+            <span class="accordion-number">01</span>
+            <span class="accordion-name" data-i18n="step-01-title">前期规划</span>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" id="panel-01" role="region" aria-labelledby="trigger-01">
+            <div class="accordion-panel-inner">
+              <p data-i18n="step-01-copy">从家庭结构、生活习惯、土地条件与预算目标出发，我们与您共同梳理项目愿景，明确时间、范围与关键决策，让筑家的第一步清晰而坚定。</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item">
+          <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-02" id="trigger-02">
+            <span class="accordion-number">02</span>
+            <span class="accordion-name" data-i18n="step-02-title">建筑设计</span>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" id="panel-02" role="region" aria-labelledby="trigger-02">
+            <div class="accordion-panel-inner">
+              <p data-i18n="step-02-copy">建筑师将场地朝向、光线、尺度与法规条件转化为完整的空间方案，在美学表达与居住实用之间建立长久平衡。</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item">
+          <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-03" id="trigger-03">
+            <span class="accordion-number">03</span>
+            <span class="accordion-name" data-i18n="step-03-title">室内设计</span>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" id="panel-03" role="region" aria-labelledby="trigger-03">
+            <div class="accordion-panel-inner">
+              <p data-i18n="step-03-copy">我们延续建筑概念进入室内细节，统筹材质、色彩、灯光、收纳与定制家具，使日常使用与视觉质感自然衔接。</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item">
+          <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-04" id="trigger-04">
+            <span class="accordion-number">04</span>
+            <span class="accordion-name" data-i18n="step-04-title">文书处理</span>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" id="panel-04" role="region" aria-labelledby="trigger-04">
+            <div class="accordion-panel-inner">
+              <p data-i18n="step-04-copy">面对规划许可、工程文件、审批协调与合同资料，我们协同相关顾问推进流程，减少沟通成本，让复杂手续更有秩序。</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item">
+          <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-05" id="trigger-05">
+            <span class="accordion-number">05</span>
+            <span class="accordion-name" data-i18n="step-05-title">施工建造</span>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" id="panel-05" role="region" aria-labelledby="trigger-05">
+            <div class="accordion-panel-inner">
+              <p data-i18n="step-05-copy">从现场组织、质量控制到进度管理，我们以稳定的建造体系落实设计意图，确保每一道工序都经得起时间检验。</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item">
+          <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-06" id="trigger-06">
+            <span class="accordion-number">06</span>
+            <span class="accordion-name" data-i18n="step-06-title">景观美化</span>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" id="panel-06" role="region" aria-labelledby="trigger-06">
+            <div class="accordion-panel-inner">
+              <p data-i18n="step-06-copy">景观并非附加装饰，而是住宅体验的一部分。我们整合庭院、植栽、动线与户外生活场景，让建筑自然融入日常。</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item">
+          <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-07" id="trigger-07">
+            <span class="accordion-number">07</span>
+            <span class="accordion-name" data-i18n="step-07-title">售后服务</span>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" id="panel-07" role="region" aria-labelledby="trigger-07">
+            <div class="accordion-panel-inner">
+              <p data-i18n="step-07-copy">交付并不是服务的终点。入住后我们持续回应维护、调整与使用反馈，让新家在真实生活中保持舒适、可靠与完整。</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="process-closing" aria-label="Process commitment">
+    <p class="process-closing-text" data-i18n="closing-statement">作为值得信赖的建造商，<br>Habitas Design 的专业管理与周到服务将一直与您的筑宅之路相伴同行。<br>我们不遗余力，达成您对于"家"的所有期盼。</p>
+  </section>
+</main>
+
+<footer class="footer">
+  <span data-i18n="footer-copy">&copy; 2026 Habitas Design. All rights reserved.</span>
+</footer>
+
+<script>
+const t = {
+  'nav-works': ['作品', 'Projects'],
+  'nav-process': ['服务流程', 'Process'],
+  'nav-about': ['关于我们', 'About us'],
+  'nav-contact': ['联系我们', 'Contact'],
+  'nav-stories': ['故事', 'Stories'],
+  'intro-title': ['无隙、无忧、无缺<br>打造伴随式筑家之旅', 'Seamless, assured, complete<br>A guided journey home'],
+  'intro-p1': ['在匠心淬炼中走过四十余载筑宅之路，Habitas Design 形成了全方位的住宅定制化流程。从前期了解到交付与入住，我们以专业且优质的服务确保每一个阶段顺利进行。', 'Through decades of refined residential practice, Habitas Design has shaped a complete custom-home process. From early discovery to handover and living in, we guide every stage with professional and considered service.'],
+  'intro-p2': ['每一个为您量身定制的步骤，都满载您对未来之家的憧憬期盼。在卓越的建筑设计与精湛的施工技艺融合下，圆一个您所向往的、永恒的、住进幸福的梦。', 'Each tailored step carries your vision for the home ahead. With thoughtful architecture and precise construction working together, we create a lasting place for the life you imagine.'],
+  'process-heading': ['服务流程', 'Process'],
+  'step-01-title': ['前期规划', 'Pre-planning'],
+  'step-01-copy': ['从家庭结构、生活习惯、土地条件与预算目标出发，我们与您共同梳理项目愿景，明确时间、范围与关键决策，让筑家的第一步清晰而坚定。', 'We begin with your household, habits, site conditions and budget goals, then define the project vision, timeline, scope and key decisions so the first step feels clear and confident.'],
+  'step-02-title': ['建筑设计', 'Architecture'],
+  'step-02-copy': ['建筑师将场地朝向、光线、尺度与法规条件转化为完整的空间方案，在美学表达与居住实用之间建立长久平衡。', 'The architectural design translates orientation, light, scale and planning requirements into a complete spatial proposal, balancing expression with enduring everyday use.'],
+  'step-03-title': ['室内设计', 'Interior Design'],
+  'step-03-copy': ['我们延续建筑概念进入室内细节，统筹材质、色彩、灯光、收纳与定制家具，使日常使用与视觉质感自然衔接。', 'We carry the architectural idea into the interior, coordinating materials, colour, lighting, storage and custom furniture so function and atmosphere meet naturally.'],
+  'step-04-title': ['文书处理', 'Documentation'],
+  'step-04-copy': ['面对规划许可、工程文件、审批协调与合同资料，我们协同相关顾问推进流程，减少沟通成本，让复杂手续更有秩序。', 'Planning permits, construction documents, consultant coordination and contract material are managed with care, bringing order to complex approval and documentation stages.'],
+  'step-05-title': ['施工建造', 'Construction'],
+  'step-05-copy': ['从现场组织、质量控制到进度管理，我们以稳定的建造体系落实设计意图，确保每一道工序都经得起时间检验。', 'From site coordination and quality control to program management, our construction process carries the design intent through every detail and trade.'],
+  'step-06-title': ['景观美化', 'Landscape'],
+  'step-06-copy': ['景观并非附加装饰，而是住宅体验的一部分。我们整合庭院、植栽、动线与户外生活场景，让建筑自然融入日常。', 'Landscape is treated as part of the home experience, connecting gardens, planting, movement and outdoor living so the building settles into daily life.'],
+  'step-07-title': ['售后服务', 'Aftercare'],
+  'step-07-copy': ['交付并不是服务的终点。入住后我们持续回应维护、调整与使用反馈，让新家在真实生活中保持舒适、可靠与完整。', 'Handover is not the end of our care. After move-in, we respond to maintenance, adjustments and feedback so the home remains comfortable, reliable and complete.'],
+  'closing-statement': ['作为值得信赖的建造商，<br>Habitas Design 的专业管理与周到服务将一直与您的筑宅之路相伴同行。<br>我们不遗余力，达成您对于"家"的所有期盼。', 'As a trusted builder,<br>Habitas Design brings professional management and thoughtful service to every step of your home-building journey.<br>We spare no effort in realising every expectation you hold for home.'],
+  'footer-copy': ['&copy; 2026 Habitas Design. All rights reserved.', '&copy; 2026 Habitas Design. All rights reserved.']
+};
+
+let lang = localStorage.getItem('hb-lang') || 'cn';
+
+function switchLang(l) {
+  if (l === lang) return;
+  lang = l;
+  localStorage.setItem('hb-lang', lang);
+  applyLang();
+}
+
+function applyLang() {
+  const idx = lang === 'cn' ? 0 : 1;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.innerHTML = t[key][idx];
+  });
+  document.getElementById('btn-cn').classList.toggle('active', lang === 'cn');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang === 'cn' ? 'zh-CN' : 'en';
+}
+
+function toggleMenu() {
+  const isOpen = document.body.classList.toggle('menu-open');
+  const toggle = document.querySelector('.nav-toggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.querySelector('.sidebar-overlay');
+  toggle.classList.toggle('is-open', isOpen);
+  toggle.setAttribute('aria-expanded', isOpen);
+  sidebar.classList.toggle('is-open', isOpen);
+  sidebar.setAttribute('aria-hidden', !isOpen);
+  overlay.classList.toggle('is-open', isOpen);
+  overlay.setAttribute('aria-hidden', !isOpen);
+}
+
+function closeMenu() {
+  if (document.body.classList.contains('menu-open')) {
+    toggleMenu();
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeMenu();
+});
+
+document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+  trigger.addEventListener('click', () => {
+    const item = trigger.closest('.accordion-item');
+    const isOpen = item.classList.toggle('is-open');
+    trigger.setAttribute('aria-expanded', String(isOpen));
+  });
+});
+
+applyLang();
+</script>
+
+</body>
+</html>

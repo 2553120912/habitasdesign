@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects | Habitas Design</title>
+<style>
+  @font-face {
+    font-family: 'News Gothic';
+    src: url('fonts/news-gothic-regular.woff2') format('woff2'),
+         url('fonts/news-gothic-regular.woff')  format('woff'),
+         url('fonts/news-gothic-regular.ttf')   format('truetype'),
+         url('fonts/news-gothic-regular.otf')   format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'News Gothic';
+    src: url('fonts/news-gothic-bold.woff2') format('woff2'),
+         url('fonts/news-gothic-bold.woff')  format('woff'),
+         url('fonts/news-gothic-bold.ttf')   format('truetype'),
+         url('fonts/news-gothic-bold.otf')   format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    font-family: "News Gothic", "News Gothic MT", "Trade Gothic", "Franklin Gothic Book", "Helvetica Neue", Arial, "Noto Serif SC", "Source Han Serif SC", "SimSun", sans-serif;
+    color: #1a1a1a;
+    background: #f4efe6;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 110;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    color: #fafaf8;
+    background: #1a1a1a;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .nav-logo {
+    display: block;
+    line-height: 0;
+  }
+
+  .nav-logo img {
+    display: block;
+    height: 44px;
+    width: auto;
+    filter: invert(1);
+    transition: opacity 0.3s;
+  }
+
+  .nav-logo:hover img {
+    opacity: 0.7;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .lang-switch {
+    display: flex;
+    gap: 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .lang-switch button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: inherit;
+    padding: 0 4px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+  }
+
+  #btn-cn,
+  #btn-en {
+    font-size: 13px;
+  }
+
+  .lang-switch button.active {
+    opacity: 1;
+  }
+
+  .lang-switch button:hover {
+    opacity: 0.8;
+  }
+
+  .lang-switch span {
+    opacity: 0.25;
+  }
+
+  .nav-toggle {
+    position: fixed;
+    top: 30px;
+    right: 48px;
+    z-index: 140;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    width: 22px;
+    background: #fafaf8;
+    transition: transform 0.35s ease, opacity 0.25s ease;
+    transform-origin: center;
+  }
+
+  .nav-toggle.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .nav-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 340px;
+    max-width: 100%;
+    height: 100vh;
+    background: rgba(42, 42, 42, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fafaf8;
+    z-index: 130;
+    padding: 120px 48px 48px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateZ(0);
+    transition: opacity 2s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 2s;
+    will-change: opacity;
+  }
+
+  .sidebar.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 2s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s;
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    z-index: 120;
+  }
+
+  .sidebar-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .sidebar-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .sidebar-links a {
+    position: relative;
+    color: #fafaf8;
+    text-decoration: none;
+    font-size: 24px;
+    letter-spacing: 4px;
+    display: inline-block;
+  }
+
+  .sidebar-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 1px;
+    background: #fafaf8;
+    transition: width 0.4s ease;
+  }
+
+  .sidebar-links a:hover::after {
+    width: 100%;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  .projects-hero {
+    background: #1a1a1a;
+    color: #fafaf8;
+    padding: 172px 72px 32px;
+  }
+
+  .projects-hero-inner {
+    max-width: none;
+    margin: 0 auto;
+  }
+
+  .projects-kicker {
+    font-size: clamp(36px, 6vw, 72px);
+    letter-spacing: 6px;
+    color: #fafaf8;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  .projects-filters {
+    display: flex;
+    gap: 48px;
+    align-items: baseline;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgba(250, 250, 248, 0.18);
+    padding-bottom: 20px;
+  }
+
+  .filter-btn {
+    background: none;
+    border: none;
+    color: rgba(250, 250, 248, 0.45);
+    font-family: inherit;
+    font-size: 16px;
+    letter-spacing: 3px;
+    padding: 0 0 6px;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .filter-btn:hover {
+    color: rgba(250, 250, 248, 0.85);
+  }
+
+  .filter-btn.is-active {
+    color: #fafaf8;
+  }
+
+  .filter-btn.is-active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -21px;
+    height: 2px;
+    background: #fafaf8;
+  }
+
+  .projects-grid-wrap {
+    background: #f4efe6;
+    padding: 100px clamp(48px, 10vw, 250px) 64px 72px;
+  }
+
+  .projects-grid {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 48px clamp(32px, 5vw, 100px);
+  }
+
+  .project-card {
+    display: grid;
+    gap: 16px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    min-width: 0;
+  }
+
+  .project-image {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #e8e6e1;
+  }
+
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .project-card:hover .project-image img {
+    transform: scale(1.05);
+  }
+
+  .project-title {
+    font-size: clamp(20px, 1.8vw, 26px);
+    font-weight: normal;
+    letter-spacing: 3px;
+    line-height: 1.3;
+    text-transform: uppercase;
+    margin: 0;
+    overflow-wrap: break-word;
+  }
+
+  .project-info {
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #666;
+    margin: 0;
+  }
+
+  .footer {
+    padding: 36px 48px;
+    border-top: 1px solid rgba(26,26,26,0.08);
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #777;
+    text-align: center;
+  }
+
+  @media (max-width: 1100px) {
+    .projects-hero {
+      padding: 148px 40px 36px;
+    }
+    .projects-kicker {
+      font-size: 48px;
+    }
+    .projects-filters {
+      gap: 32px;
+    }
+    .projects-grid-wrap {
+      padding: 72px 40px 80px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      padding: 20px 24px;
+    }
+
+    .nav-logo img {
+      height: 36px;
+    }
+
+    .nav-left {
+      gap: 24px;
+    }
+
+    .nav-toggle {
+      top: 24px;
+      right: 24px;
+    }
+
+    .sidebar {
+      width: 100%;
+      padding: 120px 40px 48px;
+    }
+
+    .projects-hero {
+      padding: 136px 24px 40px;
+    }
+
+    .projects-kicker {
+      letter-spacing: 3px;
+      margin-bottom: 40px;
+    }
+
+    .projects-filters {
+      gap: 28px;
+      font-size: 14px;
+      padding-bottom: 16px;
+    }
+
+    .filter-btn.is-active::after {
+      bottom: -17px;
+    }
+
+    .projects-grid-wrap {
+      padding: 56px 24px 80px;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .footer {
+      padding: 32px 24px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-logo" aria-label="Habitas Design">
+      <img src="images/logo.png" alt="Habitas Design">
+    </a>
+    <div class="lang-switch">
+      <button id="btn-cn" class="active" onclick="switchLang('cn')">中</button>
+      <span>/</span>
+      <button id="btn-en" onclick="switchLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="toggleMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<div class="sidebar-overlay" onclick="closeMenu()" aria-hidden="true"></div>
+
+<aside class="sidebar" id="sidebar" aria-hidden="true">
+  <ul class="sidebar-links">
+    <li><a href="projects.html" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
+    <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
+    <li><a href="index.html#about" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
+    <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
+    <li><a href="#" data-i18n="nav-stories" onclick="closeMenu()">故事</a></li>
+  </ul>
+</aside>
+
+<header class="projects-hero">
+  <div class="projects-hero-inner">
+    <p class="projects-kicker" data-i18n="projects-kicker">所有项目</p>
+    <nav class="projects-filters" aria-label="Project filters">
+      <button class="filter-btn is-active" data-filter="all"      data-i18n="filter-all">全部</button>
+      <button class="filter-btn"           data-filter="built"    data-i18n="filter-built">已建成</button>
+      <button class="filter-btn"           data-filter="progress" data-i18n="filter-progress">进行中</button>
+      <button class="filter-btn"           data-filter="concept"  data-i18n="filter-concept">概念</button>
+    </nav>
+  </div>
+</header>
+
+<main class="projects-grid-wrap">
+  <section class="projects-grid" aria-label="Projects"></section>
+</main>
+
+<footer class="footer">
+  <span data-i18n="footer-copy">&copy; 2026 Habitas Design. All rights reserved.</span>
+</footer>
+
+<script>
+const t = {
+  'nav-works': ['作品', 'Projects'],
+  'nav-process': ['服务流程', 'Process'],
+  'nav-about': ['关于我们', 'About us'],
+  'nav-contact': ['联系我们', 'Contact'],
+  'nav-stories': ['故事', 'Stories'],
+  'projects-kicker': ['所有项目', 'ALL PROJECTS'],
+  'filter-all':      ['全部', 'All'],
+  'filter-built':    ['已建成', 'Built'],
+  'filter-progress': ['进行中', 'In Progress'],
+  'filter-concept':  ['概念', 'Concept'],
+  'footer-copy': ['&copy; 2026 Habitas Design. All rights reserved.', '&copy; 2026 Habitas Design. All rights reserved.']
+};
+
+const projects = [
+  { id: 'lovell-house',  category: 'built',    image: 'images/lovell-house/精选卡/秋天perspective.png', href: 'lovell-house.html',
+    title: { cn: 'Lovell House', en: 'Lovell House' },
+    info:  { cn: '住宅 · 2024',  en: 'Residence · 2024' } },
+  { id: 'myrtle-house',  category: 'built',    image: 'images/myrtle-house/精选卡/side elevation.png', imagePosition: '54% center', href: 'myrtle-house.html',
+    title: { cn: 'Myrtle House', en: 'Myrtle House' },
+    info:  { cn: '住宅 · 2025',  en: 'Residence · 2025' } },
+  { id: 'knutsford-house', category: 'built',  image: 'images/knutsford-house/精选卡/1.png', href: 'knutsford-house.html',
+    title: { cn: 'Knutsford House', en: 'Knutsford House' },
+    info:  { cn: '住宅 · 2025',  en: 'Residence · 2025' } },
+];
+
+let activeFilter = 'all';
+
+function renderProjects() {
+  const grid = document.querySelector('.projects-grid');
+  if (!grid) return;
+  const list = activeFilter === 'all'
+    ? projects
+    : projects.filter(p => p.category === activeFilter);
+  grid.innerHTML = list.map(p => `
+    <a class="project-card" href="${p.href}" data-id="${p.id}">
+      <div class="project-image"><img src="${p.image}" alt="${p.title.en}" style="object-position: ${p.imagePosition || 'center center'}"></div>
+      <h2 class="project-title">${p.title[lang]}</h2>
+      <p class="project-info">${p.info[lang]}</p>
+    </a>
+  `).join('');
+}
+
+let lang = localStorage.getItem('hb-lang') || 'cn';
+
+function switchLang(l) {
+  if (l === lang) return;
+  lang = l;
+  localStorage.setItem('hb-lang', lang);
+  applyLang();
+}
+
+function applyLang() {
+  const idx = lang === 'cn' ? 0 : 1;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.innerHTML = t[key][idx];
+  });
+  document.getElementById('btn-cn').classList.toggle('active', lang === 'cn');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang === 'cn' ? 'zh-CN' : 'en';
+  renderProjects();
+}
+
+applyLang();
+
+function toggleMenu() {
+  const isOpen = document.body.classList.toggle('menu-open');
+  const toggle = document.querySelector('.nav-toggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.querySelector('.sidebar-overlay');
+  toggle.classList.toggle('is-open', isOpen);
+  toggle.setAttribute('aria-expanded', isOpen);
+  sidebar.classList.toggle('is-open', isOpen);
+  sidebar.setAttribute('aria-hidden', !isOpen);
+  overlay.classList.toggle('is-open', isOpen);
+  overlay.setAttribute('aria-hidden', !isOpen);
+}
+
+function closeMenu() {
+  if (document.body.classList.contains('menu-open')) {
+    toggleMenu();
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeMenu();
+});
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeFilter = btn.dataset.filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('is-active', b === btn));
+    renderProjects();
+  });
+});
+</script>
+
+</body>
+</html>

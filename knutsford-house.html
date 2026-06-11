@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knutsford House | Habitas Design</title>
+<style>
+  :root {
+    --bg: #f4efe6;
+    --surface: #f7f2e8;
+    --text: #181818;
+    --muted: #79756f;
+    --line: rgba(24, 24, 24, 0.14);
+    --content-width: min(1500px, calc(100vw - 56px));
+    --font-sans: "Helvetica Neue", "Helvetica", "Arial", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 110;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    color: #fafaf8;
+    background: #1a1a1a;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .nav-logo {
+    display: block;
+    line-height: 0;
+  }
+
+  .nav-logo img {
+    display: block;
+    height: 44px;
+    width: auto;
+    filter: invert(1);
+    transition: opacity 0.3s;
+  }
+
+  .nav-logo:hover img {
+    opacity: 0.7;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .lang-switch {
+    display: flex;
+    gap: 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .lang-switch button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: inherit;
+    padding: 0 4px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+  }
+
+  #btn-cn,
+  #btn-en {
+    font-size: 13px;
+  }
+
+  .lang-switch button.active {
+    opacity: 1;
+  }
+
+  .lang-switch button:hover {
+    opacity: 0.8;
+  }
+
+  .lang-switch span {
+    opacity: 0.25;
+  }
+
+  .nav-toggle {
+    position: fixed;
+    top: 30px;
+    right: 48px;
+    z-index: 140;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    width: 22px;
+    background: #fafaf8;
+    transition: transform 0.35s ease, opacity 0.25s ease;
+    transform-origin: center;
+  }
+
+  .nav-toggle.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .nav-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 340px;
+    max-width: 100%;
+    height: 100vh;
+    background: rgba(42, 42, 42, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fafaf8;
+    z-index: 130;
+    padding: 120px 48px 48px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateZ(0);
+    transition: opacity 2s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 2s;
+    will-change: opacity;
+  }
+
+  .sidebar.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 2s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s;
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    z-index: 120;
+  }
+
+  .sidebar-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .sidebar-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .sidebar-links a {
+    position: relative;
+    color: #fafaf8;
+    text-decoration: none;
+    font-size: 24px;
+    letter-spacing: 4px;
+    display: inline-block;
+  }
+
+  .sidebar-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 1px;
+    background: #fafaf8;
+    transition: width 0.4s ease;
+  }
+
+  .sidebar-links a:hover::after {
+    width: 100%;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  .kh-hero {
+    margin-top: 92px;
+    width: 100%;
+    height: 75vh;
+    min-height: 520px;
+    overflow: hidden;
+    background: #e7e2da;
+    position: relative;
+  }
+
+  .kh-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .kh-hero-copy {
+    position: absolute;
+    left: 50%;
+    bottom: 44px;
+    width: var(--content-width);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .kh-hero-title {
+    max-width: min(780px, 70vw);
+    font-size: clamp(42px, 5vw, 84px);
+    line-height: 0.92;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: #fbfaf7;
+    text-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+  }
+
+  .kh-main {
+    background: var(--surface);
+  }
+
+  .kh-intro {
+    width: var(--content-width);
+    margin: 0 auto;
+    padding: 82px 0 76px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 108px;
+    align-items: start;
+  }
+  .kh-intro > *,
+  .kh-detail-row > * {
+    min-width: 0;
+  }
+
+  .kh-intro-visual {
+    background: #e8e3db;
+    overflow: hidden;
+    aspect-ratio: 4 / 5.31;
+    align-self: start;
+  }
+
+  .kh-intro-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .kh-intro-copy {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: clamp(56px, 7vw, 104px);
+    align-content: stretch;
+    min-width: 0;
+    min-height: 100%;
+  }
+
+  .kh-intro-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .kh-subtitle {
+    font-size: 14px;
+    letter-spacing: 3.2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .kh-intro-summary {
+    max-width: 720px;
+    font-size: 18px;
+    line-height: 1.75;
+    color: #252525;
+    font-weight: 600;
+    overflow-wrap: break-word;
+  }
+
+  .kh-details {
+    align-self: end;
+  }
+
+  .kh-details-title {
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin-bottom: 26px;
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .kh-details-table {
+    border-top: 1px solid var(--line);
+  }
+
+  .kh-detail-row {
+    display: grid;
+    grid-template-columns: minmax(96px, 0.9fr) minmax(0, 1.3fr);
+    gap: 32px;
+    padding: 24px 0 22px;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+
+  .kh-detail-label {
+    font-size: 15px;
+    color: #2e2e2e;
+    font-weight: 600;
+  }
+
+  .kh-detail-value {
+    font-size: 15px;
+    color: var(--text);
+    font-weight: 600;
+    overflow-wrap: break-word;
+  }
+
+  .kh-back-link-wrap {
+    width: var(--content-width);
+    margin: -32px auto 88px;
+    text-align: center;
+  }
+  .kh-back-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: opacity 0.3s ease;
+  }
+  .kh-back-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.35s ease;
+  }
+  .kh-back-link:hover {
+    opacity: 0.68;
+  }
+  .kh-back-link:hover::after {
+    transform: scaleX(1);
+  }
+  .kh-back-link-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+  .kh-back-link-icon svg {
+    display: block;
+    width: 12px;
+    height: 12px;
+  }
+  .kh-back-link:hover .kh-back-link-icon {
+    transform: translateX(4px);
+  }
+
+  .kh-gallery {
+    width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 0 88px;
+  }
+
+  .kh-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    grid-auto-flow: dense;
+  }
+
+  .kh-gallery-item {
+    background: #ebe7df;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .kh-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .kh-gallery-item--portrait {
+    aspect-ratio: 4 / 5.6;
+  }
+
+  .kh-gallery-item--landscape {
+    aspect-ratio: 5.2 / 3.7;
+  }
+
+  .kh-gallery-item--square {
+    aspect-ratio: 1 / 1;
+  }
+
+  .kh-gallery-item--wide {
+    aspect-ratio: 2.1 / 1.2;
+    grid-column: span 2;
+  }
+
+  .kh-gallery-item--tall {
+    aspect-ratio: 4 / 6.2;
+  }
+
+  .kh-gallery-trigger {
+    cursor: pointer;
+  }
+
+  .kh-gallery-trigger img {
+    transition: opacity 0.35s ease;
+  }
+
+  .kh-gallery-trigger:hover img {
+    opacity: 0.86;
+  }
+
+  .kh-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.94);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 80px;
+  }
+
+  .kh-lightbox.is-open {
+    display: flex;
+  }
+
+  .kh-lightbox-stage {
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .kh-lightbox-stage img {
+    max-width: 90vw;
+    max-height: 86vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: opacity 0.2s ease;
+  }
+
+  .kh-lightbox-close,
+  .kh-lightbox-prev,
+  .kh-lightbox-next {
+    position: absolute;
+    background: none;
+    border: none;
+    color: #fafaf8;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.25s ease;
+    padding: 0;
+  }
+
+  .kh-lightbox-close:hover,
+  .kh-lightbox-prev:hover,
+  .kh-lightbox-next:hover {
+    opacity: 1;
+  }
+
+  .kh-lightbox-close {
+    top: 28px;
+    right: 36px;
+    width: 40px;
+    height: 40px;
+    font-size: 32px;
+    line-height: 1;
+  }
+
+  .kh-lightbox-prev,
+  .kh-lightbox-next {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 56px;
+    height: 56px;
+    font-size: 44px;
+    line-height: 1;
+  }
+
+  .kh-lightbox-prev {
+    left: 28px;
+  }
+
+  .kh-lightbox-next {
+    right: 28px;
+  }
+
+  .kh-lightbox-counter {
+    position: absolute;
+    left: 36px;
+    bottom: 28px;
+    color: #fafaf8;
+    opacity: 0.55;
+    font-size: 13px;
+    letter-spacing: 2.4px;
+  }
+
+  .kh-contact {
+    background: #1a1a1a;
+    padding: 56px 0 96px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .kh-contact-inner {
+    width: var(--content-width);
+    margin: 0 auto;
+  }
+
+  .kh-contact-label {
+    margin-bottom: 28px;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #999;
+  }
+
+  .kh-contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 56px;
+    margin-bottom: 48px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .kh-contact-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 56px;
+  }
+
+  .kh-contact-item h4 {
+    margin-bottom: 12px;
+    font-size: 13px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: #999;
+  }
+
+  .kh-contact-item p,
+  .kh-contact-item a {
+    font-size: 16px;
+    line-height: 2.2;
+    letter-spacing: 1px;
+    color: #fafaf8;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .kh-contact-item a:hover {
+    opacity: 0.6;
+  }
+
+  .kh-contact-phone {
+    margin-top: 8px;
+    letter-spacing: 0.4px;
+  }
+
+  .footer {
+    padding: 36px 48px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #666;
+    text-align: center;
+    background: #1a1a1a;
+    font-weight: 600;
+  }
+
+  @media (max-width: 1100px) {
+    :root {
+      --content-width: min(1500px, calc(100vw - 48px));
+    }
+
+    .kh-hero-copy {
+      bottom: 36px;
+    }
+
+    .kh-intro {
+      gap: 56px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      padding: 68px 0 64px;
+    }
+
+    .kh-gallery-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .kh-gallery-item--wide {
+      grid-column: span 2;
+    }
+
+    .kh-contact-grid,
+    .kh-contact-meta {
+      gap: 28px 40px;
+    }
+  }
+
+  @media (max-width: 920px) {
+    .kh-intro {
+      grid-template-columns: 1fr;
+      gap: 36px;
+      padding: 62px 0 60px;
+    }
+    .kh-intro-visual {
+      aspect-ratio: 4 / 4.7;
+    }
+    .kh-intro-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      min-height: 0;
+    }
+    .kh-details {
+      align-self: stretch;
+    }
+  }
+
+  @media (max-width: 768px) {
+    :root {
+      --content-width: calc(100vw - 32px);
+    }
+
+    .nav {
+      padding: 20px 24px;
+    }
+
+    .nav-logo img {
+      height: 36px;
+    }
+
+    .nav-left {
+      gap: 24px;
+    }
+
+    .nav-toggle {
+      top: 24px;
+      right: 24px;
+    }
+
+    .sidebar {
+      width: 100%;
+      padding: 120px 40px 48px;
+    }
+
+    .kh-hero {
+      margin-top: 76px;
+      height: 75vh;
+      min-height: 420px;
+    }
+
+    .kh-hero-copy {
+      bottom: 26px;
+    }
+
+    .kh-hero-title {
+      max-width: min(300px, 78vw);
+      font-size: clamp(30px, 9vw, 42px);
+      letter-spacing: 1.2px;
+    }
+
+    .kh-intro {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 46px 0 48px;
+      align-items: start;
+    }
+
+    .kh-intro-visual {
+      aspect-ratio: 4 / 4.68;
+    }
+
+    .kh-subtitle {
+      font-size: 13px;
+      letter-spacing: 2.6px;
+    }
+
+    .kh-intro-heading {
+      gap: 22px;
+    }
+
+    .kh-intro-summary {
+      font-size: 16.5px;
+      line-height: 1.7;
+    }
+
+    .kh-detail-row {
+      grid-template-columns: 1fr;
+      gap: 6px;
+      padding: 14px 0 12px;
+    }
+
+    .kh-back-link-wrap {
+      margin: -12px auto 64px;
+    }
+    .kh-back-link {
+      font-size: 14px;
+      letter-spacing: 1.6px;
+    }
+    .kh-back-link-icon {
+      width: 23px;
+      height: 23px;
+    }
+    .kh-back-link-icon svg {
+      width: 11.5px;
+      height: 11.5px;
+    }
+
+    .kh-gallery {
+      padding-bottom: 72px;
+    }
+
+    .kh-gallery-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .kh-gallery-item--wide {
+      grid-column: auto;
+    }
+
+    .kh-contact {
+      padding: 40px 0 72px;
+    }
+
+    .kh-contact-grid,
+    .kh-contact-meta {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .footer {
+      padding: 32px 24px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-logo" aria-label="Habitas Design">
+      <img src="images/logo.png" alt="Habitas Design">
+    </a>
+    <div class="lang-switch">
+      <button id="btn-cn" class="active" onclick="switchLang('cn')">中</button>
+      <span>/</span>
+      <button id="btn-en" onclick="switchLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="toggleMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<div class="sidebar-overlay" onclick="closeMenu()" aria-hidden="true"></div>
+
+<aside class="sidebar" id="sidebar" aria-hidden="true">
+  <ul class="sidebar-links">
+    <li><a href="projects.html" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
+    <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
+    <li><a href="index.html#about" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
+    <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
+    <li><a href="#" data-i18n="nav-stories" onclick="closeMenu()">故事</a></li>
+  </ul>
+</aside>
+
+<header class="kh-hero">
+  <img src="images/knutsford-house/顶部图/1.png" alt="Knutsford House hero view">
+  <div class="kh-hero-copy">
+    <h1 class="kh-hero-title">Knutsford House</h1>
+  </div>
+</header>
+
+<main class="kh-main">
+  <section class="kh-intro">
+    <div class="kh-intro-visual">
+      <img src="images/knutsford-house/参考图/1.png" alt="Knutsford House pool reference">
+    </div>
+
+    <div class="kh-intro-copy">
+      <div class="kh-intro-heading">
+        <p class="kh-subtitle" data-i18n="kh-subtitle">Knutsford 住宅</p>
+        <div class="kh-intro-summary">
+          <p data-i18n="kh-summary-p1">Knutsford House is imagined as a quiet sequence of thresholds, where the weight of the street-facing form gives way to a softer domestic atmosphere within. The project balances enclosure and openness through carefully edited openings, layered circulation, and a measured palette of stone, plaster, glass, and shadow. Rather than presenting the home all at once, the design unfolds gradually, allowing approach, entry, courtyard, and living spaces to register as distinct moments. This page currently uses a placeholder editorial summary, but the structure is intended to support a fuller architectural narrative once final project writing is available, while already establishing a calm, gallery-like rhythm between image, text, and project information.</p>
+        </div>
+      </div>
+
+      <section class="kh-details" aria-label="Project details">
+        <h2 class="kh-details-title" data-i18n="kh-details-title">项目详情</h2>
+        <div class="kh-details-table">
+          <div class="kh-detail-row">
+            <div class="kh-detail-label" data-i18n="kh-meta-location-label">地点</div>
+            <div class="kh-detail-value" data-i18n="kh-meta-location-value">待定</div>
+          </div>
+          <div class="kh-detail-row">
+            <div class="kh-detail-label" data-i18n="kh-meta-year-label">年份</div>
+            <div class="kh-detail-value" data-i18n="kh-meta-year-value">2025</div>
+          </div>
+          <div class="kh-detail-row">
+            <div class="kh-detail-label" data-i18n="kh-meta-area-label">面积</div>
+            <div class="kh-detail-value" data-i18n="kh-meta-area-value">待定</div>
+          </div>
+          <div class="kh-detail-row">
+            <div class="kh-detail-label" data-i18n="kh-meta-status-label">状态</div>
+            <div class="kh-detail-value" data-i18n="kh-meta-status-value">已建成</div>
+          </div>
+          <div class="kh-detail-row">
+            <div class="kh-detail-label" data-i18n="kh-meta-type-label">类型</div>
+            <div class="kh-detail-value" data-i18n="kh-meta-type-value">住宅</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="kh-gallery" aria-label="Project gallery">
+    <div class="kh-gallery-grid">
+      <figure class="kh-gallery-item kh-gallery-trigger" data-index="0" style="grid-column: 1 / -1; aspect-ratio: 16 / 9;"><img src="images/knutsford-house/展示图/1.png" alt="Knutsford House view 1"></figure>
+      <figure class="kh-gallery-item kh-gallery-trigger" data-index="1" style="grid-column: 1 / -1; aspect-ratio: 16 / 9;"><img src="images/knutsford-house/展示图/2.png" alt="Knutsford House view 2"></figure>
+    </div>
+  </section>
+
+  <div class="kh-back-link-wrap">
+    <a class="kh-back-link" href="projects.html">
+      <span data-i18n="kh-back-portfolio">返回作品集页</span>
+      <span class="kh-back-link-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="18" y2="12"/>
+          <polyline points="12,6 18,12 12,18"/>
+        </svg>
+      </span>
+    </a>
+  </div>
+
+  <section class="kh-contact" aria-labelledby="kh-contact-title">
+    <div class="kh-contact-inner">
+      <p class="kh-contact-label" id="kh-contact-title" data-i18n="section-contact">联系</p>
+      <div class="kh-contact-grid">
+        <div class="kh-contact-item">
+          <h4 data-i18n="contact-melbourne-label">墨尔本</h4>
+          <p data-i18n="contact-melbourne">U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia</p>
+          <p class="kh-contact-phone" data-i18n="contact-melbourne-phone">+61 422 501 811</p>
+        </div>
+        <div class="kh-contact-item">
+          <h4 data-i18n="contact-shanghai-label">上海</h4>
+          <p data-i18n="contact-shanghai">中国 上海市<br>苏州南路 1295 号</p>
+          <p class="kh-contact-phone" data-i18n="contact-shanghai-phone">+86 159 0199 9004</p>
+        </div>
+      </div>
+      <div class="kh-contact-meta">
+        <div class="kh-contact-item">
+          <h4 data-i18n="contact-email-label">邮箱</h4>
+          <p><a href="mailto:studio@habitasdesign.com" data-i18n="contact-email">studio@habitasdesign.com</a></p>
+        </div>
+        <div class="kh-contact-item">
+          <h4 data-i18n="contact-web-label">网站</h4>
+          <p><a href="https://habitasdesign.com" target="_blank" rel="noopener" data-i18n="contact-web">habitasdesign.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="kh-lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+  <button class="kh-lightbox-close" type="button" aria-label="Close" data-i18n-aria="lightbox-close">×</button>
+  <button class="kh-lightbox-prev" type="button" aria-label="Previous" data-i18n-aria="lightbox-prev">‹</button>
+  <button class="kh-lightbox-next" type="button" aria-label="Next" data-i18n-aria="lightbox-next">›</button>
+  <div class="kh-lightbox-stage"><img src="" alt=""></div>
+  <div class="kh-lightbox-counter">1 / 1</div>
+</div>
+
+<footer class="footer">
+  <span data-i18n="footer-copy">&copy; 2026 Habitas Design. All rights reserved.</span>
+</footer>
+
+<script>
+const t = {
+  'nav-works': ['作品', 'Projects'],
+  'nav-process': ['服务流程', 'Process'],
+  'nav-about': ['关于我们', 'About us'],
+  'nav-contact': ['联系我们', 'Contact'],
+  'nav-stories': ['故事', 'Stories'],
+  'section-contact': ['联系', 'Contact'],
+  'kh-subtitle': ['Knutsford 住宅', 'A Residence by Habitas Design'],
+  'kh-summary-p1': ['Knutsford House 被设想为一系列安静展开的空间阈值：临街一侧以克制而厚重的体量建立秩序，进入内部后则转向更柔和、更具有居住气息的氛围。项目通过精确控制的开口、层层递进的流线，以及石材、灰泥、玻璃与阴影之间的关系，平衡围合感与开放感。住宅并不试图一次性展示全部内容，而是让接近、入口、庭院与起居空间依次显现，形成可被感知的节奏。当前页面中的这段文字为占位简介，但页面结构已经预留好承载更完整建筑叙事的位置，在正式项目文案到位前，也能先建立图像、文字与项目信息之间安静而清晰的阅读关系。', 'Knutsford House is imagined as a quiet sequence of thresholds, where the weight of the street-facing form gives way to a softer domestic atmosphere within. The project balances enclosure and openness through carefully edited openings, layered circulation, and a measured palette of stone, plaster, glass, and shadow. Rather than presenting the home all at once, the design unfolds gradually, allowing approach, entry, courtyard, and living spaces to register as distinct moments. This page currently uses a placeholder editorial summary, but the structure is intended to support a fuller architectural narrative once final project writing is available, while already establishing a calm, gallery-like rhythm between image, text, and project information.'],
+  'kh-details-title': ['项目详情', 'Project Details'],
+  'kh-back-portfolio': ['返回作品集页', 'Back to Portfolio'],
+  'kh-meta-location-label': ['地点', 'Location'],
+  'kh-meta-location-value': ['待定', 'TBD'],
+  'kh-meta-year-label': ['年份', 'Year'],
+  'kh-meta-year-value': ['2025', '2025'],
+  'kh-meta-area-label': ['面积', 'Area'],
+  'kh-meta-area-value': ['待定', 'TBD'],
+  'kh-meta-status-label': ['状态', 'Status'],
+  'kh-meta-status-value': ['已建成', 'Built'],
+  'kh-meta-type-label': ['类型', 'Typology'],
+  'kh-meta-type-value': ['住宅', 'Residence'],
+  'contact-melbourne-label': ['墨尔本', 'Melbourne'],
+  'contact-melbourne': ['U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia', 'U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia'],
+  'contact-melbourne-phone': ['+61 422 501 811', '+61 422 501 811'],
+  'contact-shanghai-label': ['上海', 'Shanghai'],
+  'contact-shanghai': ['中国 上海市<br>苏州南路 1295 号', '1295 Suzhou South Road<br>Shanghai, China'],
+  'contact-shanghai-phone': ['+86 159 0199 9004', '+86 159 0199 9004'],
+  'contact-email-label': ['邮箱', 'Email'],
+  'contact-email': ['studio@habitasdesign.com', 'studio@habitasdesign.com'],
+  'contact-web-label': ['网站', 'Website'],
+  'contact-web': ['habitasdesign.com', 'habitasdesign.com'],
+  'footer-copy': ['&copy; 2026 Habitas Design. All rights reserved.', '&copy; 2026 Habitas Design. All rights reserved.'],
+  'lightbox-close': ['关闭', 'Close'],
+  'lightbox-prev': ['上一张', 'Previous'],
+  'lightbox-next': ['下一张', 'Next']
+};
+
+let lang = localStorage.getItem('hb-lang') || 'cn';
+
+function switchLang(l) {
+  if (l === lang) return;
+  lang = l;
+  localStorage.setItem('hb-lang', lang);
+  applyLang();
+}
+
+function applyLang() {
+  const idx = lang === 'cn' ? 0 : 1;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.innerHTML = t[key][idx];
+  });
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    const key = el.getAttribute('data-i18n-aria');
+    if (t[key]) el.setAttribute('aria-label', t[key][idx]);
+  });
+  document.getElementById('btn-cn').classList.toggle('active', lang === 'cn');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang === 'cn' ? 'zh-CN' : 'en';
+}
+
+applyLang();
+
+function toggleMenu() {
+  const isOpen = document.body.classList.toggle('menu-open');
+  const toggle = document.querySelector('.nav-toggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.querySelector('.sidebar-overlay');
+  toggle.classList.toggle('is-open', isOpen);
+  toggle.setAttribute('aria-expanded', isOpen);
+  sidebar.classList.toggle('is-open', isOpen);
+  sidebar.setAttribute('aria-hidden', !isOpen);
+  overlay.classList.toggle('is-open', isOpen);
+  overlay.setAttribute('aria-hidden', !isOpen);
+}
+
+function closeMenu() {
+  if (document.body.classList.contains('menu-open')) {
+    toggleMenu();
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeMenu();
+});
+
+(function lightbox() {
+  const images = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png'];
+  const basePath = 'images/knutsford-house/展示图/';
+  const box = document.querySelector('.kh-lightbox');
+  const img = box.querySelector('.kh-lightbox-stage img');
+  const counter = box.querySelector('.kh-lightbox-counter');
+  let idx = 0;
+
+  function show() {
+    img.src = basePath + images[idx];
+    counter.textContent = (idx + 1) + ' / ' + images.length;
+  }
+
+  function open(i) {
+    idx = (i + images.length) % images.length;
+    show();
+    box.classList.add('is-open');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    box.classList.remove('is-open');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function next() { idx = (idx + 1) % images.length; show(); }
+  function prev() { idx = (idx - 1 + images.length) % images.length; show(); }
+
+  document.querySelectorAll('.kh-gallery-trigger').forEach(el => {
+    el.addEventListener('click', () => open(parseInt(el.dataset.index, 10)));
+  });
+  box.querySelector('.kh-lightbox-close').addEventListener('click', close);
+  box.querySelector('.kh-lightbox-prev').addEventListener('click', prev);
+  box.querySelector('.kh-lightbox-next').addEventListener('click', next);
+  box.addEventListener('click', e => {
+    if (e.target === box) close();
+  });
+  document.addEventListener('keydown', e => {
+    if (!box.classList.contains('is-open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowRight') next();
+    else if (e.key === 'ArrowLeft') prev();
+  });
+})();
+</script>
+
+</body>
+</html>

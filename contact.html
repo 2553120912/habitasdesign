@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联系我们 | Habitas Design</title>
+<style>
+  @font-face {
+    font-family: 'News Gothic';
+    src: url('fonts/news-gothic-regular.woff2') format('woff2'),
+         url('fonts/news-gothic-regular.woff')  format('woff'),
+         url('fonts/news-gothic-regular.ttf')   format('truetype'),
+         url('fonts/news-gothic-regular.otf')   format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'News Gothic';
+    src: url('fonts/news-gothic-bold.woff2') format('woff2'),
+         url('fonts/news-gothic-bold.woff')  format('woff'),
+         url('fonts/news-gothic-bold.ttf')   format('truetype'),
+         url('fonts/news-gothic-bold.otf')   format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    font-family: "News Gothic", "News Gothic MT", "Trade Gothic", "Franklin Gothic Book", "Helvetica Neue", Arial, "Noto Serif SC", "Source Han Serif SC", "SimSun", sans-serif;
+    color: #1a1a1a;
+    background: #f4efe6;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 110;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    color: #fafaf8;
+    background: #1a1a1a;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .nav-logo {
+    display: block;
+    line-height: 0;
+  }
+
+  .nav-logo img {
+    display: block;
+    height: 44px;
+    width: auto;
+    filter: invert(1);
+    transition: opacity 0.3s;
+  }
+
+  .nav-logo:hover img {
+    opacity: 0.7;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .lang-switch {
+    display: flex;
+    gap: 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .lang-switch button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: inherit;
+    padding: 0 4px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+  }
+
+  #btn-cn,
+  #btn-en {
+    font-size: 13px;
+  }
+
+  .lang-switch button.active {
+    opacity: 1;
+  }
+
+  .lang-switch button:hover {
+    opacity: 0.8;
+  }
+
+  .lang-switch span {
+    opacity: 0.25;
+  }
+
+  .nav-toggle {
+    position: fixed;
+    top: 30px;
+    right: 48px;
+    z-index: 140;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    width: 22px;
+    background: #fafaf8;
+    transition: transform 0.35s ease, opacity 0.25s ease;
+    transform-origin: center;
+  }
+
+  .nav-toggle.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .nav-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 340px;
+    max-width: 100%;
+    height: 100vh;
+    background: rgba(42, 42, 42, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fafaf8;
+    z-index: 130;
+    padding: 120px 48px 48px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, 0, 0);
+    transition: visibility 0s linear 1.5s;
+    will-change: opacity;
+    backface-visibility: hidden;
+    contain: paint;
+  }
+
+  .sidebar.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    animation: sidebarFadeIn 1.5s cubic-bezier(0.19, 1, 0.22, 1) both;
+    transition: visibility 0s;
+  }
+
+  .sidebar-links {
+    opacity: 0;
+    transition: opacity 1.1s cubic-bezier(0.19, 1, 0.22, 1) 0.15s;
+    will-change: opacity;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .sidebar.is-open .sidebar-links {
+    opacity: 1;
+  }
+
+  @keyframes sidebarFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    z-index: 120;
+  }
+
+  .sidebar-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .sidebar-links a {
+    position: relative;
+    color: #fafaf8;
+    text-decoration: none;
+    font-size: 24px;
+    letter-spacing: 4px;
+    display: inline-block;
+  }
+
+  .sidebar-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 1px;
+    background: #fafaf8;
+    transition: width 0.4s ease;
+  }
+
+  .sidebar-links a:hover::after {
+    width: 100%;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  .contact-hero {
+    background: #1a1a1a;
+    color: #fafaf8;
+    padding: 176px 64px 96px;
+    min-height: 56vh;
+  }
+
+  .contact-hero-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 96px;
+    align-items: start;
+  }
+  .contact-hero-inner > *,
+  .form-inner > *,
+  .contact-form > * {
+    min-width: 0;
+  }
+
+  .contact-title {
+    font-size: clamp(42px, 7vw, 88px);
+    font-weight: normal;
+    letter-spacing: 8px;
+    line-height: 1.1;
+    margin-bottom: 40px;
+    overflow-wrap: break-word;
+  }
+
+  .contact-intro {
+    max-width: 520px;
+    color: rgba(250,250,248,0.72);
+    font-size: clamp(17px, 1.7vw, 22px);
+    line-height: 1.9;
+    letter-spacing: 1px;
+  }
+
+  .contact-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px 48px;
+    border-top: 1px solid rgba(255,255,255,0.16);
+    padding-top: 32px;
+  }
+
+  .contact-item h2 {
+    font-size: 13px;
+    font-weight: normal;
+    letter-spacing: 3px;
+    color: rgba(250,250,248,0.48);
+    margin-bottom: 14px;
+  }
+
+  .contact-item p,
+  .contact-item a {
+    color: #fafaf8;
+    font-size: 16px;
+    letter-spacing: 1px;
+    line-height: 2;
+    text-decoration: none;
+  }
+
+  .contact-item a {
+    transition: opacity 0.3s;
+  }
+
+  .contact-item a:hover {
+    opacity: 0.6;
+  }
+
+  .contact-form-section {
+    background: #f4efe6;
+    padding: 96px 64px 120px;
+  }
+
+  .form-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(48px, 6vw, 80px);
+    align-items: stretch;
+  }
+
+  .form-header {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    align-content: stretch;
+    min-height: 100%;
+  }
+
+  .form-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .form-title {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: normal;
+    letter-spacing: 5px;
+    line-height: 1.25;
+  }
+
+  .form-intro {
+    color: #555;
+    font-size: 16px;
+    line-height: 2;
+    max-width: 560px;
+  }
+
+  .contact-carousel {
+    margin-top: 34px;
+    position: relative;
+    min-height: 0;
+  }
+
+  .contact-carousel-frame {
+    position: relative;
+    height: 100%;
+    min-height: 430px;
+    background: #e8e6e1;
+    overflow: hidden;
+  }
+
+  .contact-carousel-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  .contact-carousel-slide.is-active {
+    opacity: 1;
+  }
+
+  .contact-carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .contact-carousel-slide.placeholder {
+    background: #d4d1cb;
+  }
+
+  .contact-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    gap: 26px;
+    padding-top: 58px;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .form-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: space-between;
+    gap: 22px 36px;
+    min-height: 0;
+  }
+
+  .form-field {
+    display: grid;
+    gap: 7px;
+  }
+
+  .form-field.full {
+    grid-column: 1 / -1;
+  }
+
+  .form-field label {
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 3px;
+    color: #777;
+    text-transform: uppercase;
+  }
+
+  .form-field input,
+  .form-field textarea {
+    width: 100%;
+    min-width: 0;
+    border: none;
+    border-bottom: 1px solid rgba(26,26,26,0.24);
+    background: transparent;
+    color: #1a1a1a;
+    font: inherit;
+    font-size: 17px;
+    line-height: 1.35;
+    padding: 0 0 8px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .form-field textarea {
+    resize: vertical;
+    min-height: 118px;
+  }
+
+  .message-field,
+  .message-field textarea {
+    min-height: 0;
+  }
+
+  .message-field {
+    grid-template-rows: auto auto;
+  }
+
+  .message-field textarea {
+    height: 118px;
+    align-self: start;
+  }
+
+  .form-field input:focus,
+  .form-field textarea:focus {
+    border-bottom-color: #1a1a1a;
+  }
+
+  .form-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    align-self: end;
+  }
+
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    border: none;
+    background: transparent;
+    color: #1a1a1a;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 8px 0;
+  }
+
+  .submit-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #1a1a1a;
+    border-radius: 50%;
+  }
+
+  .cta-arrow {
+    width: 14px;
+    height: 14px;
+    display: block;
+  }
+
+  .form-status {
+    color: #555;
+    font-size: 14px;
+    letter-spacing: 1px;
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+
+  .form-status.is-visible {
+    opacity: 1;
+  }
+
+  .footer {
+    padding: 36px 48px;
+    border-top: 1px solid rgba(26,26,26,0.08);
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #777;
+    text-align: center;
+  }
+
+  @media (max-width: 1100px) {
+    .contact-hero {
+      padding: 152px 40px 80px;
+    }
+    .contact-hero-inner,
+    .form-inner {
+      gap: 56px;
+    }
+    .contact-form-section {
+      padding: 88px 40px 104px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .contact-hero-inner,
+    .form-inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .form-header {
+      min-height: auto;
+    }
+
+    .contact-carousel-frame {
+      height: auto;
+      min-height: 0;
+      aspect-ratio: 4 / 3;
+    }
+
+    .contact-form {
+      height: auto;
+      padding-top: 0;
+      grid-template-rows: none;
+    }
+
+    .form-fields {
+      align-content: start;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      padding: 20px 24px;
+    }
+
+    .nav-logo img {
+      height: 32px;
+    }
+
+    .nav-left {
+      gap: 24px;
+    }
+
+    .nav-toggle {
+      top: 20px;
+      right: 24px;
+    }
+
+    .sidebar {
+      width: 100%;
+      padding: 100px 32px 40px;
+    }
+
+    .sidebar-links a {
+      font-size: 20px;
+    }
+
+    .contact-hero {
+      padding: 132px 24px 64px;
+      min-height: auto;
+    }
+
+    .contact-title {
+      letter-spacing: 4px;
+      margin-bottom: 28px;
+    }
+
+    .contact-info-grid,
+    .contact-form {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-form-section {
+      padding: 72px 24px 88px;
+    }
+
+    .contact-carousel {
+      margin-top: 30px;
+    }
+
+    .contact-form {
+      gap: 22px;
+    }
+
+    .form-fields {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .form-actions {
+      display: grid;
+      gap: 18px;
+    }
+
+    .footer {
+      padding: 32px 24px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-logo" aria-label="Habitas Design">
+      <img src="images/logo.png" alt="Habitas Design">
+    </a>
+    <div class="lang-switch">
+      <button id="btn-cn" class="active" onclick="switchLang('cn')">中</button>
+      <span>/</span>
+      <button id="btn-en" onclick="switchLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="toggleMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<div class="sidebar-overlay" onclick="closeMenu()" aria-hidden="true"></div>
+
+<aside class="sidebar" id="sidebar" aria-hidden="true">
+  <ul class="sidebar-links">
+    <li><a href="projects.html" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
+    <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
+    <li><a href="index.html#about" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
+    <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
+    <li><a href="#" data-i18n="nav-stories" onclick="closeMenu()">故事</a></li>
+  </ul>
+</aside>
+
+<main>
+  <section class="contact-hero">
+    <div class="contact-hero-inner">
+      <div class="contact-copy">
+        <h1 class="contact-title" data-i18n="contact-title">联系我们</h1>
+        <p class="contact-intro" data-i18n="contact-intro">无论您正准备开始建造，还是只是想咨询与自身情况相关的问题，与我们取得联系，都是迈向专属定制住宅的第一步。</p>
+      </div>
+      <div class="contact-info-grid">
+        <div class="contact-item">
+          <h2 data-i18n="contact-melbourne-label">墨尔本</h2>
+          <p data-i18n="contact-melbourne">U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia</p>
+          <p data-i18n="contact-melbourne-phone">+61 422 501 811</p>
+        </div>
+        <div class="contact-item">
+          <h2 data-i18n="contact-shanghai-label">上海</h2>
+          <p data-i18n="contact-shanghai">中国 上海市<br>苏州南路 1295 号</p>
+          <p data-i18n="contact-shanghai-phone">+86 159 0199 9004</p>
+        </div>
+        <div class="contact-item">
+          <h2 data-i18n="contact-email-label">邮箱</h2>
+          <p><a href="mailto:studio@habitasdesign.com" data-i18n="contact-email">studio@habitasdesign.com</a></p>
+        </div>
+        <div class="contact-item">
+          <h2 data-i18n="contact-web-label">网站</h2>
+          <p><a href="https://habitasdesign.com" target="_blank" rel="noopener" data-i18n="contact-web">habitasdesign.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-form-section">
+    <div class="form-inner">
+      <div class="form-header">
+        <div class="form-copy">
+          <h2 class="form-title" data-i18n="form-title">项目咨询</h2>
+          <p class="form-intro" data-i18n="form-intro">留下您的联系方式与项目想法，我们会尽快与您沟通下一步。</p>
+        </div>
+        <div class="contact-carousel" aria-label="Project images">
+          <div class="contact-carousel-frame">
+            <div class="contact-carousel-slide is-active">
+              <img src="images/lovell-house/精选卡/秋天perspective.png" alt="Lovell House">
+            </div>
+            <div class="contact-carousel-slide">
+              <img src="images/web-01.jpg" alt="Project">
+            </div>
+            <div class="contact-carousel-slide">
+              <img src="images/web-05.png" alt="Project">
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" id="contact-form">
+        <div class="form-fields">
+          <div class="form-field">
+            <label for="first-name" data-i18n="form-first-name">名</label>
+            <input id="first-name" name="firstName" type="text" autocomplete="given-name" required>
+          </div>
+          <div class="form-field">
+            <label for="last-name" data-i18n="form-last-name">姓</label>
+            <input id="last-name" name="lastName" type="text" autocomplete="family-name" required>
+          </div>
+          <div class="form-field">
+            <label for="phone" data-i18n="form-phone">手机</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+          <div class="form-field">
+            <label for="email" data-i18n="form-email">邮箱</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="form-field full">
+            <label for="budget" data-i18n="form-budget">预算</label>
+            <input id="budget" name="budget" type="text" inputmode="text">
+          </div>
+          <div class="form-field full message-field">
+            <label for="message" data-i18n="form-message">留言</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="submit-btn" type="submit">
+            <span data-i18n="form-submit">提交</span>
+            <span class="submit-circle" aria-hidden="true">
+              <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="6" y1="12" x2="18" y2="12"/>
+                <polyline points="13,7 18,12 13,17"/>
+              </svg>
+            </span>
+          </button>
+          <p class="form-status" id="form-status" data-i18n="form-success" aria-live="polite">已收到，我们会尽快与您联系。</p>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span data-i18n="footer-copy">&copy; 2026 Habitas Design. All rights reserved.</span>
+</footer>
+
+<script>
+const t = {
+  'nav-works': ['作品', 'Projects'],
+  'nav-process': ['服务流程', 'Process'],
+  'nav-about': ['关于我们', 'About us'],
+  'nav-contact': ['联系我们', 'Contact'],
+  'nav-stories': ['故事', 'Stories'],
+  'contact-title': ['联系我们', 'CONTACT'],
+  'contact-intro': ['无论您正准备开始建造，还是只是想咨询与自身情况相关的问题，与我们取得联系，都是迈向专属定制住宅的第一步。', 'Whether you’re planning to build right now or just have a question specific to your circumstance, getting in touch with us is the first step towards your very own custom designed home.'],
+  'contact-melbourne-label': ['墨尔本', 'Melbourne'],
+  'contact-melbourne': ['U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia', 'U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia'],
+  'contact-melbourne-phone': ['+61 422 501 811', '+61 422 501 811'],
+  'contact-shanghai-label': ['上海', 'Shanghai'],
+  'contact-shanghai': ['中国 上海市<br>苏州南路 1295 号', '1295 Suzhou South Road<br>Shanghai, China'],
+  'contact-shanghai-phone': ['+86 159 0199 9004', '+86 159 0199 9004'],
+  'contact-email-label': ['邮箱', 'Email'],
+  'contact-email': ['studio@habitasdesign.com', 'studio@habitasdesign.com'],
+  'contact-web-label': ['网站', 'Website'],
+  'contact-web': ['habitasdesign.com', 'habitasdesign.com'],
+  'form-title': ['项目咨询', 'PROJECT ENQUIRY'],
+  'form-intro': ['留下您的联系方式与项目想法，我们会尽快与您沟通下一步。', 'Share your contact details and project ideas, and we will get back to you soon.'],
+  'form-first-name': ['名', 'First Name'],
+  'form-last-name': ['姓', 'Last Name'],
+  'form-phone': ['手机', 'Phone'],
+  'form-email': ['邮箱', 'Email'],
+  'form-budget': ['预算', 'Budget'],
+  'form-message': ['留言', 'Message'],
+  'form-submit': ['提交', 'Submit'],
+  'form-success': ['已收到，我们会尽快与您联系。', 'Thank you. We will be in touch soon.'],
+  'footer-copy': ['&copy; 2026 Habitas Design. All rights reserved.', '&copy; 2026 Habitas Design. All rights reserved.']
+};
+
+let lang = localStorage.getItem('hb-lang') || 'cn';
+
+function switchLang(l) {
+  if (l === lang) return;
+  lang = l;
+  localStorage.setItem('hb-lang', lang);
+  applyLang();
+}
+
+function applyLang() {
+  const idx = lang === 'cn' ? 0 : 1;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.innerHTML = t[key][idx];
+  });
+  document.getElementById('btn-cn').classList.toggle('active', lang === 'cn');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang === 'cn' ? 'zh-CN' : 'en';
+}
+
+applyLang();
+
+function toggleMenu() {
+  const isOpen = document.body.classList.toggle('menu-open');
+  const toggle = document.querySelector('.nav-toggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.querySelector('.sidebar-overlay');
+  toggle.classList.toggle('is-open', isOpen);
+  toggle.setAttribute('aria-expanded', isOpen);
+  sidebar.classList.toggle('is-open', isOpen);
+  sidebar.setAttribute('aria-hidden', !isOpen);
+  overlay.classList.toggle('is-open', isOpen);
+  overlay.setAttribute('aria-hidden', !isOpen);
+}
+
+function closeMenu() {
+  if (document.body.classList.contains('menu-open')) {
+    toggleMenu();
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeMenu();
+});
+
+(() => {
+  const slides = document.querySelectorAll('.contact-carousel-slide');
+  if (!slides.length) return;
+
+  let current = 0;
+  const INTERVAL = 5000;
+
+  function show(i) {
+    current = (i + slides.length) % slides.length;
+    slides.forEach((slide, idx) => slide.classList.toggle('is-active', idx === current));
+  }
+
+  setInterval(() => show(current + 1), INTERVAL);
+})();
+
+document.getElementById('contact-form').addEventListener('submit', e => {
+  e.preventDefault();
+  document.getElementById('form-status').classList.add('is-visible');
+});
+</script>
+
+</body>
+</html>
