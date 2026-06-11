@@ -903,7 +903,7 @@
   <ul class="sidebar-links">
     <li><a href="projects.html" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
     <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
-    <li><a href="#about" class="is-active" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
+    <li><a href="#about" class="is-active" data-i18n="nav-about" onclick="goToAbout(event)">关于我们</a></li>
     <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
     <li><a href="#"        data-i18n="nav-stories" onclick="closeMenu()">故事</a></li>
   </ul>
@@ -1062,13 +1062,23 @@
 </footer>
 
 <script>
-// 进入页面时强制从顶部开始（除非用户访问带 #xxx 的 URL）
-if (!location.hash) {
+function forcePageTop() {
   const html = document.documentElement;
   const prev = html.style.scrollBehavior;
   html.style.scrollBehavior = 'auto';
   window.scrollTo(0, 0);
   html.style.scrollBehavior = prev;
+}
+
+const allowAboutHash = location.hash === '#about' && sessionStorage.getItem('hb-allow-about-scroll') === '1';
+sessionStorage.removeItem('hb-allow-about-scroll');
+if (location.hash && !allowAboutHash) {
+  history.replaceState(null, '', location.pathname + location.search);
+}
+if (!location.hash) {
+  forcePageTop();
+  window.addEventListener('pageshow', forcePageTop, { once: true });
+  window.addEventListener('load', () => requestAnimationFrame(forcePageTop), { once: true });
 }
 
 const t = {
@@ -1216,6 +1226,13 @@ function closeMenu() {
   if (document.body.classList.contains('menu-open')) {
     toggleMenu();
   }
+}
+
+function goToAbout(event) {
+  event.preventDefault();
+  closeMenu();
+  const about = document.getElementById('about');
+  if (about) about.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 document.addEventListener('keydown', e => {
