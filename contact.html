@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,6 +37,11 @@
     scroll-behavior: smooth;
     overflow-y: scroll;
     scrollbar-gutter: stable;
+  }
+
+  :root {
+    --contact-content-width: 1200px;
+    --contact-side-padding: 64px;
   }
 
   body {
@@ -178,6 +183,8 @@
     color: #fafaf8;
     z-index: 130;
     padding: 120px 48px 48px;
+    display: flex;
+    flex-direction: column;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -254,6 +261,38 @@
   .sidebar-links a.is-active::after {
     width: 100%;
   }
+  .sidebar-social {
+    margin-top: auto;
+    padding-top: 28px;
+    border-top: 1px solid rgba(250, 250, 248, 0.18);
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    opacity: 0;
+    transition: opacity 1.1s cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
+    will-change: opacity;
+  }
+  .sidebar.is-open .sidebar-social {
+    opacity: 1;
+  }
+  .sidebar-social a {
+    width: 24px;
+    height: 24px;
+    color: rgba(250, 250, 248, 0.62);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.25s ease;
+  }
+  .sidebar-social a:hover,
+  .sidebar-social a:focus-visible {
+    color: #fafaf8;
+  }
+  .sidebar-social svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
 
   body.menu-open {
     overflow: hidden;
@@ -262,16 +301,16 @@
   .contact-hero {
     background: #1a1a1a;
     color: #fafaf8;
-    padding: 176px 64px 96px;
+    padding: 176px var(--contact-side-padding) 96px;
     min-height: 56vh;
   }
 
   .contact-hero-inner {
-    max-width: 1120px;
+    max-width: var(--contact-content-width);
     margin: 0 auto;
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    gap: 96px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(64px, 8vw, 104px);
     align-items: start;
   }
   .contact-hero-inner > *,
@@ -281,44 +320,46 @@
   }
 
   .contact-title {
-    font-size: clamp(42px, 7vw, 88px);
+    font-size: clamp(38px, 5.4vw, 68px);
     font-weight: normal;
-    letter-spacing: 8px;
+    letter-spacing: 6px;
     line-height: 1.1;
-    margin-bottom: 40px;
+    margin-bottom: 34px;
     overflow-wrap: break-word;
   }
 
   .contact-intro {
     max-width: 520px;
     color: rgba(250,250,248,0.72);
-    font-size: clamp(17px, 1.7vw, 22px);
-    line-height: 1.9;
+    font-size: clamp(16px, 1.45vw, 19px);
+    line-height: 1.75;
     letter-spacing: 1px;
   }
 
   .contact-info-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 40px 48px;
+    gap: 44px 56px;
+    align-items: start;
     border-top: 1px solid rgba(255,255,255,0.16);
     padding-top: 32px;
   }
 
   .contact-item h2 {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: normal;
     letter-spacing: 3px;
+    text-transform: uppercase;
     color: rgba(250,250,248,0.48);
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
 
   .contact-item p,
   .contact-item a {
     color: #fafaf8;
-    font-size: 16px;
-    letter-spacing: 1px;
-    line-height: 2;
+    font-size: 15px;
+    letter-spacing: 0.8px;
+    line-height: 1.7;
     text-decoration: none;
   }
 
@@ -329,17 +370,38 @@
   .contact-item a:hover {
     opacity: 0.6;
   }
+  .contact-social-links {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-top: 4px;
+  }
+  .contact-social-links a {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fafaf8;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  .contact-social-links svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
 
   .contact-form-section {
     background: #f4efe6;
-    padding: 96px 64px 120px;
+    padding: 96px var(--contact-side-padding) 120px;
   }
 
   .form-inner {
-    max-width: 1200px;
+    max-width: var(--contact-content-width);
     margin: 0 auto;
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: clamp(48px, 6vw, 80px);
     align-items: stretch;
   }
@@ -531,6 +593,61 @@
   .form-status.is-visible {
     opacity: 1;
   }
+  .contact-home-link {
+    grid-column: 1 / -1;
+    justify-self: center;
+    margin-top: 44px;
+    position: relative;
+    color: #222;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: opacity 0.3s ease;
+  }
+  .contact-home-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.35s ease;
+  }
+  .contact-home-link:hover,
+  .contact-home-link:focus-visible {
+    opacity: 0.68;
+  }
+  .contact-home-link:hover::after,
+  .contact-home-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+  .contact-home-link-icon {
+    width: 24px;
+    height: 24px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  .contact-home-link-icon svg {
+    width: 12px;
+    height: 12px;
+    display: block;
+  }
+  .contact-home-link:hover .contact-home-link-icon,
+  .contact-home-link:focus-visible .contact-home-link-icon {
+    transform: translateX(4px);
+  }
 
   .footer {
     padding: 36px 48px;
@@ -542,15 +659,21 @@
   }
 
   @media (max-width: 1100px) {
+    :root {
+      --contact-side-padding: 40px;
+    }
+
     .contact-hero {
-      padding: 152px 40px 80px;
+      padding-top: 152px;
+      padding-bottom: 80px;
     }
     .contact-hero-inner,
     .form-inner {
       gap: 56px;
     }
     .contact-form-section {
-      padding: 88px 40px 104px;
+      padding-top: 88px;
+      padding-bottom: 104px;
     }
   }
 
@@ -584,6 +707,10 @@
   }
 
   @media (max-width: 768px) {
+    :root {
+      --contact-side-padding: 24px;
+    }
+
     .nav {
       padding: 20px 24px;
     }
@@ -611,7 +738,8 @@
     }
 
     .contact-hero {
-      padding: 132px 24px 64px;
+      padding-top: 132px;
+      padding-bottom: 64px;
       min-height: auto;
     }
 
@@ -625,8 +753,14 @@
       grid-template-columns: 1fr;
     }
 
+    .contact-info-grid {
+      gap: 30px;
+      padding-top: 28px;
+    }
+
     .contact-form-section {
-      padding: 72px 24px 88px;
+      padding-top: 72px;
+      padding-bottom: 88px;
     }
 
     .contact-carousel {
@@ -647,6 +781,20 @@
       gap: 18px;
     }
 
+    .contact-home-link {
+      margin-top: 34px;
+      font-size: 14px;
+      letter-spacing: 1.6px;
+    }
+    .contact-home-link-icon {
+      width: 23px;
+      height: 23px;
+    }
+    .contact-home-link-icon svg {
+      width: 11.5px;
+      height: 11.5px;
+    }
+
     .footer {
       padding: 32px 24px;
     }
@@ -661,9 +809,9 @@
       <img src="images/logo.png" alt="Habitas Design">
     </a>
     <div class="lang-switch">
-      <button id="btn-cn" class="active" onclick="switchLang('cn')">中</button>
+      <button id="btn-en" class="active" onclick="switchLang('en')">EN</button>
       <span>/</span>
-      <button id="btn-en" onclick="switchLang('en')">EN</button>
+      <button id="btn-cn" onclick="switchLang('cn')">中</button>
     </div>
   </div>
 </nav>
@@ -684,6 +832,20 @@
     <li><a href="contact.html" class="is-active" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
     <li><a href="#" data-i18n="nav-stories" onclick="closeMenu()">故事</a></li>
   </ul>
+  <div class="sidebar-social" aria-label="Social media">
+    <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect width="20" height="20" x="2" y="2" rx="5.5"></rect>
+        <circle cx="12" cy="12" r="4.75"></circle>
+        <circle cx="17.75" cy="6.25" r="0.85" fill="currentColor" stroke="none"></circle>
+      </svg>
+    </a>
+    <a href="https://x.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="X">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+      </svg>
+    </a>
+  </div>
 </aside>
 
 <main>
@@ -709,8 +871,21 @@
           <p><a href="mailto:studio@habitasdesign.com" data-i18n="contact-email">studio@habitasdesign.com</a></p>
         </div>
         <div class="contact-item">
-          <h2 data-i18n="contact-web-label">网站</h2>
-          <p><a href="https://habitasdesign.com" target="_blank" rel="noopener" data-i18n="contact-web">habitasdesign.com</a></p>
+          <h2 data-i18n="contact-web-label">社交媒体链接</h2>
+          <div class="contact-social-links" aria-label="Social media">
+            <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="20" height="20" x="2" y="2" rx="5.5"></rect>
+                <circle cx="12" cy="12" r="4.75"></circle>
+                <circle cx="17.75" cy="6.25" r="0.85" fill="currentColor" stroke="none"></circle>
+              </svg>
+            </a>
+            <a href="https://x.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="X">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -777,6 +952,15 @@
           <p class="form-status" id="form-status" data-i18n="form-success" aria-live="polite">已收到，我们会尽快与您联系。</p>
         </div>
       </form>
+      <a class="contact-home-link" href="index.html">
+        <span data-i18n="back-home">返回首页</span>
+        <span class="contact-home-link-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="18" y2="12"/>
+            <polyline points="12,6 18,12 12,18"/>
+          </svg>
+        </span>
+      </a>
     </div>
   </section>
 </main>
@@ -802,8 +986,7 @@ const t = {
   'contact-shanghai-phone': ['+86 159 0199 9004', '+86 159 0199 9004'],
   'contact-email-label': ['邮箱', 'Email'],
   'contact-email': ['studio@habitasdesign.com', 'studio@habitasdesign.com'],
-  'contact-web-label': ['网站', 'Website'],
-  'contact-web': ['habitasdesign.com', 'habitasdesign.com'],
+  'contact-web-label': ['社交媒体链接', 'Social Media'],
   'form-title': ['项目咨询', 'PROJECT ENQUIRY'],
   'form-intro': ['留下您的联系方式与项目想法，我们会尽快与您沟通下一步。', 'Share your contact details and project ideas, and we will get back to you soon.'],
   'form-first-name': ['名', 'First Name'],
@@ -814,10 +997,11 @@ const t = {
   'form-message': ['留言', 'Message'],
   'form-submit': ['提交', 'Submit'],
   'form-success': ['已收到，我们会尽快与您联系。', 'Thank you. We will be in touch soon.'],
+  'back-home': ['返回首页', 'Back to Home'],
   'footer-copy': ['&copy; 2026 Habitas Design. All rights reserved.', '&copy; 2026 Habitas Design. All rights reserved.']
 };
 
-let lang = localStorage.getItem('hb-lang') || 'cn';
+let lang = localStorage.getItem('hb-lang') || 'en';
 
 function switchLang(l) {
   if (l === lang) return;

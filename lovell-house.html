@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -171,6 +171,8 @@
     color: #fafaf8;
     z-index: 130;
     padding: 120px 48px 48px;
+    display: flex;
+    flex-direction: column;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -231,6 +233,32 @@
   .sidebar-links a:hover::after,
   .sidebar-links a.is-active::after {
     width: 100%;
+  }
+  .sidebar-social {
+    margin-top: auto;
+    padding-top: 28px;
+    border-top: 1px solid rgba(250, 250, 248, 0.18);
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+  .sidebar-social a {
+    width: 24px;
+    height: 24px;
+    color: rgba(250, 250, 248, 0.62);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.25s ease;
+  }
+  .sidebar-social a:hover,
+  .sidebar-social a:focus-visible {
+    color: #fafaf8;
+  }
+  .sidebar-social svg {
+    width: 20px;
+    height: 20px;
+    display: block;
   }
 
   body.menu-open {
@@ -635,6 +663,27 @@
   .lh-contact-item a:hover {
     opacity: 0.6;
   }
+  .lh-contact-social-links {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-top: 2px;
+  }
+  .lh-contact-social-links a {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fafaf8;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  .lh-contact-social-links svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
 
   .lh-contact-phone {
     margin-top: 8px;
@@ -827,9 +876,9 @@
       <img src="images/logo.png" alt="Habitas Design">
     </a>
     <div class="lang-switch">
-      <button id="btn-cn" class="active" onclick="switchLang('cn')">中</button>
+      <button id="btn-en" class="active" onclick="switchLang('en')">EN</button>
       <span>/</span>
-      <button id="btn-en" onclick="switchLang('en')">EN</button>
+      <button id="btn-cn" onclick="switchLang('cn')">中</button>
     </div>
   </div>
 </nav>
@@ -850,6 +899,20 @@
     <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
     <li><a href="#" data-i18n="nav-stories" onclick="closeMenu()">故事</a></li>
   </ul>
+  <div class="sidebar-social" aria-label="Social media">
+    <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect width="20" height="20" x="2" y="2" rx="5.5"></rect>
+        <circle cx="12" cy="12" r="4.75"></circle>
+        <circle cx="17.75" cy="6.25" r="0.85" fill="currentColor" stroke="none"></circle>
+      </svg>
+    </a>
+    <a href="https://x.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="X">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+      </svg>
+    </a>
+  </div>
 </aside>
 
 <header class="lh-hero">
@@ -941,8 +1004,21 @@
           <p><a href="mailto:studio@habitasdesign.com" data-i18n="contact-email">studio@habitasdesign.com</a></p>
         </div>
         <div class="lh-contact-item">
-          <h4 data-i18n="contact-web-label">网站</h4>
-          <p><a href="https://habitasdesign.com" target="_blank" rel="noopener" data-i18n="contact-web">habitasdesign.com</a></p>
+          <h4 data-i18n="contact-web-label">社交媒体链接</h4>
+          <div class="lh-contact-social-links" aria-label="Social media">
+            <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="20" height="20" x="2" y="2" rx="5.5"></rect>
+                <circle cx="12" cy="12" r="4.75"></circle>
+                <circle cx="17.75" cy="6.25" r="0.85" fill="currentColor" stroke="none"></circle>
+              </svg>
+            </a>
+            <a href="https://x.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="X">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -991,15 +1067,14 @@ const t = {
   'contact-shanghai-phone': ['+86 159 0199 9004', '+86 159 0199 9004'],
   'contact-email-label': ['邮箱', 'Email'],
   'contact-email': ['studio@habitasdesign.com', 'studio@habitasdesign.com'],
-  'contact-web-label': ['网站', 'Website'],
-  'contact-web': ['habitasdesign.com', 'habitasdesign.com'],
+  'contact-web-label': ['社交媒体链接', 'Social Media'],
   'footer-copy': ['&copy; 2026 Habitas Design. All rights reserved.', '&copy; 2026 Habitas Design. All rights reserved.'],
   'lightbox-close': ['关闭', 'Close'],
   'lightbox-prev': ['上一张', 'Previous'],
   'lightbox-next': ['下一张', 'Next']
 };
 
-let lang = localStorage.getItem('hb-lang') || 'cn';
+let lang = localStorage.getItem('hb-lang') || 'en';
 
 function switchLang(l) {
   if (l === lang) return;

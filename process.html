@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -161,6 +161,8 @@
     color: #fafaf8;
     z-index: 130;
     padding: 120px 48px 48px;
+    display: flex;
+    flex-direction: column;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -222,6 +224,37 @@
   .sidebar-links a:hover::after,
   .sidebar-links a.is-active::after {
     width: 100%;
+  }
+  .sidebar-social {
+    margin-top: auto;
+    padding-top: 28px;
+    border-top: 1px solid rgba(250, 250, 248, 0.18);
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    opacity: 0;
+    transition: opacity 1.1s cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
+  }
+  .sidebar.is-open .sidebar-social {
+    opacity: 1;
+  }
+  .sidebar-social a {
+    width: 24px;
+    height: 24px;
+    color: rgba(250, 250, 248, 0.62);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.25s ease;
+  }
+  .sidebar-social a:hover,
+  .sidebar-social a:focus-visible {
+    color: #fafaf8;
+  }
+  .sidebar-social svg {
+    width: 20px;
+    height: 20px;
+    display: block;
   }
   body.menu-open {
     overflow: hidden;
@@ -385,8 +418,10 @@
 
   .process-closing {
     min-height: 420px;
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background: #f4efe6;
     padding: 128px clamp(32px, 5vw, 72px);
   }
@@ -398,6 +433,59 @@
     line-height: 1.72;
     color: #222;
     overflow-wrap: break-word;
+  }
+  .process-home-link {
+    margin-top: 44px;
+    position: relative;
+    color: #222;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: opacity 0.3s ease;
+  }
+  .process-home-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.35s ease;
+  }
+  .process-home-link:hover,
+  .process-home-link:focus-visible {
+    opacity: 0.68;
+  }
+  .process-home-link:hover::after,
+  .process-home-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+  .process-home-link-icon {
+    width: 24px;
+    height: 24px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  .process-home-link-icon svg {
+    width: 12px;
+    height: 12px;
+    display: block;
+  }
+  .process-home-link:hover .process-home-link-icon,
+  .process-home-link:focus-visible .process-home-link-icon {
+    transform: translateX(4px);
   }
 
   .footer {
@@ -543,6 +631,19 @@
       font-size: 20px;
       line-height: 1.75;
     }
+    .process-home-link {
+      margin-top: 34px;
+      font-size: 14px;
+      letter-spacing: 1.6px;
+    }
+    .process-home-link-icon {
+      width: 23px;
+      height: 23px;
+    }
+    .process-home-link-icon svg {
+      width: 11.5px;
+      height: 11.5px;
+    }
     .accordion-trigger {
       grid-template-columns: 42px minmax(0, 1fr) 30px;
       gap: 12px;
@@ -604,9 +705,9 @@
       <img src="images/logo.png" alt="Habitas Design">
     </a>
     <div class="lang-switch">
-      <button id="btn-cn" class="active" onclick="switchLang('cn')">中</button>
+      <button id="btn-en" class="active" onclick="switchLang('en')">EN</button>
       <span>/</span>
-      <button id="btn-en" onclick="switchLang('en')">EN</button>
+      <button id="btn-cn" onclick="switchLang('cn')">中</button>
     </div>
   </div>
 </nav>
@@ -627,6 +728,20 @@
     <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
     <li><a href="#" data-i18n="nav-stories" onclick="closeMenu()">故事</a></li>
   </ul>
+  <div class="sidebar-social" aria-label="Social media">
+    <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect width="20" height="20" x="2" y="2" rx="5.5"></rect>
+        <circle cx="12" cy="12" r="4.75"></circle>
+        <circle cx="17.75" cy="6.25" r="0.85" fill="currentColor" stroke="none"></circle>
+      </svg>
+    </a>
+    <a href="https://x.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="X">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+      </svg>
+    </a>
+  </div>
 </aside>
 
 <main>
@@ -746,6 +861,15 @@
 
   <section class="process-closing" aria-label="Process commitment">
     <p class="process-closing-text" data-i18n="closing-statement">作为值得信赖的建造商，<br>Habitas Design 的专业管理与周到服务将一直与您的筑宅之路相伴同行。<br>我们不遗余力，达成您对于"家"的所有期盼。</p>
+    <a class="process-home-link" href="index.html">
+      <span data-i18n="back-home">返回首页</span>
+      <span class="process-home-link-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="18" y2="12"/>
+          <polyline points="12,6 18,12 12,18"/>
+        </svg>
+      </span>
+    </a>
   </section>
 </main>
 
@@ -779,10 +903,11 @@ const t = {
   'step-07-title': ['售后服务', 'Aftercare'],
   'step-07-copy': ['交付并不是服务的终点。入住后我们持续回应维护、调整与使用反馈，让新家在真实生活中保持舒适、可靠与完整。', 'Handover is not the end of our care. After move-in, we respond to maintenance, adjustments and feedback so the home remains comfortable, reliable and complete.'],
   'closing-statement': ['作为值得信赖的建造商，<br>Habitas Design 的专业管理与周到服务将一直与您的筑宅之路相伴同行。<br>我们不遗余力，达成您对于"家"的所有期盼。', 'As a trusted builder,<br>Habitas Design brings professional management and thoughtful service to every step of your home-building journey.<br>We spare no effort in realising every expectation you hold for home.'],
+  'back-home': ['返回首页', 'Back to Home'],
   'footer-copy': ['&copy; 2026 Habitas Design. All rights reserved.', '&copy; 2026 Habitas Design. All rights reserved.']
 };
 
-let lang = localStorage.getItem('hb-lang') || 'cn';
+let lang = localStorage.getItem('hb-lang') || 'en';
 
 function switchLang(l) {
   if (l === lang) return;
