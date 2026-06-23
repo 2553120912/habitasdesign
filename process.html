@@ -258,12 +258,24 @@
     max-width: 1440px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
-    gap: clamp(48px, 8vw, 160px);
-    align-items: end;
+    grid-template-columns: minmax(0, 45%) minmax(0, 45%);
+    column-gap: 10%;
+    align-items: start;
   }
   .process-intro-inner > * {
     min-width: 0;
+  }
+  .process-heading-block {
+    display: grid;
+    gap: 14px;
+    max-width: 560px;
+  }
+  .process-eyebrow {
+    font-size: 13px;
+    line-height: 1.2;
+    letter-spacing: 3px;
+    color: rgba(34, 34, 34, 0.58);
+    overflow-wrap: break-word;
   }
   .process-title {
     max-width: 520px;
@@ -504,6 +516,10 @@
       gap: 36px;
       align-items: start;
     }
+    .process-heading-block {
+      max-width: 680px;
+      gap: 12px;
+    }
     .process-title {
       max-width: 680px;
       font-size: 42px;
@@ -587,6 +603,10 @@
       font-size: 34px;
       line-height: 1.34;
     }
+    .process-eyebrow {
+      font-size: 11px;
+      letter-spacing: 2.4px;
+    }
     .process-copy {
       gap: 22px;
     }
@@ -655,6 +675,9 @@
     .process-title {
       font-size: 30px;
     }
+    .process-eyebrow {
+      letter-spacing: 2px;
+    }
     .process-closing {
       padding-left: 18px;
       padding-right: 18px;
@@ -704,7 +727,7 @@
     <li><a href="process.html" class="is-active" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
     <li><a href="story.html" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
     <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
-    <li><a href="#" data-i18n="nav-stories" onclick="closeMenu()">故事</a></li>
+    <li><a href="story.html#team" data-i18n="nav-stories" onclick="closeMenu()">团队</a></li>
   </ul>
   <div class="sidebar-social" aria-label="Social media">
     <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -729,8 +752,9 @@
 
   <section class="process-intro" aria-labelledby="process-title">
     <div class="process-intro-inner">
-      <div>
-        <h1 class="process-title" id="process-title" data-i18n="intro-title">无隙、无忧、无缺<br>打造伴随式筑家之旅</h1>
+      <div class="process-heading-block">
+        <p class="process-eyebrow" data-i18n="intro-eyebrow">无隙 · 无忧 · 无缺</p>
+        <h1 class="process-title" id="process-title" data-i18n="intro-title">打造伴随式筑家之旅</h1>
       </div>
       <div class="process-copy">
         <p data-i18n="intro-p1">在匠心淬炼中走过四十余载筑宅之路，Habitas Design 形成了全方位的住宅定制化流程。从前期了解到交付与入住，我们以专业且优质的服务确保每一个阶段顺利进行。</p>
@@ -861,8 +885,9 @@ const t = {
   'nav-process': ['服务流程', 'Process'],
   'nav-about': ['关于我们', 'About us'],
   'nav-contact': ['联系我们', 'Contact'],
-  'nav-stories': ['故事', 'Stories'],
-  'intro-title': ['无隙、无忧、无缺<br>打造伴随式筑家之旅', 'Seamless, assured, complete<br>A guided journey home'],
+  'nav-stories': ['团队', 'Team'],
+  'intro-eyebrow': ['无隙 · 无忧 · 无缺', 'Seamless · Assured · Complete'],
+  'intro-title': ['打造伴随式筑家之旅', 'A guided journey home'],
   'intro-p1': ['在匠心淬炼中走过四十余载筑宅之路，Habitas Design 形成了全方位的住宅定制化流程。从前期了解到交付与入住，我们以专业且优质的服务确保每一个阶段顺利进行。', 'Through decades of refined residential practice, Habitas Design has shaped a complete custom-home process. From early discovery to handover and living in, we guide every stage with professional and considered service.'],
   'intro-p2': ['每一个为您量身定制的步骤，都满载您对未来之家的憧憬期盼。在卓越的建筑设计与精湛的施工技艺融合下，圆一个您所向往的、永恒的、住进幸福的梦。', 'Each tailored step carries your vision for the home ahead. With thoughtful architecture and precise construction working together, we create a lasting place for the life you imagine.'],
   'process-heading': ['服务流程', 'Process'],

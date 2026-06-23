@@ -952,7 +952,7 @@
     <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
     <li><a href="story.html" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
     <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
-    <li><a href="#"        data-i18n="nav-stories" onclick="closeMenu()">故事</a></li>
+    <li><a href="story.html#team" data-i18n="nav-stories" onclick="closeMenu()">团队</a></li>
   </ul>
   <div class="sidebar-social" aria-label="Social media">
     <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -1021,8 +1021,8 @@
 <section class="story-band scroll-reveal">
   <div class="story-band-inner">
     <h2 class="story-title" data-i18n="story-title">匠心独运<br>卓越设计屡获殊荣</h2>
-    <a href="#" class="story-cta">
-      <span data-i18n="story-cta">我们的故事</span>
+    <a href="story.html#team" class="story-cta">
+      <span data-i18n="story-cta">我们的团队</span>
       <span class="story-cta-circle" aria-hidden="true">
         <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <line x1="6" y1="12" x2="18" y2="12"/>
@@ -1160,7 +1160,7 @@ const t = {
   'nav-process':     ['服务流程', 'Process'],
   'nav-about':       ['关于我们', 'About us'],
   'nav-contact':     ['联系我们', 'Contact'],
-  'nav-stories':     ['故事',     'Stories'],
+  'nav-stories':     ['团队',     'Team'],
   'service-label':   ['服务流程 / OUR PROCESS', 'OUR PROCESS'],
   'service-slogan':  ['空间 · 场所 · 生活',     'Space · Place · Life'],
   'service-intro':   ['我们相信设计的力量能够促进健康生活，缔造长久的合作关系，并营造让世界比我们初见时更美好的建筑。',
@@ -1170,7 +1170,7 @@ const t = {
   'hero-tagline':    ['空间为生活而存在 &nbsp;/&nbsp; 设计为体验而思考', 'Space for living &nbsp;/&nbsp; Design through experience'],
   'hero-scroll':     ['↓ 向下浏览', '↓ Scroll'],
   'story-title':     ['匠心独运<br>卓越设计屡获殊荣', 'Crafted with intent<br>Recognised by design'],
-  'story-cta':       ['我们的故事', 'OUR STORY'],
+  'story-cta':       ['我们的团队', 'OUR TEAM'],
   'works-slogan':    ['作品 · 见证', 'Works · Witness'],
   'works-intro':     ['从城市住宅到文化建筑，我们以建筑回应场地、光线与人的行为。每一个项目都是一次对生活方式的重新阅读。',
                       'From urban residences to cultural buildings, our architecture responds to site, light, and human behavior. Each project is a renewed reading of how we live.'],
@@ -1312,9 +1312,9 @@ document.addEventListener('keydown', e => {
   const next  = document.getElementById('carousel-next');
   if (!frame || !prev || !next) return;
 
-  // 加图时按数字递增追加文件名（如 '3.png', '4.png'）
-  const images = ['1.png', '2.png'];
-  const basePath = 'images/轮播图/';
+  // 加图时按数字递增追加文件名（如 '2.png', '3.png'）
+  const images = ['1.png'];
+  const basePath = 'images/process/';
 
   frame.innerHTML = images.map((name, i) =>
     `<div class="carousel-slide${i === 0 ? ' is-active' : ''}"><img src="${basePath}${name}" alt="Carousel ${i + 1}"></div>`
