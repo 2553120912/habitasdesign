@@ -39,6 +39,11 @@
     color: #fafaf8;
     background: #1a1a1a;
     border-bottom: 1px solid rgba(255,255,255,0.12);
+    transition: transform 0.4s ease;
+  }
+
+  body.header-hidden .nav {
+    transform: translateY(-100%);
   }
 
   .nav-logo {
@@ -107,7 +112,7 @@
 
   .nav-toggle {
     position: fixed;
-    top: 30px;
+    top: 20px;
     right: 48px;
     z-index: 140;
     background: none;
@@ -117,9 +122,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 5px;
-    width: 32px;
-    height: 32px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    transition: background 0.35s ease, box-shadow 0.35s ease;
+  }
+  body.header-hidden .nav-toggle {
+    background: #1a1a1a;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
   }
 
   .nav-toggle span {
@@ -368,6 +380,66 @@
     margin: 0;
   }
 
+  .projects-closing {
+    display: flex;
+    justify-content: center;
+    padding: 96px 24px;
+    background: #f4efe6;
+  }
+  .process-home-link {
+    margin-top: 0;
+    position: relative;
+    color: #222;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: opacity 0.3s ease;
+  }
+  .process-home-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.35s ease;
+  }
+  .process-home-link:hover,
+  .process-home-link:focus-visible {
+    opacity: 0.68;
+  }
+  .process-home-link:hover::after,
+  .process-home-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+  .process-home-link-icon {
+    width: 24px;
+    height: 24px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  .process-home-link-icon svg {
+    width: 12px;
+    height: 12px;
+    display: block;
+  }
+  .process-home-link:hover .process-home-link-icon,
+  .process-home-link:focus-visible .process-home-link-icon {
+    transform: translateX(4px);
+  }
+
   .footer {
     padding: 36px 48px;
     border-top: 1px solid rgba(26,26,26,0.08);
@@ -406,7 +478,7 @@
     }
 
     .nav-toggle {
-      top: 24px;
+      top: 20px;
       right: 24px;
     }
 
@@ -447,6 +519,24 @@
       padding: 32px 24px;
     }
   }
+
+  @media (max-width: 560px) {
+    .projects-closing {
+      padding: 64px 22px;
+    }
+    .process-home-link {
+      font-size: 14px;
+      letter-spacing: 1.6px;
+    }
+    .process-home-link-icon {
+      width: 23px;
+      height: 23px;
+    }
+    .process-home-link-icon svg {
+      width: 11.5px;
+      height: 11.5px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -474,11 +564,11 @@
 
 <aside class="sidebar" id="sidebar" aria-hidden="true">
   <ul class="sidebar-links">
-    <li><a href="projects.html" class="is-active" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
-    <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
     <li><a href="story.html" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
-    <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
+    <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
     <li><a href="story.html#team" data-i18n="nav-stories" onclick="closeMenu()">团队</a></li>
+    <li><a href="projects.html" class="is-active" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
+    <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
   </ul>
   <div class="sidebar-social" aria-label="Social media">
     <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -512,22 +602,35 @@
   <section class="projects-grid" aria-label="Projects"></section>
 </main>
 
+<section class="projects-closing" aria-label="Back to home">
+  <a class="process-home-link" href="index.html">
+    <span data-i18n="back-home">返回首页</span>
+    <span class="process-home-link-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="18" y2="12"/>
+        <polyline points="12,6 18,12 12,18"/>
+      </svg>
+    </span>
+  </a>
+</section>
+
 <footer class="footer">
   <span data-i18n="footer-copy">&copy; 2026 Habitas Design. All rights reserved.</span>
 </footer>
 
 <script>
 const t = {
-  'nav-works': ['作品', 'Projects'],
-  'nav-process': ['服务流程', 'Process'],
-  'nav-about': ['关于我们', 'About us'],
+  'nav-works': ['作品', 'Our Work'],
+  'nav-process': ['服务流程', 'Service'],
+  'nav-about': ['关于我们', 'About'],
   'nav-contact': ['联系我们', 'Contact'],
-  'nav-stories': ['团队', 'Team'],
+  'nav-stories': ['团队', 'People'],
   'projects-kicker': ['所有项目', 'PORTFOLIO'],
   'filter-all':      ['全部', 'All'],
   'filter-built':    ['已建成', 'Built'],
   'filter-progress': ['进行中', 'In Progress'],
   'filter-concept':  ['概念', 'Concept'],
+  'back-home': ['返回首页', 'Back to Home'],
   'footer-copy': ['&copy; 2026 Habitas Design. All rights reserved.', '&copy; 2026 Habitas Design. All rights reserved.']
 };
 
@@ -613,6 +716,62 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     renderProjects();
   });
 });
+
+// ===== 顶栏：下滑隐藏 / 上滑出现 + 停顿 2 秒自动消失 =====
+(() => {
+  let lastY = window.scrollY;
+  let ticking = false;
+  let hideTimer = null;
+  const TOP_ZONE = 80;   // 接近顶部时始终显示
+  const DELTA = 5;       // 抖动阈值
+  const IDLE_MS = 2000;  // 静止 2 秒后自动收起
+
+  function autoHide() {
+    if (!document.body.classList.contains('menu-open')) {
+      document.body.classList.add('header-hidden');
+    }
+  }
+
+  function scheduleAutoHide() {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(autoHide, IDLE_MS);
+  }
+
+  function show() {
+    document.body.classList.remove('header-hidden');
+    scheduleAutoHide();
+  }
+
+  function update() {
+    ticking = false;
+    const y = window.scrollY;
+
+    if (document.body.classList.contains('menu-open')) {
+      document.body.classList.remove('header-hidden');
+      lastY = y;
+      return;
+    }
+
+    if (y <= TOP_ZONE) {
+      show();
+    } else if (y > lastY + DELTA) {
+      document.body.classList.add('header-hidden');
+      clearTimeout(hideTimer);
+    } else if (y < lastY - DELTA) {
+      show();
+    }
+    lastY = y;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  scheduleAutoHide();
+})();
 </script>
 
 </body>

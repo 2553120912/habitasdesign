@@ -53,6 +53,11 @@
     color: #fafaf8;
     background: #1a1a1a;
     border-bottom: 1px solid rgba(255,255,255,0.12);
+    transition: transform 0.4s ease;
+  }
+
+  body.header-hidden .nav {
+    transform: translateY(-100%);
   }
 
   .nav-logo {
@@ -117,7 +122,7 @@
 
   .nav-toggle {
     position: fixed;
-    top: 30px;
+    top: 20px;
     right: 48px;
     z-index: 140;
     background: none;
@@ -127,9 +132,17 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 5px;
-    width: 32px;
-    height: 32px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    transition: background 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  body.header-hidden .nav-toggle {
+    background: #1a1a1a;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
   }
 
   .nav-toggle span {
@@ -569,8 +582,16 @@
     background:
       linear-gradient(145deg, rgba(255,255,255,0.16), rgba(24,24,24,0.08)),
       #ded8ce;
+    background-size: cover;
+    background-position: center;
     border: 1px solid rgba(24, 24, 24, 0.08);
   }
+
+  .team-card[data-member="01"] .team-photo { background-image: url('images/Our Story/成员相册/1/1.png'); background-position: center 20%; }
+  .team-card[data-member="02"] .team-photo { background-image: url('images/Our Story/成员相册/2/2.png'); }
+  .team-card[data-member="03"] .team-photo { background-image: url('images/Our Story/成员相册/3/3.png'); background-position: center 15%; }
+  .team-card[data-member="04"] .team-photo { background-image: url('images/Our Story/成员相册/4/4.png'); background-position: center 20%; }
+  .team-card[data-member="05"] .team-photo { background-image: url('images/Our Story/成员相册/5/5.png'); background-position: center 20%; }
 
   .team-meta {
     padding-top: 18px;
@@ -739,6 +760,65 @@
 
   body.panel-open {
     overflow: hidden;
+  }
+
+  .story-closing {
+    display: flex;
+    justify-content: center;
+    padding: 96px 24px;
+    background: var(--story-bg);
+  }
+  .process-home-link {
+    position: relative;
+    color: #222;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: opacity 0.3s ease;
+  }
+  .process-home-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.35s ease;
+  }
+  .process-home-link:hover,
+  .process-home-link:focus-visible {
+    opacity: 0.68;
+  }
+  .process-home-link:hover::after,
+  .process-home-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+  .process-home-link-icon {
+    width: 24px;
+    height: 24px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  .process-home-link-icon svg {
+    width: 12px;
+    height: 12px;
+    display: block;
+  }
+  .process-home-link:hover .process-home-link-icon,
+  .process-home-link:focus-visible .process-home-link-icon {
+    transform: translateX(4px);
   }
 
   .footer {
@@ -994,11 +1074,11 @@
 
 <aside class="sidebar" id="sidebar" aria-hidden="true">
   <ul class="sidebar-links">
-    <li><a href="projects.html" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
-    <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
     <li><a href="story.html" class="is-active" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
-    <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
+    <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
     <li><a href="story.html#team" data-i18n="nav-stories" onclick="closeMenu()">团队</a></li>
+    <li><a href="projects.html" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
+    <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
   </ul>
   <div class="sidebar-social" aria-label="Social media">
     <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -1069,8 +1149,8 @@
         <article class="team-card" style="--team-order: 1;" data-member="01" tabindex="0" role="button" aria-label="View team member detail">
           <div class="team-photo" aria-hidden="true"></div>
           <div class="team-meta">
-            <h2 class="team-name" data-i18n="team-name-01">姓名待定</h2>
-            <p class="team-role" data-i18n="team-role-01">职位待定</p>
+            <h2 class="team-name" data-i18n="team-name-01">徐 圣杰 RAIA</h2>
+            <p class="team-role" data-i18n="team-role-01">主持建筑师</p>
           </div>
         </article>
         <article class="team-card team-card-spacer" aria-hidden="true">
@@ -1083,8 +1163,8 @@
         <article class="team-card team-card--fifth" style="--team-order: 5;" data-member="05" tabindex="0" role="button" aria-label="View team member detail">
           <div class="team-photo" aria-hidden="true"></div>
           <div class="team-meta">
-            <h2 class="team-name" data-i18n="team-name-05">姓名待定</h2>
-            <p class="team-role" data-i18n="team-role-05">职位待定</p>
+            <h2 class="team-name" data-i18n="team-name-05">颜 聿栋</h2>
+            <p class="team-role" data-i18n="team-role-05">建筑师</p>
           </div>
         </article>
         <article class="team-card team-card--seventh" style="--team-order: 7;" data-member="07" tabindex="0" role="button" aria-label="View team member detail">
@@ -1100,23 +1180,23 @@
         <article class="team-card" style="--team-order: 2;" data-member="02" tabindex="0" role="button" aria-label="View team member detail">
           <div class="team-photo" aria-hidden="true"></div>
           <div class="team-meta">
-            <h2 class="team-name" data-i18n="team-name-02">姓名待定</h2>
-            <p class="team-role" data-i18n="team-role-02">职位待定</p>
+            <h2 class="team-name" data-i18n="team-name-02">郭 瑞城</h2>
+            <p class="team-role" data-i18n="team-role-02">主持建筑师</p>
           </div>
         </article>
         <div class="team-pair">
           <article class="team-card" style="--team-order: 3;" data-member="03" tabindex="0" role="button" aria-label="View team member detail">
             <div class="team-photo" aria-hidden="true"></div>
             <div class="team-meta">
-              <h2 class="team-name" data-i18n="team-name-03">姓名待定</h2>
-              <p class="team-role" data-i18n="team-role-03">职位待定</p>
+              <h2 class="team-name" data-i18n="team-name-03">庄 瀚圣</h2>
+              <p class="team-role" data-i18n="team-role-03">主持建筑师</p>
             </div>
           </article>
           <article class="team-card" style="--team-order: 4;" data-member="04" tabindex="0" role="button" aria-label="View team member detail">
             <div class="team-photo" aria-hidden="true"></div>
             <div class="team-meta">
-              <h2 class="team-name" data-i18n="team-name-04">姓名待定</h2>
-              <p class="team-role" data-i18n="team-role-04">职位待定</p>
+              <h2 class="team-name" data-i18n="team-name-04">熊 丽佳</h2>
+              <p class="team-role" data-i18n="team-role-04">建筑师</p>
             </div>
           </article>
         </div>
@@ -1131,6 +1211,18 @@
     </div>
   </section>
 </main>
+
+<section class="story-closing" aria-label="Back to home">
+  <a class="process-home-link" href="index.html">
+    <span data-i18n="back-home">返回首页</span>
+    <span class="process-home-link-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="18" y2="12"/>
+        <polyline points="12,6 18,12 12,18"/>
+      </svg>
+    </span>
+  </a>
+</section>
 
 <footer class="footer">&copy; 2026 Habitas Design. All rights reserved.</footer>
 
@@ -1150,52 +1242,53 @@
 
 <script>
 const t = {
-  'nav-works': ['作品', 'Projects'],
-  'nav-process': ['服务流程', 'Process'],
-  'nav-about': ['关于我们', 'About us'],
+  'nav-works': ['作品', 'Our Work'],
+  'nav-process': ['服务流程', 'Service'],
+  'nav-about': ['关于我们', 'About'],
   'nav-contact': ['联系我们', 'Contact'],
-  'nav-stories': ['团队', 'Team'],
+  'nav-stories': ['团队', 'People'],
   'tab-about': ['关于我们', 'About Us'],
   'tab-team': ['团队', 'Team'],
   'story-title': ['40年匠心独运<br>缔造品质之家', '40 Years of Craft<br>Creating Quality Homes'],
   'about-p1': ['Habitas Design 植根于当代设计的理念，同时坚守对经典特质的追求。我们希望在每一个项目中，找到隽永气质与建筑表达之间的平衡。', 'Habitas Design is grounded in the values of contemporary design whilst maintaining a commitment to Classic characteristics. We wish to find the balance of timeless qualities and Architectural expression in each project.'],
   'about-p2': ['3000 Corporation 与 Habitas Design 携手合作，汇聚了 35 年商业建筑经验与 20 年住宅设计经验。我们以家族对设计的执着、专注的客户服务，以及对品质的坚守，在墨尔本打造高端豪宅。', '3000 Corporation and Habitas Design are bringing together 35 years of commercial construction experience and 20 years of residential architecture experience through a family commitment to design, dedicated client service and quality construction of luxury homes in Melbourne.'],
   'about-p3': ['我们亦携手墨尔本最具创意的建筑师、室内与产品设计师、景观设计师及营造团队，为您提供量身定制的设计与建造一体化服务。', 'We also collaborate with some of Melbourne\'s most creative architects, interior and product designers, landscape architects and builders to offer a personalized design and build service.'],
-  'team-name-01': ['姓名待定', 'Name TBD'],
-  'team-role-01': ['职位待定', 'Title TBD'],
-  'team-name-02': ['姓名待定', 'Name TBD'],
-  'team-role-02': ['职位待定', 'Title TBD'],
-  'team-name-03': ['姓名待定', 'Name TBD'],
-  'team-role-03': ['职位待定', 'Title TBD'],
-  'team-name-04': ['姓名待定', 'Name TBD'],
-  'team-role-04': ['职位待定', 'Title TBD'],
-  'team-name-05': ['姓名待定', 'Name TBD'],
-  'team-role-05': ['职位待定', 'Title TBD'],
+  'team-name-01': ['徐 圣杰 RAIA', 'Jonathan Xu RAIA'],
+  'team-role-01': ['主持建筑师', 'Principal Architect'],
+  'team-name-02': ['郭 瑞城', 'Ruicheng Guo'],
+  'team-role-02': ['主持建筑师', 'Principal Architect'],
+  'team-name-03': ['庄 瀚圣', 'Hansheng Zhuang'],
+  'team-role-03': ['主持建筑师', 'Principal Architect'],
+  'team-name-04': ['熊 丽佳', 'Lijia Xiong'],
+  'team-role-04': ['建筑师', 'Architect'],
+  'team-name-05': ['颜 聿栋', 'Yudong Yan'],
+  'team-role-05': ['建筑师', 'Architect'],
   'team-name-06': ['姓名待定', 'Name TBD'],
   'team-role-06': ['职位待定', 'Title TBD'],
   'team-name-07': ['姓名待定', 'Name TBD'],
   'team-role-07': ['职位待定', 'Title TBD'],
   'team-quote-01': ['引述待定', 'Quote TBD'],
-  'team-edu-01': ['学历待定', 'Education TBD'],
+  'team-edu-01': ['澳大利亚维多利亚州注册建筑师（ARBV）<br>墨尔本大学 | 建筑学规划和设计学士<br>墨尔本大学 | 建筑学硕士', 'Registered Architect, Victoria Australia (ARBV)<br>University of Melbourne | Bachelor of Architecture, Planning and Design<br>University of Melbourne | Master of Architecture'],
   'team-bio-01': ['<p>个人简介待定。</p>', '<p>Bio TBD.</p>'],
   'team-quote-02': ['引述待定', 'Quote TBD'],
-  'team-edu-02': ['学历待定', 'Education TBD'],
+  'team-edu-02': ['诺丁汉大学 | 建筑学学士<br>佐治亚理工学院 | 建筑学硕士', 'University of Nottingham | Bachelor of Architecture<br>Georgia Institute of Technology | Master of Architecture'],
   'team-bio-02': ['<p>个人简介待定。</p>', '<p>Bio TBD.</p>'],
   'team-quote-03': ['引述待定', 'Quote TBD'],
-  'team-edu-03': ['学历待定', 'Education TBD'],
+  'team-edu-03': ['上海大学 | 建筑学学士', 'Shanghai University | Bachelor of Architecture'],
   'team-bio-03': ['<p>个人简介待定。</p>', '<p>Bio TBD.</p>'],
   'team-quote-04': ['引述待定', 'Quote TBD'],
-  'team-edu-04': ['学历待定', 'Education TBD'],
+  'team-edu-04': ['凯泽斯劳滕工业大学 | 建筑学学士', 'Technical University of Kaiserslautern | Bachelor of Architecture'],
   'team-bio-04': ['<p>个人简介待定。</p>', '<p>Bio TBD.</p>'],
   'team-quote-05': ['引述待定', 'Quote TBD'],
-  'team-edu-05': ['学历待定', 'Education TBD'],
+  'team-edu-05': ['美国俄勒冈大学 | 建筑学学士<br>美国罗彻斯特理工大学 | 建筑学硕士', 'University of Oregon | Bachelor of Architecture<br>Rochester Institute of Technology | Master of Architecture'],
   'team-bio-05': ['<p>个人简介待定。</p>', '<p>Bio TBD.</p>'],
   'team-quote-06': ['引述待定', 'Quote TBD'],
   'team-edu-06': ['学历待定', 'Education TBD'],
   'team-bio-06': ['<p>个人简介待定。</p>', '<p>Bio TBD.</p>'],
   'team-quote-07': ['引述待定', 'Quote TBD'],
   'team-edu-07': ['学历待定', 'Education TBD'],
-  'team-bio-07': ['<p>个人简介待定。</p>', '<p>Bio TBD.</p>']
+  'team-bio-07': ['<p>个人简介待定。</p>', '<p>Bio TBD.</p>'],
+  'back-home': ['返回首页', 'Back to Home']
 };
 
 let lang = localStorage.getItem('hb-lang') || 'en';
@@ -1371,6 +1464,63 @@ document.addEventListener('keydown', e => {
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeMember();
   });
+})();
+
+// ===== 顶栏：下滑隐藏 / 上滑出现 + 停顿 2 秒自动消失 =====
+(() => {
+  let lastY = window.scrollY;
+  let ticking = false;
+  let hideTimer = null;
+  const TOP_ZONE = 80;   // 接近顶部时始终显示
+  const DELTA = 5;       // 抖动阈值
+  const IDLE_MS = 2000;  // 静止 2 秒后自动收起
+
+  function autoHide() {
+    if (!document.body.classList.contains('menu-open')) {
+      document.body.classList.add('header-hidden');
+    }
+  }
+
+  function scheduleAutoHide() {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(autoHide, IDLE_MS);
+  }
+
+  function show() {
+    document.body.classList.remove('header-hidden');
+    scheduleAutoHide();
+  }
+
+  function update() {
+    ticking = false;
+    const y = window.scrollY;
+
+    // 菜单打开时不隐藏顶栏
+    if (document.body.classList.contains('menu-open')) {
+      document.body.classList.remove('header-hidden');
+      lastY = y;
+      return;
+    }
+
+    if (y <= TOP_ZONE) {
+      show();                                           // 接近顶部：显示，并重启计时
+    } else if (y > lastY + DELTA) {
+      document.body.classList.add('header-hidden');     // 向下滚：立即隐藏
+      clearTimeout(hideTimer);
+    } else if (y < lastY - DELTA) {
+      show();                                           // 向上滚：显示，并重启计时
+    }
+    lastY = y;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  scheduleAutoHide();    // 首次加载后静止 2 秒也自动收起
 })();
 </script>
 

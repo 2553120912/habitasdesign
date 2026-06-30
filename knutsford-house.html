@@ -54,6 +54,11 @@
     color: #fafaf8;
     background: #1a1a1a;
     border-bottom: 1px solid rgba(255,255,255,0.12);
+    transition: transform 0.4s ease;
+  }
+
+  body.header-hidden .nav {
+    transform: translateY(-100%);
   }
 
   .nav-logo {
@@ -122,7 +127,7 @@
 
   .nav-toggle {
     position: fixed;
-    top: 30px;
+    top: 20px;
     right: 48px;
     z-index: 140;
     background: none;
@@ -132,9 +137,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 5px;
-    width: 32px;
-    height: 32px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    transition: background 0.35s ease, box-shadow 0.35s ease;
+  }
+  body.header-hidden .nav-toggle {
+    background: #1a1a1a;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
   }
 
   .nav-toggle span {
@@ -767,7 +779,7 @@
     }
 
     .nav-toggle {
-      top: 24px;
+      top: 20px;
       right: 24px;
     }
 
@@ -893,11 +905,11 @@
 
 <aside class="sidebar" id="sidebar" aria-hidden="true">
   <ul class="sidebar-links">
-    <li><a href="projects.html" class="is-active" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
-    <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
     <li><a href="story.html" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
-    <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
+    <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
     <li><a href="story.html#team" data-i18n="nav-stories" onclick="closeMenu()">团队</a></li>
+    <li><a href="projects.html" class="is-active" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
+    <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
   </ul>
   <div class="sidebar-social" aria-label="Social media">
     <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -1039,11 +1051,11 @@
 
 <script>
 const t = {
-  'nav-works': ['作品', 'Projects'],
-  'nav-process': ['服务流程', 'Process'],
-  'nav-about': ['关于我们', 'About us'],
+  'nav-works': ['作品', 'Our Work'],
+  'nav-process': ['服务流程', 'Service'],
+  'nav-about': ['关于我们', 'About'],
   'nav-contact': ['联系我们', 'Contact'],
-  'nav-stories': ['团队', 'Team'],
+  'nav-stories': ['团队', 'People'],
   'section-contact': ['联系', 'Contact'],
   'kh-subtitle': ['Knutsford 住宅', 'A Residence by Habitas Design'],
   'kh-summary-p1': ['Knutsford House 被设想为一系列安静展开的空间阈值：临街一侧以克制而厚重的体量建立秩序，进入内部后则转向更柔和、更具有居住气息的氛围。项目通过精确控制的开口、层层递进的流线，以及石材、灰泥、玻璃与阴影之间的关系，平衡围合感与开放感。住宅并不试图一次性展示全部内容，而是让接近、入口、庭院与起居空间依次显现，形成可被感知的节奏。当前页面中的这段文字为占位简介，但页面结构已经预留好承载更完整建筑叙事的位置，在正式项目文案到位前，也能先建立图像、文字与项目信息之间安静而清晰的阅读关系。', 'Knutsford House is imagined as a quiet sequence of thresholds, where the weight of the street-facing form gives way to a softer domestic atmosphere within. The project balances enclosure and openness through carefully edited openings, layered circulation, and a measured palette of stone, plaster, glass, and shadow. Rather than presenting the home all at once, the design unfolds gradually, allowing approach, entry, courtyard, and living spaces to register as distinct moments. This page currently uses a placeholder editorial summary, but the structure is intended to support a fuller architectural narrative once final project writing is available, while already establishing a calm, gallery-like rhythm between image, text, and project information.'],
@@ -1168,6 +1180,62 @@ document.addEventListener('keydown', e => {
     else if (e.key === 'ArrowRight') next();
     else if (e.key === 'ArrowLeft') prev();
   });
+})();
+
+// ===== 顶栏：下滑隐藏 / 上滑出现 + 停顿 2 秒自动消失 =====
+(() => {
+  let lastY = window.scrollY;
+  let ticking = false;
+  let hideTimer = null;
+  const TOP_ZONE = 80;
+  const DELTA = 5;
+  const IDLE_MS = 2000;
+
+  function autoHide() {
+    if (!document.body.classList.contains('menu-open')) {
+      document.body.classList.add('header-hidden');
+    }
+  }
+
+  function scheduleAutoHide() {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(autoHide, IDLE_MS);
+  }
+
+  function show() {
+    document.body.classList.remove('header-hidden');
+    scheduleAutoHide();
+  }
+
+  function update() {
+    ticking = false;
+    const y = window.scrollY;
+
+    if (document.body.classList.contains('menu-open')) {
+      document.body.classList.remove('header-hidden');
+      lastY = y;
+      return;
+    }
+
+    if (y <= TOP_ZONE) {
+      show();
+    } else if (y > lastY + DELTA) {
+      document.body.classList.add('header-hidden');
+      clearTimeout(hideTimer);
+    } else if (y < lastY - DELTA) {
+      show();
+    }
+    lastY = y;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  scheduleAutoHide();
 })();
 </script>
 

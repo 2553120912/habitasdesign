@@ -39,6 +39,11 @@
     color: #fafaf8;
     background: #1a1a1a;
     border-bottom: 1px solid rgba(255,255,255,0.12);
+    transition: transform 0.4s ease;
+  }
+
+  body.header-hidden .nav {
+    transform: translateY(-100%);
   }
   .nav-logo {
     display: block;
@@ -94,7 +99,7 @@
 
   .nav-toggle {
     position: fixed;
-    top: 30px;
+    top: 20px;
     right: 48px;
     z-index: 140;
     background: none;
@@ -104,9 +109,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 5px;
-    width: 32px;
-    height: 32px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    transition: background 0.35s ease, box-shadow 0.35s ease;
+  }
+  body.header-hidden .nav-toggle {
+    background: #1a1a1a;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
   }
   .nav-toggle span {
     display: block;
@@ -723,11 +735,11 @@
 
 <aside class="sidebar" id="sidebar" aria-hidden="true">
   <ul class="sidebar-links">
-    <li><a href="projects.html" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
-    <li><a href="process.html" class="is-active" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
     <li><a href="story.html" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
-    <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
+    <li><a href="process.html" class="is-active" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
     <li><a href="story.html#team" data-i18n="nav-stories" onclick="closeMenu()">团队</a></li>
+    <li><a href="projects.html" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
+    <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
   </ul>
   <div class="sidebar-social" aria-label="Social media">
     <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -881,11 +893,11 @@
 
 <script>
 const t = {
-  'nav-works': ['作品', 'Projects'],
-  'nav-process': ['服务流程', 'Process'],
-  'nav-about': ['关于我们', 'About us'],
+  'nav-works': ['作品', 'Our Work'],
+  'nav-process': ['服务流程', 'Service'],
+  'nav-about': ['关于我们', 'About'],
   'nav-contact': ['联系我们', 'Contact'],
-  'nav-stories': ['团队', 'Team'],
+  'nav-stories': ['团队', 'People'],
   'intro-eyebrow': ['无隙 · 无忧 · 无缺', 'Seamless · Assured · Complete'],
   'intro-title': ['打造伴随式筑家之旅', 'A guided journey home'],
   'intro-p1': ['在匠心淬炼中走过四十余载筑宅之路，Habitas Design 形成了全方位的住宅定制化流程。从前期了解到交付与入住，我们以专业且优质的服务确保每一个阶段顺利进行。', 'Through decades of refined residential practice, Habitas Design has shaped a complete custom-home process. From early discovery to handover and living in, we guide every stage with professional and considered service.'],
@@ -962,6 +974,62 @@ document.querySelectorAll('.accordion-trigger').forEach(trigger => {
 });
 
 applyLang();
+
+// ===== 顶栏：下滑隐藏 / 上滑出现 + 停顿 2 秒自动消失 =====
+(() => {
+  let lastY = window.scrollY;
+  let ticking = false;
+  let hideTimer = null;
+  const TOP_ZONE = 80;
+  const DELTA = 5;
+  const IDLE_MS = 2000;
+
+  function autoHide() {
+    if (!document.body.classList.contains('menu-open')) {
+      document.body.classList.add('header-hidden');
+    }
+  }
+
+  function scheduleAutoHide() {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(autoHide, IDLE_MS);
+  }
+
+  function show() {
+    document.body.classList.remove('header-hidden');
+    scheduleAutoHide();
+  }
+
+  function update() {
+    ticking = false;
+    const y = window.scrollY;
+
+    if (document.body.classList.contains('menu-open')) {
+      document.body.classList.remove('header-hidden');
+      lastY = y;
+      return;
+    }
+
+    if (y <= TOP_ZONE) {
+      show();
+    } else if (y > lastY + DELTA) {
+      document.body.classList.add('header-hidden');
+      clearTimeout(hideTimer);
+    } else if (y < lastY - DELTA) {
+      show();
+    }
+    lastY = y;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  scheduleAutoHide();
+})();
 </script>
 
 </body>

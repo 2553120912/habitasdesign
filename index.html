@@ -46,6 +46,11 @@
     color: #fafaf8;
     background: #1a1a1a;
     border-bottom: 1px solid rgba(255,255,255,0.12);
+    transition: transform 0.4s ease;
+  }
+
+  body.header-hidden .nav {
+    transform: translateY(-100%);
   }
   .nav-logo {
     display: block;
@@ -103,7 +108,7 @@
   /* ── 汉堡按钮 ── */
   .nav-toggle {
     position: fixed;
-    top: 30px;
+    top: 20px;
     right: 48px;
     z-index: 140;
     background: none;
@@ -113,9 +118,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 5px;
-    width: 32px;
-    height: 32px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    transition: background 0.35s ease, box-shadow 0.35s ease;
+  }
+  body.header-hidden .nav-toggle {
+    background: #1a1a1a;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
   }
   .nav-toggle span {
     display: block;
@@ -290,7 +302,8 @@
   }
   .hero h1,
   .hero .tagline,
-  .hero .scroll-hint {
+  .hero .scroll-hint,
+  .hero .hero-journey {
     z-index: 2;
   }
   .hero h1,
@@ -328,6 +341,77 @@
   @keyframes heroFadeIn {
     from { opacity: 0; }
     to   { opacity: 1; }
+  }
+
+  /* ── hero 右下角「Start Your Journey」引导按钮（动效照搬 about-us 底部按钮） ── */
+  .hero .hero-journey {
+    position: absolute;
+    right: 48px;
+    bottom: 48px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #fafaf8;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    transition: opacity 0.3s ease;
+  }
+  .hero .hero-journey .hero-journey-icon {
+    width: 32px;
+    height: 32px;
+  }
+  .hero .hero-journey .hero-journey-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+  .hero .hero-journey::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 44px;
+    bottom: -8px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.35s ease;
+  }
+  .hero .hero-journey:hover,
+  .hero .hero-journey:focus-visible {
+    opacity: 0.68;
+  }
+  .hero .hero-journey:hover::after,
+  .hero .hero-journey:focus-visible::after {
+    transform: scaleX(1);
+  }
+  .hero-journey-icon {
+    width: 24px;
+    height: 24px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  .hero-journey-icon svg {
+    width: 12px;
+    height: 12px;
+    display: block;
+  }
+  .hero .hero-journey:hover .hero-journey-icon,
+  .hero .hero-journey:focus-visible .hero-journey-icon {
+    transform: translateX(4px);
+  }
+
+  /* 平滑转跳：离开当前页时整页淡出 */
+  body {
+    transition: opacity 0.4s ease;
+  }
+  body.page-leaving {
+    opacity: 0;
   }
 
   /* ── 模块滚动渐入（仅文字） ── */
@@ -378,7 +462,8 @@
     background: #f4efe6;
     position: relative;
     z-index: 2;
-    padding: 64px 64px 64px 48px;
+    padding: 0;
+    min-height: 100vh;
   }
   .service-process-inner {
     display: grid;
@@ -401,6 +486,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    height: 100vh;
   }
   .carousel-frame {
     position: relative;
@@ -422,6 +508,79 @@
     display: block;
   }
   .carousel-slide.placeholder { background: #d4d1cb; }
+
+  /* 服务流程：单张全屏铺图 */
+  .process-image {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+  }
+
+  /* 全屏铺图右下角叠加：项目名 + Explore */
+  .process-feature {
+    position: absolute;
+    right: 48px;
+    bottom: 48px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    text-align: right;
+    text-shadow: 0 1px 12px rgba(0,0,0,0.35);
+  }
+  .process-feature-name {
+    color: #fff;
+    font-size: clamp(34px, 3.8vw, 52px);
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 1.2;
+  }
+  .process-feature-explore {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #fafaf8;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    transition: opacity 0.3s ease;
+  }
+  .process-feature-explore .hero-journey-icon {
+    width: 32px;
+    height: 32px;
+  }
+  .process-feature-explore .hero-journey-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+  .process-feature-explore::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 44px;
+    bottom: -8px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.35s ease;
+  }
+  .process-feature-explore:hover,
+  .process-feature-explore:focus-visible {
+    opacity: 0.68;
+  }
+  .process-feature-explore:hover::after,
+  .process-feature-explore:focus-visible::after {
+    transform: scaleX(1);
+  }
+  .process-feature-explore:hover .hero-journey-icon,
+  .process-feature-explore:focus-visible .hero-journey-icon {
+    transform: translateX(4px);
+  }
   .carousel-controls {
     display: flex;
     justify-content: flex-end;
@@ -819,6 +978,15 @@
       aspect-ratio: 4 / 3;
       height: auto;
     }
+    /* 服务流程屏保持全屏铺图（不受上面的栅格/比例影响） */
+    .service-process {
+      padding: 0;
+    }
+    .service-process .carousel,
+    .service-process .carousel-frame {
+      height: 100vh;
+      aspect-ratio: auto;
+    }
     .service-text,
     .works-text {
       justify-content: flex-start;
@@ -846,6 +1014,12 @@
       top: 20px;
       right: 24px;
     }
+    .hero .hero-journey {
+      right: 24px;
+      bottom: 28px;
+      font-size: 18px;
+      letter-spacing: 2px;
+    }
     .sidebar {
       width: 100%;
       padding: 100px 32px 40px;
@@ -857,7 +1031,7 @@
       padding: 80px 24px;
     }
     .service-process {
-      padding: 32px 24px 16px;
+      padding: 0;
     }
     .service-process-inner {
       grid-template-columns: 1fr;
@@ -867,6 +1041,21 @@
     .carousel-frame {
       aspect-ratio: 4 / 3;
       height: auto;
+    }
+    .service-process .carousel,
+    .service-process .carousel-frame {
+      height: 100vh;
+      aspect-ratio: auto;
+    }
+    .process-feature {
+      right: 24px;
+      bottom: 28px;
+    }
+    .process-feature-name {
+      font-size: 30px;
+    }
+    .process-feature-explore {
+      font-size: 18px;
     }
     .service-text {
       padding-bottom: 0;
@@ -948,11 +1137,11 @@
 
 <aside class="sidebar" id="sidebar" aria-hidden="true">
   <ul class="sidebar-links">
-    <li><a href="projects.html" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
-    <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
     <li><a href="story.html" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
-    <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
+    <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
     <li><a href="story.html#team" data-i18n="nav-stories" onclick="closeMenu()">团队</a></li>
+    <li><a href="projects.html" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
+    <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
   </ul>
   <div class="sidebar-social" aria-label="Social media">
     <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -978,42 +1167,31 @@
   <h1 data-i18n="hero-title">Habitas Design</h1>
   <p class="tagline" data-i18n="hero-tagline">空间为生活而存在 &nbsp;/&nbsp; 设计为体验而思考</p>
   <span class="scroll-hint" data-i18n="hero-scroll">↓ 向下浏览</span>
+  <a class="hero-journey" href="process.html">
+    <span>Start Your Journey</span>
+    <span class="hero-journey-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="18" y2="12"/>
+        <polyline points="12,6 18,12 12,18"/>
+      </svg>
+    </span>
+  </a>
 </section>
 
-<!-- 服务流程 -->
+<!-- 服务流程（全屏铺图 + 右下角项目名/Explore） -->
 <section class="service-process scroll-reveal" id="process">
-  <div class="service-process-inner">
-    <div class="carousel" id="carousel">
-      <div class="carousel-frame"></div>
-      <div class="carousel-controls">
-        <button class="carousel-btn" id="carousel-prev" aria-label="Previous">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-            <line x1="4" y1="16" x2="26" y2="16"/>
-            <polyline points="14,8 4,16 14,24"/>
-          </svg>
-        </button>
-        <button class="carousel-btn" id="carousel-next" aria-label="Next">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-            <line x1="6" y1="16" x2="28" y2="16"/>
-            <polyline points="18,8 28,16 18,24"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <div class="service-text">
-      <h2 class="service-slogan" data-i18n="service-slogan">空间 · 场所 · 生活</h2>
-      <p class="service-intro" data-i18n="service-intro">我们相信设计的力量能够促进健康生活，缔造长久的合作关系，并营造让世界比我们初见时更美好的建筑。</p>
-      <a href="process.html" class="service-cta">
-        <span data-i18n="service-cta">服务流程</span>
-        <span class="service-cta-circle" aria-hidden="true">
-          <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="6" y1="12" x2="18" y2="12"/>
-            <polyline points="13,7 18,12 13,17"/>
-          </svg>
-        </span>
-      </a>
-    </div>
+  <img class="process-image" src="images/process/1.jpg" alt="Lovell 2024">
+  <div class="process-feature">
+    <p class="process-feature-name">Lovell 2024</p>
+    <a class="process-feature-explore" href="lovell-house.html">
+      <span>Explore</span>
+      <span class="hero-journey-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="18" y2="12"/>
+          <polyline points="12,6 18,12 12,18"/>
+        </svg>
+      </span>
+    </a>
   </div>
 </section>
 
@@ -1156,11 +1334,11 @@ if (!location.hash) {
 }
 
 const t = {
-  'nav-works':       ['作品',     'Projects'],
-  'nav-process':     ['服务流程', 'Process'],
-  'nav-about':       ['关于我们', 'About us'],
+  'nav-works':       ['作品',     'Our Work'],
+  'nav-process':     ['服务流程', 'Service'],
+  'nav-about':       ['关于我们', 'About'],
   'nav-contact':     ['联系我们', 'Contact'],
-  'nav-stories':     ['团队',     'Team'],
+  'nav-stories':     ['团队',     'People'],
   'service-label':   ['服务流程 / OUR PROCESS', 'OUR PROCESS'],
   'service-slogan':  ['空间 · 场所 · 生活',     'Space · Place · Life'],
   'service-intro':   ['我们相信设计的力量能够促进健康生活，缔造长久的合作关系，并营造让世界比我们初见时更美好的建筑。',
@@ -1305,46 +1483,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeMenu();
 });
 
-/* ── 服务流程轮播 ── */
-(function() {
-  const frame = document.querySelector('.carousel-frame');
-  const prev  = document.getElementById('carousel-prev');
-  const next  = document.getElementById('carousel-next');
-  if (!frame || !prev || !next) return;
-
-  // 加图时按数字递增追加文件名（如 '2.png', '3.png'）
-  const images = ['1.png'];
-  const basePath = 'images/process/';
-
-  frame.innerHTML = images.map((name, i) =>
-    `<div class="carousel-slide${i === 0 ? ' is-active' : ''}"><img src="${basePath}${name}" alt="Carousel ${i + 1}"></div>`
-  ).join('');
-
-  const slides = frame.querySelectorAll('.carousel-slide');
-  if (!slides.length) return;
-
-  let current = 0;
-  let timer = null;
-  const INTERVAL = 5000;
-
-  function show(i) {
-    current = (i + slides.length) % slides.length;
-    slides.forEach((s, idx) => s.classList.toggle('is-active', idx === current));
-  }
-  function startAuto() {
-    stopAuto();
-    timer = setInterval(() => show(current + 1), INTERVAL);
-  }
-  function stopAuto() {
-    if (timer) { clearInterval(timer); timer = null; }
-  }
-
-  prev.addEventListener('click', () => { show(current - 1); startAuto(); });
-  next.addEventListener('click', () => { show(current + 1); startAuto(); });
-
-  startAuto();
-})();
-
 /* ── 模块滚动渐入（每个模块首次进入视口时） ── */
 (() => {
   const targets = document.querySelectorAll('.scroll-reveal');
@@ -1365,6 +1503,74 @@ document.addEventListener('keydown', e => {
   }, { threshold: 0.15 });
 
   targets.forEach(t => observer.observe(t));
+})();
+
+// ===== 顶栏：下滑隐藏 / 上滑出现 + 停顿 3 秒自动消失 =====
+(() => {
+  let lastY = window.scrollY;
+  let ticking = false;
+  let hideTimer = null;
+  const TOP_ZONE = 80;   // 接近顶部时始终显示
+  const DELTA = 5;       // 抖动阈值
+  const IDLE_MS = 2000;  // 静止 2 秒后自动收起
+
+  function autoHide() {
+    if (!document.body.classList.contains('menu-open')) {
+      document.body.classList.add('header-hidden');
+    }
+  }
+
+  function scheduleAutoHide() {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(autoHide, IDLE_MS);
+  }
+
+  function show() {
+    document.body.classList.remove('header-hidden');
+    scheduleAutoHide();
+  }
+
+  function update() {
+    ticking = false;
+    const y = window.scrollY;
+
+    // 菜单打开时不隐藏顶栏
+    if (document.body.classList.contains('menu-open')) {
+      document.body.classList.remove('header-hidden');
+      lastY = y;
+      return;
+    }
+
+    if (y <= TOP_ZONE) {
+      show();                                           // 接近顶部：显示，并重启 3 秒计时
+    } else if (y > lastY + DELTA) {
+      document.body.classList.add('header-hidden');     // 向下滚：立即隐藏
+      clearTimeout(hideTimer);
+    } else if (y < lastY - DELTA) {
+      show();                                           // 向上滚：显示，并重启 3 秒计时
+    }
+    lastY = y;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  scheduleAutoHide();    // 首次加载后静止 3 秒也自动收起
+})();
+
+// ===== 引导按钮（Start Your Journey / Explore）：点击整页淡出后跳转 =====
+(() => {
+  document.querySelectorAll('.hero-journey, .process-feature-explore').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      document.body.classList.add('page-leaving');
+      setTimeout(() => { window.location.href = link.href; }, 400);
+    });
+  });
 })();
 </script>
 
