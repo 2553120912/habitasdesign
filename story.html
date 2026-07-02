@@ -301,7 +301,6 @@
 
   .story-hero {
     width: 100%;
-    padding-top: 92px;
     overflow: hidden;
     background: #e7e2da;
   }
@@ -773,7 +772,7 @@
     color: #222;
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.55em;
     text-decoration: none;
     font-size: 15px;
     letter-spacing: 2px;
@@ -785,8 +784,8 @@
     content: '';
     position: absolute;
     left: 0;
-    right: 0;
-    bottom: -8px;
+    right: 2em;
+    bottom: -0.09em;
     height: 1px;
     background: currentColor;
     transform: scaleX(0);
@@ -802,8 +801,8 @@
     transform: scaleX(1);
   }
   .process-home-link-icon {
-    width: 24px;
-    height: 24px;
+    width: 1.45em;
+    height: 1.45em;
     border: 1px solid currentColor;
     border-radius: 50%;
     display: inline-flex;
@@ -812,13 +811,13 @@
     transition: transform 0.3s ease;
   }
   .process-home-link-icon svg {
-    width: 12px;
-    height: 12px;
+    width: 0.9em;
+    height: 0.9em;
     display: block;
   }
   .process-home-link:hover .process-home-link-icon,
   .process-home-link:focus-visible .process-home-link-icon {
-    transform: translateX(4px);
+    transform: translateX(0.18em);
   }
 
   .footer {
@@ -866,10 +865,6 @@
   }
 
   @media (max-width: 900px) {
-    .story-hero {
-      padding-top: 72px;
-    }
-
     .story-hero img {
       height: 62vw;
       min-height: 360px;
@@ -965,10 +960,6 @@
 
     .sidebar-links a {
       font-size: 20px;
-    }
-
-    .story-hero {
-      padding-top: 72px;
     }
 
     .story-main {
@@ -1217,8 +1208,8 @@
     <span data-i18n="back-home">返回首页</span>
     <span class="process-home-link-icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="5" y1="12" x2="18" y2="12"/>
-        <polyline points="12,6 18,12 12,18"/>
+        <line x1="4" y1="12" x2="20" y2="12"/>
+        <polyline points="14,6 20,12 14,18"/>
       </svg>
     </span>
   </a>

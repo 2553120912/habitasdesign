@@ -270,7 +270,10 @@
 
   /* ── Hero ── */
   .hero {
+    height: 100vh;
+    height: 100dvh;
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -279,8 +282,7 @@
     padding: 120px 32px 80px;
     background: #1a1a1a;
     color: #fafaf8;
-    position: sticky;
-    top: 0;
+    position: relative;
     z-index: 1;
     overflow: hidden;
   }
@@ -350,17 +352,18 @@
     bottom: 48px;
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 0.55em;
     color: #fafaf8;
     text-decoration: none;
     font-size: 22px;
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 2.5px;
+    text-transform: uppercase;
     transition: opacity 0.3s ease;
   }
   .hero .hero-journey .hero-journey-icon {
-    width: 32px;
-    height: 32px;
+    width: 1.45em;
+    height: 1.45em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -369,15 +372,15 @@
     will-change: transform;
   }
   .hero .hero-journey .hero-journey-icon svg {
-    width: 20px;
-    height: 20px;
+    width: 0.9em;
+    height: 0.9em;
   }
   .hero .hero-journey::after {
     content: '';
     position: absolute;
     left: 0;
-    right: 44px;
-    bottom: -2px;
+    right: 2em;
+    bottom: -0.09em;
     height: 1px;
     background: currentColor;
     transform: scaleX(0);
@@ -393,8 +396,6 @@
     transform: scaleX(1);
   }
   .hero-journey-icon {
-    width: 24px;
-    height: 24px;
     border: 1px solid currentColor;
     border-radius: 50%;
     display: inline-flex;
@@ -403,13 +404,11 @@
     transition: transform 0.3s ease;
   }
   .hero-journey-icon svg {
-    width: 12px;
-    height: 12px;
     display: block;
   }
   .hero .hero-journey:hover .hero-journey-icon,
   .hero .hero-journey:focus-visible .hero-journey-icon {
-    transform: translate3d(4px, 0, 0);
+    transform: translate3d(0.18em, 0, 0);
   }
 
   /* 平滑转跳：离开当前页时整页淡出 */
@@ -465,11 +464,12 @@
 
   /* ── 服务流程板块 ── */
   .service-process {
-    background: #f4efe6;
+    background: #1a1a1a url("images/process/1.jpg") center top / cover no-repeat;
     position: relative;
     z-index: 2;
     padding: 0;
     min-height: 100vh;
+    overflow: hidden;
   }
   .service-process-inner {
     display: grid;
@@ -517,17 +517,23 @@
 
   /* 服务流程：单张全屏铺图 */
   .process-image {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -104px;
+    z-index: 0;
     display: block;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh + 104px);
     object-fit: cover;
+    object-position: center top;
   }
 
   /* 全屏铺图右下角叠加：项目名 + Explore */
   .process-feature {
     position: absolute;
     right: 48px;
-    bottom: 48px;
+    bottom: 112px;
     z-index: 3;
     display: flex;
     flex-direction: column;
@@ -545,21 +551,6 @@
   }
   .process-feature-explore {
     color: #fafaf8;
-    font-size: 22px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-  }
-  .process-feature-explore .arrow-cta-icon {
-    width: 32px;
-    height: 32px;
-  }
-  .process-feature-explore::after {
-    right: 44px;
-    bottom: -2px;
-  }
-  .process-feature-explore .arrow-cta-icon svg {
-    width: 20px;
-    height: 20px;
   }
   .carousel-controls {
     display: flex;
@@ -630,31 +621,50 @@
   .story-band {
     background: #1a1a1a;
     color: #fafaf8;
-    padding: 80px 64px;
+    padding: 96px 64px 56px;
     position: relative;
     z-index: 2;
   }
+  .story-band::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -140px;
+    height: 140px;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(26, 26, 26, 0) 0%,
+      rgba(26, 26, 26, 0.45) 48%,
+      #1a1a1a 100%
+    );
+  }
   .story-band-inner {
-    max-width: 760px;
+    max-width: 1180px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
     text-align: center;
   }
   .story-title {
-    font-size: clamp(28px, 4.5vw, 52px);
+    font-size: clamp(30px, 3.2vw, 46px);
     font-weight: normal;
     letter-spacing: 6px;
-    line-height: 1.6;
-    margin-bottom: 48px;
+    line-height: 1.2;
+    margin-bottom: 52px;
+    white-space: nowrap;
   }
   .arrow-cta {
     position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 16px;
+    gap: 0.55em;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.2;
-    letter-spacing: 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     color: inherit;
     text-decoration: none;
     transition: opacity 0.3s ease;
@@ -663,8 +673,8 @@
     content: '';
     position: absolute;
     left: 0;
-    right: 40px;
-    bottom: -7px;
+    right: 2em;
+    bottom: -0.09em;
     height: 1px;
     background: currentColor;
     transform: scaleX(0);
@@ -680,8 +690,8 @@
     transform: scaleX(1);
   }
   .arrow-cta-icon {
-    width: 22px;
-    height: 22px;
+    width: 1.45em;
+    height: 1.45em;
     border: 1px solid currentColor;
     border-radius: 50%;
     color: inherit;
@@ -693,19 +703,22 @@
     will-change: transform;
   }
   .arrow-cta-icon svg {
-    width: 14px;
-    height: 14px;
+    width: 0.9em;
+    height: 0.9em;
     display: block;
   }
   .arrow-cta:hover .arrow-cta-icon,
   .arrow-cta:focus-visible .arrow-cta-icon {
-    transform: translate3d(4px, 0, 0);
+    transform: translate3d(0.18em, 0, 0);
   }
   .arrow-cta--team {
     color: #fafaf8;
   }
   .arrow-cta--team::after {
     bottom: -0.09em;
+  }
+  .story-cta {
+    font-size: 18px;
   }
   .arrow-cta--projects {
     color: #1a1a1a;
@@ -715,32 +728,22 @@
   }
   .arrow-cta--hero-light {
     color: #fafaf8;
-    gap: 12px;
     font-size: 22px;
-    font-weight: 600;
     letter-spacing: 2.5px;
-  }
-  .arrow-cta--hero-light::after {
-    right: 44px;
-    bottom: -2px;
-  }
-  .arrow-cta--hero-light .arrow-cta-icon {
-    width: 32px;
-    height: 32px;
-  }
-  .arrow-cta--hero-light .arrow-cta-icon svg {
-    width: 20px;
-    height: 20px;
   }
 
   /* ── 精选项目（入口式） ── */
   .works-feature {
     background: #f4efe6;
-    padding: 64px 48px 64px 64px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 188px 48px 188px 64px;
     position: relative;
     z-index: 2;
   }
   .works-feature-inner {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 64px;
@@ -748,11 +751,12 @@
   .works-text {
     display: grid;
     grid-template-columns: max-content minmax(0, 1fr);
-    gap: clamp(80px, 7vw, 150px);
+    gap: clamp(140px, 12vw, 280px);
     align-items: start;
+    transform: translateY(-100px);
   }
   .works-kicker {
-    font-size: clamp(16px, 1.1vw, 20px);
+    font-size: clamp(18px, 1.35vw, 24px);
     line-height: 1.5;
     color: #62656b;
     margin: 0;
@@ -774,11 +778,15 @@
     display: flex;
     margin-top: 34px;
   }
+  .works-cta {
+    font-size: 20px;
+  }
   .works-gallery {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
     gap: 44px;
     align-items: stretch;
+    transform: translateY(42px);
   }
   .works-gallery-grid {
     display: grid;
@@ -989,6 +997,7 @@
       grid-template-columns: 1fr;
       gap: 48px;
       min-height: auto;
+      transform: none;
     }
     .carousel-frame {
       aspect-ratio: 4 / 3;
@@ -1011,12 +1020,14 @@
     .works-text {
       grid-template-columns: 1fr;
       gap: 24px;
+      transform: none;
     }
     .works-kicker {
       white-space: normal;
     }
     .works-gallery {
       grid-template-columns: 1fr;
+      transform: none;
     }
     .works-card--feature .works-card-image {
       flex: none;
@@ -1057,6 +1068,10 @@
     .service-process {
       padding: 0;
     }
+    .process-image {
+      top: -88px;
+      height: calc(100vh + 88px);
+    }
     .service-process-inner {
       grid-template-columns: 1fr;
       gap: 48px;
@@ -1073,7 +1088,7 @@
     }
     .process-feature {
       right: 24px;
-      bottom: 28px;
+      bottom: 88px;
     }
     .process-feature-name {
       font-size: 30px;
@@ -1086,11 +1101,16 @@
       justify-content: flex-start;
     }
     .story-band {
-      padding: 56px 24px;
+      padding: 72px 24px 40px;
+    }
+    .story-band::before {
+      top: -90px;
+      height: 90px;
     }
     .story-title {
-      margin-bottom: 32px;
+      margin-bottom: 38px;
       letter-spacing: 4px;
+      white-space: normal;
     }
     .works-feature {
       padding: 32px 24px 32px;
@@ -1104,6 +1124,7 @@
     .works-feature-inner {
       gap: 48px;
       min-height: auto;
+      transform: none;
     }
     .works-slogan {
       font-size: clamp(30px, 8vw, 40px);
@@ -1193,7 +1214,7 @@
   <p class="tagline" data-i18n="hero-tagline">空间为生活而存在 &nbsp;/&nbsp; 设计为体验而思考</p>
   <span class="scroll-hint" data-i18n="hero-scroll">↓ 向下浏览</span>
   <a class="hero-journey" href="process.html">
-    <span>Start Your Journey</span>
+    <span>START YOUR JOURNEY</span>
     <span class="hero-journey-icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
         <line x1="4" y1="12" x2="20" y2="12"/>
@@ -1209,7 +1230,7 @@
   <div class="process-feature">
     <p class="process-feature-name">Lovell 2024</p>
     <a class="process-feature-explore arrow-cta arrow-cta--hero-light" href="lovell-house.html">
-      <span>Explore</span>
+      <span>EXPLORE</span>
       <span class="arrow-cta-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
           <line x1="4" y1="12" x2="20" y2="12"/>
@@ -1223,9 +1244,9 @@
 <!-- 故事板块（黑色叙事条） -->
 <section class="story-band scroll-reveal">
   <div class="story-band-inner">
-    <h2 class="story-title" data-i18n="story-title">匠心独运<br>卓越设计屡获殊荣</h2>
+    <h2 class="story-title" data-i18n="story-title">匠心独运 卓越设计屡获殊荣</h2>
     <a href="story.html#team" class="arrow-cta arrow-cta--team story-cta">
-      <span data-i18n="story-cta">我们的团队</span>
+      <span data-i18n="story-cta">OUR TEAM</span>
       <span class="arrow-cta-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <line x1="4" y1="12" x2="20" y2="12"/>
@@ -1245,7 +1266,7 @@
         <h2 class="works-slogan" data-i18n="works-slogan">Partnering with your architect or ours, we are bespoke home builders delivering without compromise.</h2>
         <div class="works-actions">
           <a href="projects.html" class="arrow-cta arrow-cta--projects works-cta">
-            <span data-i18n="works-cta">View our projects</span>
+            <span data-i18n="works-cta">VIEW OUR PROJECTS</span>
             <span class="arrow-cta-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="4" y1="12" x2="20" y2="12"/>
@@ -1411,11 +1432,11 @@ const t = {
   'hero-title':      ['Habitas Design', 'Habitas Design'],
   'hero-tagline':    ['空间为生活而存在 &nbsp;/&nbsp; 设计为体验而思考', 'Space for living &nbsp;/&nbsp; Design through experience'],
   'hero-scroll':     ['↓ 向下浏览', '↓ Scroll'],
-  'story-title':     ['匠心独运<br>卓越设计屡获殊荣', 'Crafted with intent<br>Recognised by design'],
-  'story-cta':       ['我们的团队', 'OUR TEAM'],
+  'story-title':     ['匠心独运 卓越设计屡获殊荣', 'Crafted with intent Recognised by design'],
+  'story-cta':       ['OUR TEAM', 'OUR TEAM'],
   'works-kicker':    ['Luxury home builders for Melbourne’s most discerning addresses', 'Luxury home builders for Melbourne’s most discerning addresses'],
   'works-slogan':    ['Partnering with your architect or ours, we are bespoke home builders delivering without compromise.', 'Partnering with your architect or ours, we are bespoke home builders delivering without compromise.'],
-  'works-cta':       ['View our projects', 'View our projects'],
+  'works-cta':       ['VIEW OUR PROJECTS', 'VIEW OUR PROJECTS'],
   'section-about':   ['关于我们', 'About Us'],
   'about-p1':        ['Habitas Design 植根于当代设计的理念，同时坚守对经典特质的追求。我们希望在每一个项目中，找到隽永气质与建筑表达之间的平衡。', 'Habitas Design is grounded in the values of contemporary design whilst maintaining a commitment to Classic characteristics.  We wish to find the balance of timeless qualities and Architectural expression in each project.'],
   'about-p2':        ['3000 Corporation 与 Habitas Design 携手合作，汇聚了 35 年商业建筑经验与 20 年住宅设计经验。我们以家族对设计的执着、专注的客户服务，以及对品质的坚守，在墨尔本打造高端豪宅。', '3000 corporation & Habitas Design are bringing together 35 years of commercial construction experience & 20 years of Residential Architecture experience by a family commitment to Design, dedicated client service and quality construction of luxury homes in Melbourne.'],
