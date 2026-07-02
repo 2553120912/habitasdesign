@@ -361,17 +361,23 @@
   .hero .hero-journey .hero-journey-icon {
     width: 32px;
     height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.3s ease;
+    will-change: transform;
   }
   .hero .hero-journey .hero-journey-icon svg {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
   }
   .hero .hero-journey::after {
     content: '';
     position: absolute;
     left: 0;
     right: 44px;
-    bottom: -8px;
+    bottom: -2px;
     height: 1px;
     background: currentColor;
     transform: scaleX(0);
@@ -403,7 +409,7 @@
   }
   .hero .hero-journey:hover .hero-journey-icon,
   .hero .hero-journey:focus-visible .hero-journey-icon {
-    transform: translateX(4px);
+    transform: translate3d(4px, 0, 0);
   }
 
   /* 平滑转跳：离开当前页时整页淡出 */
@@ -538,48 +544,22 @@
     line-height: 1.2;
   }
   .process-feature-explore {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
     color: #fafaf8;
-    text-decoration: none;
     font-size: 22px;
     font-weight: 600;
     letter-spacing: 2.5px;
-    transition: opacity 0.3s ease;
   }
-  .process-feature-explore .hero-journey-icon {
+  .process-feature-explore .arrow-cta-icon {
     width: 32px;
     height: 32px;
   }
-  .process-feature-explore .hero-journey-icon svg {
-    width: 15px;
-    height: 15px;
-  }
   .process-feature-explore::after {
-    content: '';
-    position: absolute;
-    left: 0;
     right: 44px;
-    bottom: -8px;
-    height: 1px;
-    background: currentColor;
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform 0.35s ease;
+    bottom: -2px;
   }
-  .process-feature-explore:hover,
-  .process-feature-explore:focus-visible {
-    opacity: 0.68;
-  }
-  .process-feature-explore:hover::after,
-  .process-feature-explore:focus-visible::after {
-    transform: scaleX(1);
-  }
-  .process-feature-explore:hover .hero-journey-icon,
-  .process-feature-explore:focus-visible .hero-journey-icon {
-    transform: translateX(4px);
+  .process-feature-explore .arrow-cta-icon svg {
+    width: 20px;
+    height: 20px;
   }
   .carousel-controls {
     display: flex;
@@ -646,12 +626,6 @@
     border-radius: 50%;
     color: #1a1a1a;
   }
-  .cta-arrow {
-    width: 14px;
-    height: 14px;
-    display: block;
-  }
-
   /* ── 故事板块（黑色叙事条） ── */
   .story-band {
     background: #1a1a1a;
@@ -672,27 +646,91 @@
     line-height: 1.6;
     margin-bottom: 48px;
   }
-  .story-cta {
+  .arrow-cta {
+    position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #fafaf8;
+    gap: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0;
+    color: inherit;
     text-decoration: none;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s ease;
   }
-  .story-cta:hover { opacity: 0.55; }
-  .story-cta-circle {
-    display: inline-flex;
+  .arrow-cta::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 40px;
+    bottom: -7px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.35s ease;
+  }
+  .arrow-cta:hover,
+  .arrow-cta:focus-visible {
+    opacity: 0.68;
+  }
+  .arrow-cta:hover::after,
+  .arrow-cta:focus-visible::after {
+    transform: scaleX(1);
+  }
+  .arrow-cta-icon {
+    width: 22px;
+    height: 22px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    color: inherit;
+    display: flex;
     align-items: center;
     justify-content: center;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.3s ease;
+    will-change: transform;
+  }
+  .arrow-cta-icon svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+  }
+  .arrow-cta:hover .arrow-cta-icon,
+  .arrow-cta:focus-visible .arrow-cta-icon {
+    transform: translate3d(4px, 0, 0);
+  }
+  .arrow-cta--team {
+    color: #fafaf8;
+  }
+  .arrow-cta--team::after {
+    bottom: -0.09em;
+  }
+  .arrow-cta--projects {
+    color: #1a1a1a;
+  }
+  .arrow-cta--projects::after {
+    bottom: -0.09em;
+  }
+  .arrow-cta--hero-light {
+    color: #fafaf8;
+    gap: 12px;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+  }
+  .arrow-cta--hero-light::after {
+    right: 44px;
+    bottom: -2px;
+  }
+  .arrow-cta--hero-light .arrow-cta-icon {
+    width: 32px;
+    height: 32px;
+  }
+  .arrow-cta--hero-light .arrow-cta-icon svg {
     width: 20px;
     height: 20px;
-    border: 1px solid #fafaf8;
-    border-radius: 50%;
-    color: #fafaf8;
   }
 
   /* ── 精选项目（入口式） ── */
@@ -703,88 +741,72 @@
     z-index: 2;
   }
   .works-feature-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr);
-    gap: 64px;
-    align-items: stretch;
-    min-height: 88vh;
-  }
-  .works-text {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    gap: 64px;
+  }
+  .works-text {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: clamp(80px, 7vw, 150px);
+    align-items: start;
+  }
+  .works-kicker {
+    font-size: clamp(16px, 1.1vw, 20px);
+    line-height: 1.5;
+    color: #62656b;
+    margin: 0;
+    white-space: nowrap;
   }
   .works-slogan {
-    font-size: clamp(24px, 3vw, 36px);
+    font-size: clamp(30px, 2.35vw, 42px);
     font-weight: normal;
-    letter-spacing: 4px;
-    margin-bottom: 32px;
-    line-height: 1.4;
+    letter-spacing: 0;
+    margin: 0;
+    line-height: 1.34;
     overflow-wrap: break-word;
+    max-width: 1120px;
   }
-  .works-intro {
-    font-size: clamp(15px, 1.4vw, 17px);
-    color: #888;
-    max-width: 360px;
-    margin-bottom: 40px;
-    line-height: 1.9;
+  .works-copy {
+    min-width: 0;
   }
-  .works-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    align-self: flex-start;
-    margin-top: auto;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #1a1a1a;
-    text-decoration: none;
-    transition: opacity 0.3s;
+  .works-actions {
+    display: flex;
+    margin-top: 34px;
   }
-  .works-cta:hover { opacity: 0.55; }
-  .works-cta-circle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #1a1a1a;
-    border-radius: 50%;
+  .works-gallery {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    gap: 44px;
+    align-items: stretch;
   }
-  .works-carousel {
+  .works-gallery-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 32px;
-    align-items: stretch;
-    height: 100%;
+    gap: 44px;
   }
   .works-card {
-    display: grid;
-    grid-template-rows: auto auto 1fr auto;
-    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     text-decoration: none;
     color: inherit;
-    cursor: pointer;
-  }
-  .works-card-status {
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: #777;
-    text-transform: uppercase;
-  }
-  .works-card-title {
-    font-size: clamp(20px, 2vw, 28px);
-    font-weight: normal;
-    letter-spacing: 3px;
-    line-height: 1.25;
-    margin: 0;
-    overflow-wrap: break-word;
   }
   .works-card-image {
     position: relative;
     overflow: hidden;
     background: #e8e6e1;
+    min-height: 0;
+  }
+  .works-gallery-grid .works-card-image {
+    aspect-ratio: 16 / 10;
+  }
+  /* 大图撑满右侧 2×2 整体高度，使左大图底边与右下小图底边对齐 */
+  .works-card--feature {
+    height: 100%;
+  }
+  .works-card--feature .works-card-image {
+    flex: 1;
     min-height: 0;
   }
   .works-card-image img {
@@ -794,49 +816,43 @@
     display: block;
     transition: transform 0.6s ease;
   }
-  .works-card:hover .works-card-image img {
+  .works-card:not(.works-card--placeholder):hover .works-card-image img {
     transform: scale(1.03);
   }
-  .works-card-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    color: #fafaf8;
+  .works-card-meta {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 28px;
-    opacity: 0;
-    transition: opacity 0.4s ease;
+    gap: 4px;
   }
-  .works-card:hover .works-card-overlay {
-    opacity: 1;
-  }
-  .works-card-overlay-title {
+  .works-card-title {
     font-size: clamp(20px, 2vw, 28px);
-    letter-spacing: 4px;
-    margin-bottom: 12px;
-  }
-  .works-card-overlay-info {
-    font-size: 13px;
-    letter-spacing: 2px;
-    color: rgba(250, 250, 248, 0.7);
+    font-weight: normal;
+    letter-spacing: 3px;
+    line-height: 1.12;
+    margin: 0;
+    overflow-wrap: break-word;
   }
   .works-card-info {
     font-size: 13px;
     letter-spacing: 2px;
+    line-height: 1.2;
     color: #666;
     margin: 0;
   }
-  .works-card--preview {
-    opacity: 0.45;
-    filter: grayscale(0.4);
-    transition: opacity 0.5s ease, filter 0.5s ease;
+  /* 占位项目瓦片 */
+  .works-card--placeholder {
+    cursor: default;
   }
-  .works-card--preview:hover {
-    opacity: 0.8;
+  .works-card-image--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .works-card-placeholder-text {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #9a938a;
   }
 
   /* ── 关于 ── */
@@ -992,11 +1008,19 @@
       justify-content: flex-start;
       padding-bottom: 0;
     }
-    .works-carousel {
-      height: auto;
+    .works-text {
+      grid-template-columns: 1fr;
+      gap: 24px;
     }
-    .works-card-image {
-      aspect-ratio: 4 / 5;
+    .works-kicker {
+      white-space: normal;
+    }
+    .works-gallery {
+      grid-template-columns: 1fr;
+    }
+    .works-card--feature .works-card-image {
+      flex: none;
+      aspect-ratio: 4 / 3;
     }
   }
 
@@ -1078,24 +1102,25 @@
       padding: 32px 24px 48px;
     }
     .works-feature-inner {
-      grid-template-columns: 1fr;
       gap: 48px;
       min-height: auto;
     }
-    .works-carousel {
+    .works-slogan {
+      font-size: clamp(30px, 8vw, 40px);
+    }
+    .works-actions {
+      margin-top: 28px;
+    }
+    .works-gallery-grid {
       grid-template-columns: 1fr;
       gap: 32px;
-      height: auto;
     }
-    .works-card-image {
-      aspect-ratio: 4 / 5;
+    .works-card--feature .works-card-image {
+      flex: none;
+      aspect-ratio: 4 / 3;
     }
-    .works-card--preview {
-      opacity: 0.7;
-      filter: none;
-    }
-    .works-text {
-      justify-content: flex-start;
+    .works-gallery-grid .works-card-image {
+      aspect-ratio: 4 / 3;
     }
     .contact-grid {
       grid-template-columns: 1fr;
@@ -1171,8 +1196,8 @@
     <span>Start Your Journey</span>
     <span class="hero-journey-icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="5" y1="12" x2="18" y2="12"/>
-        <polyline points="12,6 18,12 12,18"/>
+        <line x1="4" y1="12" x2="20" y2="12"/>
+        <polyline points="14,6 20,12 14,18"/>
       </svg>
     </span>
   </a>
@@ -1183,12 +1208,12 @@
   <img class="process-image" src="images/process/1.jpg" alt="Lovell 2024">
   <div class="process-feature">
     <p class="process-feature-name">Lovell 2024</p>
-    <a class="process-feature-explore" href="lovell-house.html">
+    <a class="process-feature-explore arrow-cta arrow-cta--hero-light" href="lovell-house.html">
       <span>Explore</span>
-      <span class="hero-journey-icon" aria-hidden="true">
+      <span class="arrow-cta-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="5" y1="12" x2="18" y2="12"/>
-          <polyline points="12,6 18,12 12,18"/>
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <polyline points="14,6 20,12 14,18"/>
         </svg>
       </span>
     </a>
@@ -1199,12 +1224,12 @@
 <section class="story-band scroll-reveal">
   <div class="story-band-inner">
     <h2 class="story-title" data-i18n="story-title">匠心独运<br>卓越设计屡获殊荣</h2>
-    <a href="story.html#team" class="story-cta">
+    <a href="story.html#team" class="arrow-cta arrow-cta--team story-cta">
       <span data-i18n="story-cta">我们的团队</span>
-      <span class="story-cta-circle" aria-hidden="true">
-        <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="6" y1="12" x2="18" y2="12"/>
-          <polyline points="13,7 18,12 13,17"/>
+      <span class="arrow-cta-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <polyline points="14,6 20,12 14,18"/>
         </svg>
       </span>
     </a>
@@ -1215,43 +1240,82 @@
 <section id="works" class="works-feature scroll-reveal">
   <div class="works-feature-inner">
     <div class="works-text">
-      <h2 class="works-slogan" data-i18n="works-slogan">作品 · 见证</h2>
-      <p class="works-intro" data-i18n="works-intro">从城市住宅到文化建筑，我们以建筑回应场地、光线与人的行为。每一个项目都是一次对生活方式的重新阅读。</p>
-      <a href="projects.html" class="works-cta">
-        <span data-i18n="works-cta">查看项目</span>
-        <span class="works-cta-circle" aria-hidden="true">
-          <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="6" y1="12" x2="18" y2="12"/>
-            <polyline points="13,7 18,12 13,17"/>
-          </svg>
-        </span>
-      </a>
+      <p class="works-kicker" data-i18n="works-kicker">Luxury home builders for Melbourne’s most discerning addresses</p>
+      <div class="works-copy">
+        <h2 class="works-slogan" data-i18n="works-slogan">Partnering with your architect or ours, we are bespoke home builders delivering without compromise.</h2>
+        <div class="works-actions">
+          <a href="projects.html" class="arrow-cta arrow-cta--projects works-cta">
+            <span data-i18n="works-cta">View our projects</span>
+            <span class="arrow-cta-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="12" x2="20" y2="12"/>
+                <polyline points="14,6 20,12 14,18"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="works-carousel">
-      <a href="projects.html" class="works-card works-card--active" data-role="active">
-        <span class="works-card-status"></span>
-        <h3 class="works-card-title"></h3>
+    <div class="works-gallery">
+
+      <!-- 大图 = 真实项目 01：Lovell House -->
+      <a href="lovell-house.html" class="works-card works-card--feature">
         <div class="works-card-image">
-          <img alt="">
-          <div class="works-card-overlay">
-            <span class="works-card-overlay-title"></span>
-            <span class="works-card-overlay-info"></span>
-          </div>
+          <img src="images/lovell-house/精选卡/秋天perspective.png" alt="Lovell House">
         </div>
-        <p class="works-card-info"></p>
-      </a>
-      <a href="#" class="works-card works-card--preview" data-role="preview">
-        <span class="works-card-status"></span>
-        <h3 class="works-card-title"></h3>
-        <div class="works-card-image">
-          <img alt="">
-          <div class="works-card-overlay">
-            <span class="works-card-overlay-title"></span>
-            <span class="works-card-overlay-info"></span>
-          </div>
+        <div class="works-card-meta">
+          <h3 class="works-card-title">Lovell House</h3>
+          <p class="works-card-info">2024</p>
         </div>
-        <p class="works-card-info"></p>
       </a>
+
+      <div class="works-gallery-grid">
+
+        <!-- 小图 = 真实项目 02：Myrtle House -->
+        <a href="myrtle-house.html" class="works-card">
+          <div class="works-card-image">
+            <img src="images/myrtle-house/精选卡/side elevation.png" alt="Myrtle House" style="object-position:54% center;">
+          </div>
+          <div class="works-card-meta">
+            <h3 class="works-card-title">Myrtle House</h3>
+            <p class="works-card-info">2025</p>
+          </div>
+        </a>
+
+        <!-- 小图 = 真实项目 03：Knutsford House -->
+        <a href="knutsford-house.html" class="works-card">
+          <div class="works-card-image">
+            <img src="images/knutsford-house/精选卡/1.png" alt="Knutsford House">
+          </div>
+          <div class="works-card-meta">
+            <h3 class="works-card-title">Knutsford House</h3>
+            <p class="works-card-info">2025</p>
+          </div>
+        </a>
+
+        <!-- ===== 占位项目 04：日后替换 → 改 href、<img src>、标题与年份，并删除 works-card--placeholder 类 ===== -->
+        <a href="#" class="works-card works-card--placeholder" aria-disabled="true">
+          <div class="works-card-image works-card-image--placeholder">
+            <span class="works-card-placeholder-text">Coming Soon</span>
+          </div>
+          <div class="works-card-meta">
+            <h3 class="works-card-title">Project 04</h3>
+            <p class="works-card-info">—</p>
+          </div>
+        </a>
+
+        <!-- ===== 占位项目 05：日后替换 → 改 href、<img src>、标题与年份，并删除 works-card--placeholder 类 ===== -->
+        <a href="#" class="works-card works-card--placeholder" aria-disabled="true">
+          <div class="works-card-image works-card-image--placeholder">
+            <span class="works-card-placeholder-text">Coming Soon</span>
+          </div>
+          <div class="works-card-meta">
+            <h3 class="works-card-title">Project 05</h3>
+            <p class="works-card-info">—</p>
+          </div>
+        </a>
+
+      </div>
     </div>
   </div>
 </section>
@@ -1349,10 +1413,9 @@ const t = {
   'hero-scroll':     ['↓ 向下浏览', '↓ Scroll'],
   'story-title':     ['匠心独运<br>卓越设计屡获殊荣', 'Crafted with intent<br>Recognised by design'],
   'story-cta':       ['我们的团队', 'OUR TEAM'],
-  'works-slogan':    ['作品 · 见证', 'Works · Witness'],
-  'works-intro':     ['从城市住宅到文化建筑，我们以建筑回应场地、光线与人的行为。每一个项目都是一次对生活方式的重新阅读。',
-                      'From urban residences to cultural buildings, our architecture responds to site, light, and human behavior. Each project is a renewed reading of how we live.'],
-  'works-cta':       ['查看项目', 'View Projects'],
+  'works-kicker':    ['Luxury home builders for Melbourne’s most discerning addresses', 'Luxury home builders for Melbourne’s most discerning addresses'],
+  'works-slogan':    ['Partnering with your architect or ours, we are bespoke home builders delivering without compromise.', 'Partnering with your architect or ours, we are bespoke home builders delivering without compromise.'],
+  'works-cta':       ['View our projects', 'View our projects'],
   'section-about':   ['关于我们', 'About Us'],
   'about-p1':        ['Habitas Design 植根于当代设计的理念，同时坚守对经典特质的追求。我们希望在每一个项目中，找到隽永气质与建筑表达之间的平衡。', 'Habitas Design is grounded in the values of contemporary design whilst maintaining a commitment to Classic characteristics.  We wish to find the balance of timeless qualities and Architectural expression in each project.'],
   'about-p2':        ['3000 Corporation 与 Habitas Design 携手合作，汇聚了 35 年商业建筑经验与 20 年住宅设计经验。我们以家族对设计的执着、专注的客户服务，以及对品质的坚守，在墨尔本打造高端豪宅。', '3000 corporation & Habitas Design are bringing together 35 years of commercial construction experience & 20 years of Residential Architecture experience by a family commitment to Design, dedicated client service and quality construction of luxury homes in Melbourne.'],
@@ -1373,61 +1436,6 @@ const t = {
 
 let lang = localStorage.getItem('hb-lang') || 'en';
 
-const worksProjects = [
-  {
-    id: 'lovell-house',
-    image: 'images/lovell-house/精选卡/秋天perspective.png',
-    href: 'lovell-house.html',
-    title:  { cn: 'Lovell House', en: 'Lovell House' },
-    info:   { cn: '住宅 · 2024',  en: 'Residence · 2024' },
-    status: { cn: '已完工',       en: 'COMPLETED' },
-  },
-  {
-    id: 'myrtle-house',
-    image: 'images/myrtle-house/精选卡/side elevation.png',
-    imagePosition: '54% center',
-    href: 'myrtle-house.html',
-    title:  { cn: 'Myrtle House', en: 'Myrtle House' },
-    info:   { cn: '住宅 · 2025',  en: 'Residence · 2025' },
-    status: { cn: '已完工',       en: 'COMPLETED' },
-  },
-  {
-    id: 'knutsford-house',
-    image: 'images/knutsford-house/精选卡/1.png',
-    href: 'knutsford-house.html',
-    title:  { cn: 'Knutsford House', en: 'Knutsford House' },
-    info:   { cn: '住宅 · 2025',     en: 'Residence · 2025' },
-    status: { cn: '已完工',          en: 'COMPLETED' },
-  },
-];
-
-let worksActiveIdx = 0;
-
-function fillCard(cardEl, project) {
-  cardEl.querySelector('.works-card-status').textContent = project.status[lang];
-  cardEl.querySelector('.works-card-title').textContent  = project.title[lang];
-  cardEl.querySelector('.works-card-info').textContent   = project.info[lang];
-  const img = cardEl.querySelector('.works-card-image img');
-  img.src = project.image;
-  img.alt = project.title.en;
-  img.style.objectPosition = project.imagePosition || 'center center';
-  cardEl.querySelector('.works-card-overlay-title').textContent = project.title[lang];
-  cardEl.querySelector('.works-card-overlay-info').textContent  = project.info[lang];
-}
-
-function renderWorksCarousel() {
-  if (!worksProjects.length) return;
-  const carousel = document.querySelector('.works-carousel');
-  if (!carousel) return;
-  const activeCard  = carousel.querySelector('.works-card--active');
-  const previewCard = carousel.querySelector('.works-card--preview');
-  const N = worksProjects.length;
-  fillCard(activeCard,  worksProjects[worksActiveIdx]);
-  fillCard(previewCard, worksProjects[(worksActiveIdx + 1) % N]);
-  activeCard.setAttribute('href', worksProjects[worksActiveIdx].href);
-  previewCard.setAttribute('href', '#');
-}
-
 function switchLang(l) {
   if (l === lang) return;
   lang = l;
@@ -1444,21 +1452,9 @@ function applyLang() {
   document.getElementById('btn-cn').classList.toggle('active', lang === 'cn');
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
   document.documentElement.lang = lang === 'cn' ? 'zh-CN' : 'en';
-  renderWorksCarousel();
 }
 
 applyLang();
-
-const worksCarousel = document.querySelector('.works-carousel');
-if (worksCarousel) {
-  worksCarousel.addEventListener('click', e => {
-    const preview = e.target.closest('.works-card--preview');
-    if (!preview) return;
-    e.preventDefault();
-    worksActiveIdx = (worksActiveIdx + 1) % worksProjects.length;
-    renderWorksCarousel();
-  });
-}
 
 function toggleMenu() {
   const isOpen = document.body.classList.toggle('menu-open');
@@ -1564,7 +1560,7 @@ document.addEventListener('keydown', e => {
 
 // ===== 引导按钮（Start Your Journey / Explore）：点击整页淡出后跳转 =====
 (() => {
-  document.querySelectorAll('.hero-journey, .process-feature-explore').forEach(link => {
+  document.querySelectorAll('.hero-journey, .arrow-cta').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
       document.body.classList.add('page-leaving');

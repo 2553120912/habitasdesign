@@ -1,0 +1,66 @@
+箭头按钮设计逻辑
+
+适用范围：
+用于所有“文字 + 圆形右箭头”的 CTA 按钮。
+
+设计目标：
+文字、圆圈、箭头、下划线要组成一个完整按钮系统。
+圆圈不能抢走文字重心，箭头不能缩在圆圈里，也不能偏离圆心。
+整体应当轻、准、顺滑。
+
+字体、圆圈、箭头的比例关系：
+- 圆圈直径建议为文字字号的 1.35-1.45 倍。
+- SVG 箭头尺寸建议为圆圈直径的 0.62-0.65 倍。
+- 大型 CTA 可取比例上限，小型 CTA 可取比例下限。
+- 圆圈应比文字略大，但不应大到成为视觉主角。
+- 箭头应比圆圈小一圈，保留适度留白；尾部要清晰，不能缩成一团。
+
+箭头与圆心：
+- SVG 使用 viewBox="0 0 24 24"。
+- 圆心为 x=12, y=12。
+- 不能只按 SVG 外框居中判断；真正重要的是箭头柄的中点落在圆心上。
+- 推荐长尾箭头坐标：
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14,6 20,12 14,18"/>
+- 这组坐标中，横线从 x=4 到 x=20，中点是 x=12，正好对齐圆心。
+- 箭头尖与横线末端要自然衔接，不要显得断开、偏移或过短。
+
+圆圈内居中：
+icon 容器负责居中 SVG：
+display: flex;
+align-items: center;
+justify-content: center;
+
+动效：
+icon 初始状态：
+transform: translate3d(0, 0, 0);
+transition: transform 0.3s ease;
+will-change: transform;
+
+hover / focus 时：
+transform: translate3d(4px, 0, 0);
+
+下划线：
+- 下划线可使用 ::after，从 scaleX(0) 展开到 scaleX(1)。
+- transition 使用 transform 0.35s ease。
+- 下划线距离文字要近，和文字形成一个整体。
+- 线不能离文字太远，也不能压到字形。
+- 下划线距离应跟随字体大小变化，推荐 bottom: -0.09em。
+- 计算逻辑：以 22px 字号、2px 距离为参考，2 / 22 ≈ 0.09。
+- 例如 16px 字号时，-0.09em 约等于 -1.4px；22px 字号时，约等于 -2px。
+- 原则是贴近但不拥挤；如果具体字体的字面高度特殊，可在 -0.08em 到 -0.11em 之间微调。
+
+通用 SVG 示例：
+<span class="arrow-icon" aria-hidden="true">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="4" y1="12" x2="20" y2="12"/>
+    <polyline points="14,6 20,12 14,18"/>
+  </svg>
+</span>
+
+判断标准：
+- 看比例：圆圈略大于文字，箭头略小于圆圈。
+- 看圆心：箭头柄中点必须落在圆心上。
+- 看形态：箭头是长尾右箭头，尾部清楚，不缩成一团。
+- 看动效：hover 时箭头轻微右移，移动顺滑，不跳。
+- 看下划线：线贴近文字，按钮视觉上是一个整体。
