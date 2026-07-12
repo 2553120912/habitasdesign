@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -556,6 +556,7 @@
 
 <aside class="sidebar" id="sidebar" aria-hidden="true">
   <ul class="sidebar-links">
+    <li><a href="index.html" data-i18n="nav-home" onclick="closeMenu()">首页</a></li>
     <li><a href="story.html" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
     <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
     <li><a href="story.html#team" data-i18n="nav-stories" onclick="closeMenu()">团队</a></li>
@@ -612,6 +613,7 @@
 
 <script>
 const t = {
+  'nav-home': ['首页', 'Home'],
   'nav-works': ['作品', 'Our Work'],
   'nav-process': ['服务流程', 'Service'],
   'nav-about': ['关于我们', 'About'],
@@ -636,6 +638,15 @@ const projects = [
   { id: 'knutsford-house', category: 'built',  image: 'images/knutsford-house/精选卡/1.png', href: 'knutsford-house.html',
     title: { cn: 'Knutsford House', en: 'Knutsford House' },
     info:  { cn: '住宅 · 2025',  en: 'Residence · 2025' } },
+  { id: 'zhongji-cantonese-restaurant', category: 'built', image: 'images/Zhongji Cantonese Restaurant/Portfolio卡/1.png', href: 'zhongji-cantonese-restaurant.html',
+    title: { cn: 'Zhongji Cantonese Restaurant', en: 'Zhongji Cantonese Restaurant' },
+    info:  { cn: '餐饮空间 · 待定', en: 'Hospitality · TBD' } },
+  { id: 'in-here-beauty-salon', category: 'built', image: 'images/In Here Beauty Salon/Portfolio卡/1.png', href: 'in-here-beauty-salon.html',
+    title: { cn: 'In Here Beauty Salon', en: 'In Here Beauty Salon' },
+    info:  { cn: '美容空间 · 待定', en: 'Beauty Salon · TBD' } },
+  { id: '32-myers-avenue-single-dwelling', category: 'built', image: 'images/32 Myers Avenue  Single Dwelling/Portfolio卡/1.png', href: '32-myers-avenue-single-dwelling.html',
+    title: { cn: '32 Myers Avenue Single Dwelling', en: '32 Myers Avenue Single Dwelling' },
+    info:  { cn: '住宅 · 待定', en: 'Residence · TBD' } },
 ];
 
 let activeFilter = 'all';

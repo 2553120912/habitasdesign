@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Knutsford House | Habitas Design</title>
+<title>In Here Beauty Salon | Habitas Design</title>
 <style>
   :root {
     --bg: #f4efe6;
@@ -277,7 +277,7 @@
     overflow: hidden;
   }
 
-  .kh-hero {
+  .lh-hero {
     margin-top: 92px;
     width: 100%;
     height: 75vh;
@@ -287,13 +287,13 @@
     position: relative;
   }
 
-  .kh-hero img {
+  .lh-hero img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .kh-hero-copy {
+  .lh-hero-copy {
     position: absolute;
     left: 50%;
     bottom: 44px;
@@ -302,21 +302,22 @@
     pointer-events: none;
   }
 
-  .kh-hero-title {
-    max-width: min(780px, 70vw);
+  .lh-hero-title {
+    max-width: min(1020px, 88vw);
     font-size: clamp(42px, 5vw, 84px);
     line-height: 0.92;
     letter-spacing: 2px;
     font-weight: 600;
     color: #fbfaf7;
     text-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+    overflow-wrap: break-word;
   }
 
-  .kh-main {
+  .lh-main {
     background: var(--surface);
   }
 
-  .kh-intro {
+  .lh-intro {
     width: var(--content-width);
     margin: 0 auto;
     padding: 82px 0 76px;
@@ -325,26 +326,26 @@
     gap: 108px;
     align-items: start;
   }
-  .kh-intro > *,
-  .kh-detail-row > * {
+  .lh-intro > *,
+  .lh-detail-row > * {
     min-width: 0;
   }
 
-  .kh-intro-visual {
+  .lh-intro-visual {
     background: #e8e3db;
     overflow: hidden;
     aspect-ratio: 4 / 5.31;
     align-self: start;
   }
 
-  .kh-intro-visual img {
+  .lh-intro-visual img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center center;
   }
 
-  .kh-intro-copy {
+  .lh-intro-copy {
     display: grid;
     grid-template-rows: auto 1fr;
     gap: clamp(56px, 7vw, 104px);
@@ -353,13 +354,13 @@
     min-height: 100%;
   }
 
-  .kh-intro-heading {
+  .lh-intro-heading {
     display: flex;
     flex-direction: column;
     gap: 28px;
   }
 
-  .kh-subtitle {
+  .lh-subtitle {
     font-size: 14px;
     letter-spacing: 3.2px;
     text-transform: uppercase;
@@ -367,7 +368,7 @@
     font-weight: 600;
   }
 
-  .kh-intro-summary {
+  .lh-intro-summary {
     max-width: 720px;
     font-size: 18px;
     line-height: 1.75;
@@ -376,11 +377,11 @@
     overflow-wrap: break-word;
   }
 
-  .kh-details {
+  .lh-details {
     align-self: end;
   }
 
-  .kh-details-title {
+  .lh-details-title {
     font-size: 16px;
     letter-spacing: 1px;
     margin-bottom: 26px;
@@ -388,11 +389,11 @@
     font-weight: 600;
   }
 
-  .kh-details-table {
+  .lh-details-table {
     border-top: 1px solid var(--line);
   }
 
-  .kh-detail-row {
+  .lh-detail-row {
     display: grid;
     grid-template-columns: minmax(96px, 0.9fr) minmax(0, 1.3fr);
     gap: 32px;
@@ -401,25 +402,25 @@
     align-items: start;
   }
 
-  .kh-detail-label {
+  .lh-detail-label {
     font-size: 15px;
     color: #2e2e2e;
     font-weight: 600;
   }
 
-  .kh-detail-value {
+  .lh-detail-value {
     font-size: 15px;
     color: var(--text);
     font-weight: 600;
     overflow-wrap: break-word;
   }
 
-  .kh-back-link-wrap {
+  .lh-back-link-wrap {
     width: var(--content-width);
     margin: -32px auto 88px;
     text-align: center;
   }
-  .kh-back-link {
+  .lh-back-link {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -432,7 +433,7 @@
     font-weight: 400;
     transition: opacity 0.3s ease;
   }
-  .kh-back-link::after {
+  .lh-back-link::after {
     content: '';
     position: absolute;
     left: 0;
@@ -444,13 +445,13 @@
     transform-origin: center;
     transition: transform 0.35s ease;
   }
-  .kh-back-link:hover {
+  .lh-back-link:hover {
     opacity: 0.68;
   }
-  .kh-back-link:hover::after {
+  .lh-back-link:hover::after {
     transform: scaleX(1);
   }
-  .kh-back-link-icon {
+  .lh-back-link-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -460,74 +461,74 @@
     border-radius: 50%;
     transition: transform 0.3s ease;
   }
-  .kh-back-link-icon svg {
+  .lh-back-link-icon svg {
     display: block;
     width: 12px;
     height: 12px;
   }
-  .kh-back-link:hover .kh-back-link-icon {
+  .lh-back-link:hover .lh-back-link-icon {
     transform: translateX(4px);
   }
 
-  .kh-gallery {
+  .lh-gallery {
     width: var(--content-width);
     margin: 0 auto;
     padding: 0 0 88px;
   }
 
-  .kh-gallery-grid {
+  .lh-gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 22px;
     grid-auto-flow: dense;
   }
 
-  .kh-gallery-item {
+  .lh-gallery-item {
     background: #ebe7df;
     overflow: hidden;
     position: relative;
   }
 
-  .kh-gallery-item img {
+  .lh-gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .kh-gallery-item--portrait {
+  .lh-gallery-item--portrait {
     aspect-ratio: 4 / 5.6;
   }
 
-  .kh-gallery-item--landscape {
+  .lh-gallery-item--landscape {
     aspect-ratio: 5.2 / 3.7;
   }
 
-  .kh-gallery-item--square {
+  .lh-gallery-item--square {
     aspect-ratio: 1 / 1;
   }
 
-  .kh-gallery-item--wide {
+  .lh-gallery-item--wide {
     aspect-ratio: 2.1 / 1.2;
     grid-column: span 2;
   }
 
-  .kh-gallery-item--tall {
+  .lh-gallery-item--tall {
     aspect-ratio: 4 / 6.2;
   }
 
-  .kh-gallery-trigger {
+  .lh-gallery-trigger {
     cursor: pointer;
   }
 
-  .kh-gallery-trigger img {
+  .lh-gallery-trigger img {
     transition: opacity 0.35s ease;
   }
 
-  .kh-gallery-trigger:hover img {
+  .lh-gallery-trigger:hover img {
     opacity: 0.86;
   }
 
-  .kh-lightbox {
+  .lh-lightbox {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.94);
@@ -538,11 +539,11 @@
     padding: 64px 80px;
   }
 
-  .kh-lightbox.is-open {
+  .lh-lightbox.is-open {
     display: flex;
   }
 
-  .kh-lightbox-stage {
+  .lh-lightbox-stage {
     max-width: 100%;
     max-height: 100%;
     display: flex;
@@ -550,7 +551,7 @@
     justify-content: center;
   }
 
-  .kh-lightbox-stage img {
+  .lh-lightbox-stage img {
     max-width: 90vw;
     max-height: 86vh;
     width: auto;
@@ -559,9 +560,9 @@
     transition: opacity 0.2s ease;
   }
 
-  .kh-lightbox-close,
-  .kh-lightbox-prev,
-  .kh-lightbox-next {
+  .lh-lightbox-close,
+  .lh-lightbox-prev,
+  .lh-lightbox-next {
     position: absolute;
     background: none;
     border: none;
@@ -576,13 +577,13 @@
     padding: 0;
   }
 
-  .kh-lightbox-close:hover,
-  .kh-lightbox-prev:hover,
-  .kh-lightbox-next:hover {
+  .lh-lightbox-close:hover,
+  .lh-lightbox-prev:hover,
+  .lh-lightbox-next:hover {
     opacity: 1;
   }
 
-  .kh-lightbox-close {
+  .lh-lightbox-close {
     top: 28px;
     right: 36px;
     width: 40px;
@@ -591,8 +592,8 @@
     line-height: 1;
   }
 
-  .kh-lightbox-prev,
-  .kh-lightbox-next {
+  .lh-lightbox-prev,
+  .lh-lightbox-next {
     top: 50%;
     transform: translateY(-50%);
     width: 56px;
@@ -601,15 +602,15 @@
     line-height: 1;
   }
 
-  .kh-lightbox-prev {
+  .lh-lightbox-prev {
     left: 28px;
   }
 
-  .kh-lightbox-next {
+  .lh-lightbox-next {
     right: 28px;
   }
 
-  .kh-lightbox-counter {
+  .lh-lightbox-counter {
     position: absolute;
     left: 36px;
     bottom: 28px;
@@ -619,19 +620,19 @@
     letter-spacing: 2.4px;
   }
 
-  .kh-contact {
+  .lh-contact {
     background: #1a1a1a;
     padding: 56px 0 96px;
     position: relative;
     z-index: 2;
   }
 
-  .kh-contact-inner {
+  .lh-contact-inner {
     width: var(--content-width);
     margin: 0 auto;
   }
 
-  .kh-contact-label {
+  .lh-contact-label {
     margin-bottom: 28px;
     font-size: 12px;
     letter-spacing: 4px;
@@ -639,7 +640,7 @@
     color: #999;
   }
 
-  .kh-contact-grid {
+  .lh-contact-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 32px 56px;
@@ -648,13 +649,13 @@
     border-top: 1px solid rgba(255, 255, 255, 0.15);
   }
 
-  .kh-contact-meta {
+  .lh-contact-meta {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 32px 56px;
   }
 
-  .kh-contact-item h4 {
+  .lh-contact-item h4 {
     margin-bottom: 12px;
     font-size: 13px;
     letter-spacing: 3px;
@@ -662,8 +663,8 @@
     color: #999;
   }
 
-  .kh-contact-item p,
-  .kh-contact-item a {
+  .lh-contact-item p,
+  .lh-contact-item a {
     font-size: 16px;
     line-height: 2.2;
     letter-spacing: 1px;
@@ -672,16 +673,16 @@
     font-weight: 600;
   }
 
-  .kh-contact-item a:hover {
+  .lh-contact-item a:hover {
     opacity: 0.6;
   }
-  .kh-contact-social-links {
+  .lh-contact-social-links {
     display: flex;
     align-items: center;
     gap: 22px;
     margin-top: 2px;
   }
-  .kh-contact-social-links a {
+  .lh-contact-social-links a {
     width: 24px;
     height: 24px;
     display: inline-flex;
@@ -691,13 +692,13 @@
     line-height: 1;
     letter-spacing: 0;
   }
-  .kh-contact-social-links svg {
+  .lh-contact-social-links svg {
     width: 20px;
     height: 20px;
     display: block;
   }
 
-  .kh-contact-phone {
+  .lh-contact-phone {
     margin-top: 8px;
     letter-spacing: 0.4px;
   }
@@ -717,46 +718,46 @@
       --content-width: min(1500px, calc(100vw - 48px));
     }
 
-    .kh-hero-copy {
+    .lh-hero-copy {
       bottom: 36px;
     }
 
-    .kh-intro {
+    .lh-intro {
       gap: 56px;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       padding: 68px 0 64px;
     }
 
-    .kh-gallery-grid {
+    .lh-gallery-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .kh-gallery-item--wide {
+    .lh-gallery-item--wide {
       grid-column: span 2;
     }
 
-    .kh-contact-grid,
-    .kh-contact-meta {
+    .lh-contact-grid,
+    .lh-contact-meta {
       gap: 28px 40px;
     }
   }
 
   @media (max-width: 920px) {
-    .kh-intro {
+    .lh-intro {
       grid-template-columns: 1fr;
       gap: 36px;
       padding: 62px 0 60px;
     }
-    .kh-intro-visual {
+    .lh-intro-visual {
       aspect-ratio: 4 / 4.7;
     }
-    .kh-intro-copy {
+    .lh-intro-copy {
       display: flex;
       flex-direction: column;
       gap: 40px;
       min-height: 0;
     }
-    .kh-details {
+    .lh-details {
       align-self: stretch;
     }
   }
@@ -788,88 +789,88 @@
       padding: 120px 40px 48px;
     }
 
-    .kh-hero {
+    .lh-hero {
       margin-top: 76px;
       height: 75vh;
       min-height: 420px;
     }
 
-    .kh-hero-copy {
+    .lh-hero-copy {
       bottom: 26px;
     }
 
-    .kh-hero-title {
-      max-width: min(300px, 78vw);
+    .lh-hero-title {
+      max-width: 86vw;
       font-size: clamp(30px, 9vw, 42px);
       letter-spacing: 1.2px;
     }
 
-    .kh-intro {
+    .lh-intro {
       grid-template-columns: 1fr;
       gap: 28px;
       padding: 46px 0 48px;
       align-items: start;
     }
 
-    .kh-intro-visual {
+    .lh-intro-visual {
       aspect-ratio: 4 / 4.68;
     }
 
-    .kh-subtitle {
+    .lh-subtitle {
       font-size: 13px;
       letter-spacing: 2.6px;
     }
 
-    .kh-intro-heading {
+    .lh-intro-heading {
       gap: 22px;
     }
 
-    .kh-intro-summary {
+    .lh-intro-summary {
       font-size: 16.5px;
       line-height: 1.7;
     }
 
-    .kh-detail-row {
+    .lh-detail-row {
       grid-template-columns: 1fr;
       gap: 6px;
       padding: 14px 0 12px;
     }
 
-    .kh-back-link-wrap {
+    .lh-back-link-wrap {
       margin: -12px auto 64px;
     }
-    .kh-back-link {
+    .lh-back-link {
       font-size: 14px;
       letter-spacing: 1.6px;
     }
-    .kh-back-link-icon {
+    .lh-back-link-icon {
       width: 23px;
       height: 23px;
     }
-    .kh-back-link-icon svg {
+    .lh-back-link-icon svg {
       width: 11.5px;
       height: 11.5px;
     }
 
-    .kh-gallery {
+    .lh-gallery {
       padding-bottom: 72px;
     }
 
-    .kh-gallery-grid {
+    .lh-gallery-grid {
       grid-template-columns: 1fr;
       gap: 16px;
     }
 
-    .kh-gallery-item--wide {
+    .lh-gallery-item--wide {
       grid-column: auto;
     }
 
-    .kh-contact {
+    .lh-contact {
       padding: 40px 0 72px;
     }
 
-    .kh-contact-grid,
-    .kh-contact-meta {
+    .lh-contact-grid,
+    .lh-contact-meta {
       grid-template-columns: 1fr;
       gap: 28px;
     }
@@ -928,66 +929,66 @@
   </div>
 </aside>
 
-<header class="kh-hero">
-  <img src="images/knutsford-house/顶部图/1.png" alt="Knutsford House hero view">
-  <div class="kh-hero-copy">
-    <h1 class="kh-hero-title">Knutsford House</h1>
+<header class="lh-hero">
+  <img src="images/In Here Beauty Salon/顶部图/1.png" alt="In Here Beauty Salon hero view">
+  <div class="lh-hero-copy">
+    <h1 class="lh-hero-title">In Here Beauty Salon</h1>
   </div>
 </header>
 
-<main class="kh-main">
-  <section class="kh-intro">
-    <div class="kh-intro-visual">
-      <img src="images/knutsford-house/参考图/1.png" alt="Knutsford House pool reference">
+<main class="lh-main">
+  <section class="lh-intro">
+    <div class="lh-intro-visual">
+      <img src="images/In Here Beauty Salon/参考图/1.png" alt="In Here Beauty Salon reference view">
     </div>
 
-    <div class="kh-intro-copy">
-      <div class="kh-intro-heading">
-        <p class="kh-subtitle" data-i18n="kh-subtitle">Knutsford 住宅</p>
-        <div class="kh-intro-summary">
-          <p data-i18n="kh-summary-p1">Knutsford House is imagined as a quiet sequence of thresholds, where the weight of the street-facing form gives way to a softer domestic atmosphere within. The project balances enclosure and openness through carefully edited openings, layered circulation, and a measured palette of stone, plaster, glass, and shadow. Rather than presenting the home all at once, the design unfolds gradually, allowing approach, entry, courtyard, and living spaces to register as distinct moments. This page currently uses a placeholder editorial summary, but the structure is intended to support a fuller architectural narrative once final project writing is available, while already establishing a calm, gallery-like rhythm between image, text, and project information.</p>
+    <div class="lh-intro-copy">
+      <div class="lh-intro-heading">
+        <p class="lh-subtitle" data-i18n="lh-subtitle">In Here Beauty Salon</p>
+        <div class="lh-intro-summary">
+          <p data-i18n="lh-summary-p1">In Here Beauty Salon currently uses a placeholder project summary. The page has been prepared around the available visual material, with a hero image, reference image, gallery, and project information area; once final copy is available, this section can be replaced with a fuller narrative about the spatial concept, material atmosphere, service flow, and beauty salon experience.</p>
         </div>
       </div>
 
-      <section class="kh-details" aria-label="Project details">
-        <h2 class="kh-details-title" data-i18n="kh-details-title">项目详情</h2>
-        <div class="kh-details-table">
-          <div class="kh-detail-row">
-            <div class="kh-detail-label" data-i18n="kh-meta-location-label">地点</div>
-            <div class="kh-detail-value" data-i18n="kh-meta-location-value">待定</div>
+      <section class="lh-details" aria-label="Project details">
+        <h2 class="lh-details-title" data-i18n="lh-details-title">项目详情</h2>
+        <div class="lh-details-table">
+          <div class="lh-detail-row">
+            <div class="lh-detail-label" data-i18n="lh-meta-location-label">地点</div>
+            <div class="lh-detail-value" data-i18n="lh-meta-location-value">待定</div>
           </div>
-          <div class="kh-detail-row">
-            <div class="kh-detail-label" data-i18n="kh-meta-year-label">年份</div>
-            <div class="kh-detail-value" data-i18n="kh-meta-year-value">2025</div>
+          <div class="lh-detail-row">
+            <div class="lh-detail-label" data-i18n="lh-meta-year-label">年份</div>
+            <div class="lh-detail-value" data-i18n="lh-meta-year-value">TBD</div>
           </div>
-          <div class="kh-detail-row">
-            <div class="kh-detail-label" data-i18n="kh-meta-area-label">面积</div>
-            <div class="kh-detail-value" data-i18n="kh-meta-area-value">待定</div>
+          <div class="lh-detail-row">
+            <div class="lh-detail-label" data-i18n="lh-meta-area-label">面积</div>
+            <div class="lh-detail-value" data-i18n="lh-meta-area-value">待定</div>
           </div>
-          <div class="kh-detail-row">
-            <div class="kh-detail-label" data-i18n="kh-meta-status-label">状态</div>
-            <div class="kh-detail-value" data-i18n="kh-meta-status-value">已建成</div>
+          <div class="lh-detail-row">
+            <div class="lh-detail-label" data-i18n="lh-meta-status-label">状态</div>
+            <div class="lh-detail-value" data-i18n="lh-meta-status-value">待定</div>
           </div>
-          <div class="kh-detail-row">
-            <div class="kh-detail-label" data-i18n="kh-meta-type-label">类型</div>
-            <div class="kh-detail-value" data-i18n="kh-meta-type-value">住宅</div>
+          <div class="lh-detail-row">
+            <div class="lh-detail-label" data-i18n="lh-meta-type-label">类型</div>
+            <div class="lh-detail-value" data-i18n="lh-meta-type-value">美容空间</div>
           </div>
         </div>
       </section>
     </div>
   </section>
 
-  <section class="kh-gallery" aria-label="Project gallery">
-    <div class="kh-gallery-grid">
-      <figure class="kh-gallery-item kh-gallery-trigger" data-index="0" style="grid-column: 1 / -1; aspect-ratio: 16 / 9;"><img src="images/knutsford-house/展示图/1.png" alt="Knutsford House view 1"></figure>
-      <figure class="kh-gallery-item kh-gallery-trigger" data-index="1" style="grid-column: 1 / -1; aspect-ratio: 16 / 9;"><img src="images/knutsford-house/展示图/2.png" alt="Knutsford House view 2"></figure>
+  <section class="lh-gallery" aria-label="Project gallery">
+    <div class="lh-gallery-grid">
+      <figure class="lh-gallery-item lh-gallery-trigger" data-index="0" style="grid-column: 1 / -1; aspect-ratio: 16 / 9;"><img src="images/In Here Beauty Salon/展示图/1.png" alt="In Here Beauty Salon view 1"></figure>
+      <figure class="lh-gallery-item lh-gallery-trigger" data-index="1" style="grid-column: 1 / -1; aspect-ratio: 16 / 9;"><img src="images/In Here Beauty Salon/展示图/2.png" alt="In Here Beauty Salon view 2"></figure>
     </div>
   </section>
 
-  <div class="kh-back-link-wrap">
-    <a class="kh-back-link" href="projects.html">
-      <span data-i18n="kh-back-portfolio">返回作品集页</span>
-      <span class="kh-back-link-icon" aria-hidden="true">
+  <div class="lh-back-link-wrap">
+    <a class="lh-back-link" href="projects.html">
+      <span data-i18n="lh-back-portfolio">返回作品集页</span>
+      <span class="lh-back-link-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
           <line x1="5" y1="12" x2="18" y2="12"/>
           <polyline points="12,6 18,12 12,18"/>
@@ -996,29 +997,29 @@
     </a>
   </div>
 
-  <section class="kh-contact" aria-labelledby="kh-contact-title">
-    <div class="kh-contact-inner">
-      <p class="kh-contact-label" id="kh-contact-title" data-i18n="section-contact">联系</p>
-      <div class="kh-contact-grid">
-        <div class="kh-contact-item">
+  <section class="lh-contact" aria-labelledby="lh-contact-title">
+    <div class="lh-contact-inner">
+      <p class="lh-contact-label" id="lh-contact-title" data-i18n="section-contact">联系</p>
+      <div class="lh-contact-grid">
+        <div class="lh-contact-item">
           <h4 data-i18n="contact-melbourne-label">墨尔本</h4>
           <p data-i18n="contact-melbourne">U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia</p>
-          <p class="kh-contact-phone" data-i18n="contact-melbourne-phone">+61 422 501 811</p>
+          <p class="lh-contact-phone" data-i18n="contact-melbourne-phone">+61 422 501 811</p>
         </div>
-        <div class="kh-contact-item">
+        <div class="lh-contact-item">
           <h4 data-i18n="contact-shanghai-label">上海</h4>
           <p data-i18n="contact-shanghai">中国 上海市<br>苏州南路 1295 号</p>
-          <p class="kh-contact-phone" data-i18n="contact-shanghai-phone">+86 159 0199 9004</p>
+          <p class="lh-contact-phone" data-i18n="contact-shanghai-phone">+86 159 0199 9004</p>
         </div>
       </div>
-      <div class="kh-contact-meta">
-        <div class="kh-contact-item">
+      <div class="lh-contact-meta">
+        <div class="lh-contact-item">
           <h4 data-i18n="contact-email-label">邮箱</h4>
           <p><a href="mailto:studio@habitasdesign.com" data-i18n="contact-email">studio@habitasdesign.com</a></p>
         </div>
-        <div class="kh-contact-item">
+        <div class="lh-contact-item">
           <h4 data-i18n="contact-web-label">社交媒体链接</h4>
-          <div class="kh-contact-social-links" aria-label="Social media">
+          <div class="lh-contact-social-links" aria-label="Social media">
             <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect width="20" height="20" x="2" y="2" rx="5.5"></rect>
@@ -1038,12 +1039,12 @@
   </section>
 </main>
 
-<div class="kh-lightbox" role="dialog" aria-modal="true" aria-hidden="true">
-  <button class="kh-lightbox-close" type="button" aria-label="Close" data-i18n-aria="lightbox-close">×</button>
-  <button class="kh-lightbox-prev" type="button" aria-label="Previous" data-i18n-aria="lightbox-prev">‹</button>
-  <button class="kh-lightbox-next" type="button" aria-label="Next" data-i18n-aria="lightbox-next">›</button>
-  <div class="kh-lightbox-stage"><img src="" alt=""></div>
-  <div class="kh-lightbox-counter">1 / 1</div>
+<div class="lh-lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+  <button class="lh-lightbox-close" type="button" aria-label="Close" data-i18n-aria="lightbox-close">×</button>
+  <button class="lh-lightbox-prev" type="button" aria-label="Previous" data-i18n-aria="lightbox-prev">‹</button>
+  <button class="lh-lightbox-next" type="button" aria-label="Next" data-i18n-aria="lightbox-next">›</button>
+  <div class="lh-lightbox-stage"><img src="" alt=""></div>
+  <div class="lh-lightbox-counter">1 / 1</div>
 </div>
 
 <footer class="footer">
@@ -1059,20 +1060,20 @@ const t = {
   'nav-contact': ['联系我们', 'Contact'],
   'nav-stories': ['团队', 'People'],
   'section-contact': ['联系', 'Contact'],
-  'kh-subtitle': ['Knutsford 住宅', 'A Residence by Habitas Design'],
-  'kh-summary-p1': ['Knutsford House 被设想为一系列安静展开的空间阈值：临街一侧以克制而厚重的体量建立秩序，进入内部后则转向更柔和、更具有居住气息的氛围。项目通过精确控制的开口、层层递进的流线，以及石材、灰泥、玻璃与阴影之间的关系，平衡围合感与开放感。住宅并不试图一次性展示全部内容，而是让接近、入口、庭院与起居空间依次显现，形成可被感知的节奏。当前页面中的这段文字为占位简介，但页面结构已经预留好承载更完整建筑叙事的位置，在正式项目文案到位前，也能先建立图像、文字与项目信息之间安静而清晰的阅读关系。', 'Knutsford House is imagined as a quiet sequence of thresholds, where the weight of the street-facing form gives way to a softer domestic atmosphere within. The project balances enclosure and openness through carefully edited openings, layered circulation, and a measured palette of stone, plaster, glass, and shadow. Rather than presenting the home all at once, the design unfolds gradually, allowing approach, entry, courtyard, and living spaces to register as distinct moments. This page currently uses a placeholder editorial summary, but the structure is intended to support a fuller architectural narrative once final project writing is available, while already establishing a calm, gallery-like rhythm between image, text, and project information.'],
-  'kh-details-title': ['项目详情', 'Project Details'],
-  'kh-back-portfolio': ['返回作品集页', 'Back to Portfolio'],
-  'kh-meta-location-label': ['地点', 'Location'],
-  'kh-meta-location-value': ['待定', 'TBD'],
-  'kh-meta-year-label': ['年份', 'Year'],
-  'kh-meta-year-value': ['2025', '2025'],
-  'kh-meta-area-label': ['面积', 'Area'],
-  'kh-meta-area-value': ['待定', 'TBD'],
-  'kh-meta-status-label': ['状态', 'Status'],
-  'kh-meta-status-value': ['已建成', 'Built'],
-  'kh-meta-type-label': ['类型', 'Typology'],
-  'kh-meta-type-value': ['住宅', 'Residence'],
+  'lh-subtitle': ['In Here Beauty Salon', 'A Beauty Salon Project by Habitas Design'],
+  'lh-summary-p1': ['In Here Beauty Salon 目前使用占位项目简介。页面已根据现有素材建立完整的项目展示结构，包含顶部图、参考图、展示图与项目信息区域；正式文案到位后，可替换为关于空间概念、材料氛围、服务动线与美容沙龙体验的完整叙述。', 'In Here Beauty Salon currently uses a placeholder project summary. The page has been prepared around the available visual material, with a hero image, reference image, gallery, and project information area; once final copy is available, this section can be replaced with a fuller narrative about the spatial concept, material atmosphere, service flow, and beauty salon experience.'],
+  'lh-details-title': ['项目详情', 'Project Details'],
+  'lh-back-portfolio': ['返回作品集页', 'Back to Portfolio'],
+  'lh-meta-location-label': ['地点', 'Location'],
+  'lh-meta-location-value': ['待定', 'TBD'],
+  'lh-meta-year-label': ['年份', 'Year'],
+  'lh-meta-year-value': ['TBD', 'TBD'],
+  'lh-meta-area-label': ['面积', 'Area'],
+  'lh-meta-area-value': ['待定', 'TBD'],
+  'lh-meta-status-label': ['状态', 'Status'],
+  'lh-meta-status-value': ['待定', 'TBD'],
+  'lh-meta-type-label': ['类型', 'Typology'],
+  'lh-meta-type-value': ['美容空间', 'Beauty Salon'],
   'contact-melbourne-label': ['墨尔本', 'Melbourne'],
   'contact-melbourne': ['U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia', 'U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia'],
   'contact-melbourne-phone': ['+61 422 501 811', '+61 422 501 811'],
@@ -1138,11 +1139,11 @@ document.addEventListener('keydown', e => {
 });
 
 (function lightbox() {
-  const images = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png'];
-  const basePath = 'images/knutsford-house/展示图/';
-  const box = document.querySelector('.kh-lightbox');
-  const img = box.querySelector('.kh-lightbox-stage img');
-  const counter = box.querySelector('.kh-lightbox-counter');
+  const images = ['1.png', '2.png', '3.png', '4.png', '5.png'];
+  const basePath = 'images/In Here Beauty Salon/展示图/';
+  const box = document.querySelector('.lh-lightbox');
+  const img = box.querySelector('.lh-lightbox-stage img');
+  const counter = box.querySelector('.lh-lightbox-counter');
   let idx = 0;
 
   function show() {
@@ -1167,12 +1168,12 @@ document.addEventListener('keydown', e => {
   function next() { idx = (idx + 1) % images.length; show(); }
   function prev() { idx = (idx - 1 + images.length) % images.length; show(); }
 
-  document.querySelectorAll('.kh-gallery-trigger').forEach(el => {
+  document.querySelectorAll('.lh-gallery-trigger').forEach(el => {
     el.addEventListener('click', () => open(parseInt(el.dataset.index, 10)));
   });
-  box.querySelector('.kh-lightbox-close').addEventListener('click', close);
-  box.querySelector('.kh-lightbox-prev').addEventListener('click', prev);
-  box.querySelector('.kh-lightbox-next').addEventListener('click', next);
+  box.querySelector('.lh-lightbox-close').addEventListener('click', close);
+  box.querySelector('.lh-lightbox-prev').addEventListener('click', prev);
+  box.querySelector('.lh-lightbox-next').addEventListener('click', next);
   box.addEventListener('click', e => {
     if (e.target === box) close();
   });
