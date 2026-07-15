@@ -1,10 +1,41 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Story | Habitas Design</title>
 <style>
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-Medium.otf") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-DemiBold.otf") format("opentype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirExpanded-Black.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
   *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -27,7 +58,7 @@
   }
 
   body {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     color: var(--story-text);
     background: var(--story-bg);
     line-height: 1.8;
@@ -379,12 +410,13 @@
 
   .story-content {
     width: 100%;
-    padding: 0 64px 0 48px;
+    padding: 0 64px 0 100px;
     display: grid;
-    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    grid-template-columns: 1200px minmax(0, 1fr);
     gap: 64px;
     align-items: stretch;
     min-height: 68vh;
+    transform: none;
   }
 
   .story-content > * {
@@ -397,6 +429,8 @@
     flex-direction: column;
     background: transparent;
     overflow: visible;
+    justify-self: end;
+    width: 100%;
   }
 
   .story-carousel-frame {
@@ -479,27 +513,27 @@
   .story-copy {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding-bottom: 32px;
   }
 
   .story-title {
     font-size: clamp(24px, 3vw, 36px);
     line-height: 1.4;
-    letter-spacing: 4px;
-    font-weight: normal;
+    letter-spacing: 1px;
+    font-weight: 600;
     color: var(--story-text);
-    margin-bottom: 32px;
+    margin-bottom: 0;
     overflow-wrap: break-word;
   }
 
   .story-copy p {
-    max-width: 360px;
-    font-size: clamp(15px, 1.4vw, 17px);
+    max-width: 650px;
+    font-size: 20px;
     line-height: 1.9;
     letter-spacing: 0.4px;
     color: #888;
-    margin-bottom: 18px;
+    margin-bottom: 0;
     overflow-wrap: break-word;
   }
 
@@ -764,7 +798,7 @@
   .story-closing {
     display: flex;
     justify-content: center;
-    padding: 96px 24px;
+    padding: 0 24px 96px;
     background: var(--story-bg);
   }
   .process-home-link {
@@ -846,8 +880,10 @@
     .story-content {
       padding-left: 48px;
       padding-right: 48px;
+      grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
       gap: 48px;
       min-height: 58vh;
+      transform: translateX(-2vw);
     }
 
     .team-section {
@@ -861,6 +897,7 @@
 
     .story-carousel {
       min-height: 0;
+      transform: none;
     }
   }
 
@@ -876,6 +913,7 @@
       padding-right: 32px;
       gap: 44px;
       min-height: 0;
+      transform: none;
     }
 
     .team-section {
@@ -924,6 +962,7 @@
 
     .story-carousel {
       aspect-ratio: 4 / 3;
+      justify-self: stretch;
     }
 
     .story-copy {
@@ -1036,6 +1075,7 @@
     .story-hero img {
       height: 280px;
       min-height: 0;
+      transform: none;
     }
   }
 </style>
@@ -1089,7 +1129,7 @@
 </aside>
 
 <header class="story-hero" aria-label="Our Story visual">
-  <img src="images/Our Story/about us 顶部图/二楼餐厅.png" alt="">
+  <img src="images/Our Story/about us 顶部图/1.png" alt="">
 </header>
 
 <main class="story-main">
@@ -1103,13 +1143,19 @@
     <div class="story-carousel" aria-label="About us carousel">
       <div class="story-carousel-frame">
         <div class="story-carousel-slide is-active">
-          <img src="images/Our Story/about us轮播图/web-03.png" alt="About us image 1">
+          <img src="images/Our Story/about us轮播图/1.png?v=20260715" alt="About us image 1">
         </div>
         <div class="story-carousel-slide">
-          <img src="images/Our Story/about us轮播图/web-04.jpg" alt="About us image 2">
+          <img src="images/Our Story/about us轮播图/2.png?v=20260715" alt="About us image 2">
         </div>
         <div class="story-carousel-slide">
-          <img src="images/Our Story/about us轮播图/web-05.png" alt="About us image 3">
+          <img src="images/Our Story/about us轮播图/3.png?v=20260715" alt="About us image 3">
+        </div>
+        <div class="story-carousel-slide">
+          <img src="images/Our Story/about us轮播图/4.png?v=20260715" alt="About us image 4">
+        </div>
+        <div class="story-carousel-slide">
+          <img src="images/Our Story/about us轮播图/5.png?v=20260715" alt="About us image 5">
         </div>
       </div>
       <div class="story-carousel-controls">
@@ -1128,7 +1174,7 @@
       </div>
     </div>
     <div class="story-copy">
-      <h1 class="story-title" id="story-title" data-i18n="story-title">40年匠心独运<br>缔造品质之家</h1>
+      <h1 class="story-title" id="story-title" data-i18n="story-title">40年匠心独运 缔造品质之家</h1>
       <p data-i18n="about-p1">Habitas Design 植根于当代设计的理念，同时坚守对经典特质的追求。我们希望在每一个项目中，找到隽永气质与建筑表达之间的平衡。</p>
       <p data-i18n="about-p2">3000 Corporation 与 Habitas Design 携手合作，汇聚了 35 年商业建筑经验与 20 年住宅设计经验。我们以家族对设计的执着、专注的客户服务，以及对品质的坚守，在墨尔本打造高端豪宅。</p>
       <p data-i18n="about-p3">我们亦携手墨尔本最具创意的建筑师、室内与产品设计师、景观设计师及营造团队，为您提供量身定制的设计与建造一体化服务。</p>
@@ -1242,7 +1288,7 @@ const t = {
   'nav-stories': ['团队', 'People'],
   'tab-about': ['关于我们', 'About Us'],
   'tab-team': ['团队', 'Team'],
-  'story-title': ['40年匠心独运<br>缔造品质之家', '40 Years of Craft<br>Creating Quality Homes'],
+  'story-title': ['40年匠心独运 缔造品质之家', '40 Years of Craft Creating Quality Homes'],
   'about-p1': ['Habitas Design 植根于当代设计的理念，同时坚守对经典特质的追求。我们希望在每一个项目中，找到隽永气质与建筑表达之间的平衡。', 'Habitas Design is grounded in the values of contemporary design whilst maintaining a commitment to Classic characteristics. We wish to find the balance of timeless qualities and Architectural expression in each project.'],
   'about-p2': ['3000 Corporation 与 Habitas Design 携手合作，汇聚了 35 年商业建筑经验与 20 年住宅设计经验。我们以家族对设计的执着、专注的客户服务，以及对品质的坚守，在墨尔本打造高端豪宅。', '3000 Corporation and Habitas Design are bringing together 35 years of commercial construction experience and 20 years of residential architecture experience through a family commitment to design, dedicated client service and quality construction of luxury homes in Melbourne.'],
   'about-p3': ['我们亦携手墨尔本最具创意的建筑师、室内与产品设计师、景观设计师及营造团队，为您提供量身定制的设计与建造一体化服务。', 'We also collaborate with some of Melbourne\'s most creative architects, interior and product designers, landscape architects and builders to offer a personalized design and build service.'],

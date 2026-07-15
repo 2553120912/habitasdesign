@@ -1,10 +1,41 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zhongji Cantonese Restaurant | Habitas Design</title>
 <style>
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-Medium.otf") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-DemiBold.otf") format("opentype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirExpanded-Black.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
   :root {
     --bg: #f4efe6;
     --surface: #f7f2e8;
@@ -12,7 +43,7 @@
     --muted: #79756f;
     --line: rgba(24, 24, 24, 0.14);
     --content-width: min(1500px, calc(100vw - 56px));
-    --font-sans: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    --font-sans: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
   }
 
   *, *::before, *::after {
@@ -1004,12 +1035,10 @@
         <div class="lh-contact-item">
           <h4 data-i18n="contact-melbourne-label">墨尔本</h4>
           <p data-i18n="contact-melbourne">U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia</p>
-          <p class="lh-contact-phone" data-i18n="contact-melbourne-phone">+61 422 501 811</p>
         </div>
         <div class="lh-contact-item">
           <h4 data-i18n="contact-shanghai-label">上海</h4>
           <p data-i18n="contact-shanghai">中国 上海市<br>苏州南路 1295 号</p>
-          <p class="lh-contact-phone" data-i18n="contact-shanghai-phone">+86 159 0199 9004</p>
         </div>
       </div>
       <div class="lh-contact-meta">
@@ -1076,10 +1105,8 @@ const t = {
   'lh-meta-type-value': ['餐饮空间', 'Hospitality / Restaurant'],
   'contact-melbourne-label': ['墨尔本', 'Melbourne'],
   'contact-melbourne': ['U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia', 'U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia'],
-  'contact-melbourne-phone': ['+61 422 501 811', '+61 422 501 811'],
   'contact-shanghai-label': ['上海', 'Shanghai'],
   'contact-shanghai': ['中国 上海市<br>苏州南路 1295 号', '1295 Suzhou South Road<br>Shanghai, China'],
-  'contact-shanghai-phone': ['+86 159 0199 9004', '+86 159 0199 9004'],
   'contact-email-label': ['邮箱', 'Email'],
   'contact-email': ['studio@habitasdesign.com', 'studio@habitasdesign.com'],
   'contact-web-label': ['社交媒体链接', 'Social Media'],

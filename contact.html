@@ -1,10 +1,41 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>联系我们 | Habitas Design</title>
 <style>
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-Medium.otf") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-DemiBold.otf") format("opentype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirExpanded-Black.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
   *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -23,7 +54,7 @@
   }
 
   body {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     color: #1a1a1a;
     background: #f4efe6;
     line-height: 1.8;
@@ -310,8 +341,8 @@
   }
 
   .contact-title {
-    font-size: clamp(38px, 5.4vw, 68px);
-    font-weight: normal;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 600;
     letter-spacing: 6px;
     line-height: 1.1;
     margin-bottom: 34px;
@@ -410,10 +441,11 @@
   }
 
   .form-title {
-    font-size: clamp(28px, 4vw, 48px);
-    font-weight: normal;
-    letter-spacing: 5px;
-    line-height: 1.25;
+    font-size: clamp(36px, 6vw, 60px);
+    font-weight: 600;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    white-space: nowrap;
   }
 
   .form-intro {
@@ -427,12 +459,13 @@
     margin-top: 34px;
     position: relative;
     min-height: 0;
+    height: 430px;
   }
 
   .contact-carousel-frame {
     position: relative;
     height: 100%;
-    min-height: 430px;
+    min-height: 0;
     background: #e8e6e1;
     overflow: hidden;
   }
@@ -679,6 +712,10 @@
       min-height: auto;
     }
 
+    .contact-carousel {
+      height: auto;
+    }
+
     .contact-carousel-frame {
       height: auto;
       min-height: 0;
@@ -734,8 +771,12 @@
     }
 
     .contact-title {
-      letter-spacing: 4px;
+      letter-spacing: 3px;
       margin-bottom: 28px;
+    }
+
+    .form-title {
+      letter-spacing: 3px;
     }
 
     .contact-info-grid,
@@ -842,12 +883,10 @@
         <div class="contact-item">
           <h2 data-i18n="contact-melbourne-label">墨尔本</h2>
           <p data-i18n="contact-melbourne">U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia</p>
-          <p data-i18n="contact-melbourne-phone">+61 422 501 811</p>
         </div>
         <div class="contact-item">
           <h2 data-i18n="contact-shanghai-label">上海</h2>
           <p data-i18n="contact-shanghai">中国 上海市<br>苏州南路 1295 号</p>
-          <p data-i18n="contact-shanghai-phone">+86 159 0199 9004</p>
         </div>
         <div class="contact-item">
           <h2 data-i18n="contact-email-label">邮箱</h2>
@@ -884,13 +923,19 @@
         <div class="contact-carousel" aria-label="Project images">
           <div class="contact-carousel-frame">
             <div class="contact-carousel-slide is-active">
-              <img src="images/lovell-house/精选卡/秋天perspective.png" alt="Lovell House">
+              <img src="images/contact页面轮播图/1.png?v=20260715" alt="Contact carousel image 1">
             </div>
             <div class="contact-carousel-slide">
-              <img src="images/web-01.jpg" alt="Project">
+              <img src="images/contact页面轮播图/2.png?v=20260715" alt="Contact carousel image 2">
             </div>
             <div class="contact-carousel-slide">
-              <img src="images/web-05.png" alt="Project">
+              <img src="images/contact页面轮播图/3.png?v=20260715" alt="Contact carousel image 3">
+            </div>
+            <div class="contact-carousel-slide">
+              <img src="images/contact页面轮播图/4.png?v=20260715" alt="Contact carousel image 4">
+            </div>
+            <div class="contact-carousel-slide">
+              <img src="images/contact页面轮播图/5.png?v=20260715" alt="Contact carousel image 5">
             </div>
           </div>
         </div>
@@ -964,10 +1009,8 @@ const t = {
   'contact-intro': ['无论您正准备开始建造，还是只是想咨询与自身情况相关的问题，与我们取得联系，都是迈向专属定制住宅的第一步。', 'Whether you’re planning to build right now or just have a question specific to your circumstance, getting in touch with us is the first step towards your very own custom designed home.'],
   'contact-melbourne-label': ['墨尔本', 'Melbourne'],
   'contact-melbourne': ['U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia', 'U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia'],
-  'contact-melbourne-phone': ['+61 422 501 811', '+61 422 501 811'],
   'contact-shanghai-label': ['上海', 'Shanghai'],
   'contact-shanghai': ['中国 上海市<br>苏州南路 1295 号', '1295 Suzhou South Road<br>Shanghai, China'],
-  'contact-shanghai-phone': ['+86 159 0199 9004', '+86 159 0199 9004'],
   'contact-email-label': ['邮箱', 'Email'],
   'contact-email': ['studio@habitasdesign.com', 'studio@habitasdesign.com'],
   'contact-web-label': ['社交媒体链接', 'Social Media'],

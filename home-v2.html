@@ -3,8 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Habitas Design | 建筑事务所</title>
+<title>Habitas Design | 寤虹瓚浜嬪姟鎵€</title>
 <style>
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-Medium.otf") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-DemiBold.otf") format("opentype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirExpanded-Black.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
   *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -17,7 +48,7 @@
   }
 
   body {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     color: #2a2520;
     background: #f4efe6;
     line-height: 1.8;
@@ -25,7 +56,7 @@
     overflow-x: hidden;
   }
 
-  /* ── 导航 ── */
+  /* 鈹€鈹€ 瀵艰埅 鈹€鈹€ */
   .nav {
     position: fixed;
     top: 0;
@@ -88,7 +119,7 @@
     opacity: 0.25;
   }
 
-  /* ── Hero ── */
+  /* 鈹€鈹€ Hero 鈹€鈹€ */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -124,7 +155,7 @@
     z-index: 2;
   }
   .hero h1 {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     font-size: clamp(40px, 8vw, 88px);
     font-weight: normal;
     letter-spacing: 10px;
@@ -134,7 +165,7 @@
     animation: heroFadeIn 3s ease-out forwards;
   }
   .hero .tagline {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     font-size: clamp(14px, 2vw, 18px);
     letter-spacing: 5px;
     color: rgba(250,248,245,0.55);
@@ -161,7 +192,7 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── 滚动渐入 ── */
+  /* 鈹€鈹€ 婊氬姩娓愬叆 鈹€鈹€ */
   .scroll-reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -172,7 +203,7 @@
     transform: translateY(0);
   }
 
-  /* ── 通用板块 ── */
+  /* 鈹€鈹€ 閫氱敤鏉垮潡 鈹€鈹€ */
   .section {
     padding: 120px 48px;
     position: relative;
@@ -183,7 +214,7 @@
     margin-right: auto;
   }
   .section-label {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     font-size: 12px;
     letter-spacing: 4px;
     color: #9b9088;
@@ -191,7 +222,7 @@
     text-transform: uppercase;
   }
 
-  /* ── 设计哲学 ── */
+  /* 鈹€鈹€ 璁捐鍝插 鈹€鈹€ */
   .philosophy {
     background: #f4efe6;
   }
@@ -225,7 +256,7 @@
     gap: 32px;
   }
   .philosophy-title {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     font-size: clamp(24px, 3vw, 36px);
     font-weight: normal;
     letter-spacing: 5px;
@@ -233,14 +264,14 @@
     color: #2a2520;
   }
   .philosophy-body {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     font-size: clamp(15px, 1.4vw, 17px);
     color: #6b6058;
     line-height: 2;
     max-width: 400px;
   }
 
-  /* ── 故事横条（暖驼色） ── */
+  /* 鈹€鈹€ 鏁呬簨妯潯锛堟殩椹艰壊锛?鈹€鈹€ */
   .story-band {
     background: #e8e0d5;
     padding: 80px 64px;
@@ -251,7 +282,7 @@
     margin: 0 auto;
   }
   .story-title {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     font-size: clamp(28px, 4.5vw, 52px);
     font-weight: normal;
     letter-spacing: 6px;
@@ -266,14 +297,14 @@
     margin: 0 auto 32px;
   }
   .story-sub {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     font-size: 13px;
     letter-spacing: 3px;
     color: #6b6058;
     text-transform: uppercase;
   }
 
-  /* ── 精选作品 ── */
+  /* 鈹€鈹€ 绮鹃€変綔鍝?鈹€鈹€ */
   .works {
     background: #f4efe6;
   }
@@ -325,7 +356,7 @@
     opacity: 1;
   }
   .works-card-overlay-title {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     font-size: clamp(20px, 2vw, 26px);
     letter-spacing: 4px;
     margin-bottom: 8px;
@@ -336,27 +367,27 @@
     color: rgba(250,248,245,0.7);
   }
   .works-card-status {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     font-size: 11px;
     letter-spacing: 4px;
     color: #9b9088;
     text-transform: uppercase;
   }
   .works-card-title {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     font-size: clamp(20px, 2vw, 26px);
     font-weight: normal;
     letter-spacing: 3px;
     line-height: 1.25;
   }
   .works-card-info {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     font-size: 13px;
     letter-spacing: 2px;
     color: #6b6058;
   }
 
-  /* ── 关于 ── */
+  /* 鈹€鈹€ 鍏充簬 鈹€鈹€ */
   .about {
     background: #f4efe6;
   }
@@ -364,14 +395,14 @@
     max-width: 640px;
   }
   .about-content p {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     font-size: clamp(16px, 2.5vw, 20px);
     color: #6b6058;
     margin-bottom: 24px;
     line-height: 2;
   }
 
-  /* ── 联系 ── */
+  /* 鈹€鈹€ 鑱旂郴 鈹€鈹€ */
   .contact {
     background: #f0ece6;
     padding: 80px 48px 64px;
@@ -384,7 +415,7 @@
     border-top: 1px solid #ddd8cf;
   }
   .contact-item h4 {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     font-size: 13px;
     font-weight: normal;
     letter-spacing: 3px;
@@ -392,7 +423,7 @@
     margin-bottom: 14px;
   }
   .contact-item p {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     font-size: 16px;
     letter-spacing: 1px;
     line-height: 2.2;
@@ -437,7 +468,7 @@
     margin-top: 48px;
   }
 
-  /* ── 页脚 ── */
+  /* 鈹€鈹€ 椤佃剼 鈹€鈹€ */
   .footer {
     text-align: center;
     padding: 40px 24px;
@@ -448,7 +479,7 @@
     border-top: 1px solid #ddd8cf;
   }
 
-  /* ── 移动端 ── */
+  /* 鈹€鈹€ 绉诲姩绔?鈹€鈹€ */
   @media (max-width: 1024px) {
     .philosophy-inner {
       grid-template-columns: 1fr;
@@ -504,7 +535,7 @@
 </head>
 <body>
 
-<!-- 导航 -->
+<!-- 瀵艰埅 -->
 <nav class="nav">
   <a href="#" class="nav-logo" aria-label="Habitas Design">
     <img src="images/logo.png" alt="Habitas Design">
@@ -512,7 +543,7 @@
   <div class="lang-switch">
     <button id="btn-en" class="active" onclick="switchLang('en')">EN</button>
     <span>/</span>
-    <button id="btn-cn" onclick="switchLang('cn')">中</button>
+    <button id="btn-cn" onclick="switchLang('cn')">涓?/button>
   </div>
 </nav>
 
@@ -520,71 +551,69 @@
 <section class="hero">
   <img class="hero-bg" src="images/lovell-house/00-hero.png" alt="">
   <h1 data-i18n="hero-title">Habitas Design</h1>
-  <p class="tagline" data-i18n="hero-tagline">空间为生活而存在 &nbsp;/&nbsp; 设计为体验而思考</p>
-  <span class="scroll-hint" data-i18n="hero-scroll">↓ 向下浏览</span>
+  <p class="tagline" data-i18n="hero-tagline">绌洪棿涓虹敓娲昏€屽瓨鍦?&nbsp;/&nbsp; 璁捐涓轰綋楠岃€屾€濊€?/p>
+  <span class="scroll-hint" data-i18n="hero-scroll">鈫?鍚戜笅娴忚</span>
 </section>
 
-<!-- 设计哲学 -->
+<!-- 璁捐鍝插 -->
 <section class="philosophy section scroll-reveal">
   <div class="philosophy-inner">
     <div class="philosophy-image">
       <img src="images/web-03.jpg" alt="">
     </div>
     <div class="philosophy-text">
-      <h2 class="philosophy-title" data-i18n="philosophy-title">空间 · 场所 · 生活</h2>
-      <p class="philosophy-body" data-i18n="philosophy-body">每一个项目都始于对土地的阅读。我们相信建筑不是强加于场地的物体，而是从环境中生长出来的存在。光线、材料、尺度——这些最根本的元素，构成了我们设计语言的基石。</p>
+      <h2 class="philosophy-title" data-i18n="philosophy-title">绌洪棿 路 鍦烘墍 路 鐢熸椿</h2>
+      <p class="philosophy-body" data-i18n="philosophy-body">姣忎竴涓」鐩兘濮嬩簬瀵瑰湡鍦扮殑闃呰銆傛垜浠浉淇″缓绛戜笉鏄己鍔犱簬鍦哄湴鐨勭墿浣擄紝鑰屾槸浠庣幆澧冧腑鐢熼暱鍑烘潵鐨勫瓨鍦ㄣ€傚厜绾裤€佹潗鏂欍€佸昂搴︹€斺€旇繖浜涙渶鏍规湰鐨勫厓绱狅紝鏋勬垚浜嗘垜浠璁¤瑷€鐨勫熀鐭炽€?/p>
     </div>
   </div>
 </section>
 
-<!-- 故事横条 -->
+<!-- 鏁呬簨妯潯 -->
 <section class="story-band scroll-reveal">
   <div class="story-band-inner">
-    <h2 class="story-title" data-i18n="story-title">匠心独运<br>卓越设计屡获殊荣</h2>
+    <h2 class="story-title" data-i18n="story-title">鍖犲績鐙繍<br>鍗撹秺璁捐灞¤幏娈婅崳</h2>
     <div class="story-line"></div>
-    <p class="story-sub" data-i18n="story-sub">我们的故事</p>
+    <p class="story-sub" data-i18n="story-sub">鎴戜滑鐨勬晠浜?/p>
   </div>
 </section>
 
-<!-- 精选作品 -->
+<!-- 绮鹃€変綔鍝?-->
 <section class="works section scroll-reveal">
-  <p class="section-label" data-i18n="works-label">精选作品</p>
+  <p class="section-label" data-i18n="works-label">绮鹃€変綔鍝?/p>
   <div class="works-grid" id="works-grid">
   </div>
 </section>
 
-<!-- 关于 -->
+<!-- 鍏充簬 -->
 <section class="about section scroll-reveal">
-  <p class="section-label" data-i18n="section-about">关于我们</p>
+  <p class="section-label" data-i18n="section-about">鍏充簬鎴戜滑</p>
   <div class="about-content">
-    <p data-i18n="about-p1">我们从一个注重协作的小团队开始，逐渐成长为墨尔本备受信赖的定制住宅建造团队之一，以将创造力与精准执行相结合而闻名。</p>
-    <p data-i18n="about-p2">我们的成功建立在关系之上。客户的信任、合作伙伴的用心，以及团队的投入，共同塑造了我们交付的每一座住宅。每一座住宅都讲述着一个故事，而我们的故事始于一个信念：建造的过程应当和最终成果一样被细致对待。</p>
+    <p data-i18n="about-p1">鎴戜滑浠庝竴涓敞閲嶅崗浣滅殑灏忓洟闃熷紑濮嬶紝閫愭笎鎴愰暱涓哄ⅷ灏旀湰澶囧彈淇¤禆鐨勫畾鍒朵綇瀹呭缓閫犲洟闃熶箣涓€锛屼互灏嗗垱閫犲姏涓庣簿鍑嗘墽琛岀浉缁撳悎鑰岄椈鍚嶃€?/p>
+    <p data-i18n="about-p2">鎴戜滑鐨勬垚鍔熷缓绔嬪湪鍏崇郴涔嬩笂銆傚鎴风殑淇′换銆佸悎浣滀紮浼寸殑鐢ㄥ績锛屼互鍙婂洟闃熺殑鎶曞叆锛屽叡鍚屽閫犱簡鎴戜滑浜や粯鐨勬瘡涓€搴т綇瀹呫€傛瘡涓€搴т綇瀹呴兘璁茶堪鐫€涓€涓晠浜嬶紝鑰屾垜浠殑鏁呬簨濮嬩簬涓€涓俊蹇碉細寤洪€犵殑杩囩▼搴斿綋鍜屾渶缁堟垚鏋滀竴鏍疯缁嗚嚧瀵瑰緟銆?/p>
   </div>
 </section>
 
-<!-- 联系 -->
+<!-- 鑱旂郴 -->
 <section class="contact scroll-reveal">
-  <p class="section-label" data-i18n="section-contact">联系</p>
+  <p class="section-label" data-i18n="section-contact">鑱旂郴</p>
   <div class="contact-grid">
     <div class="contact-item">
-      <h4 data-i18n="contact-melbourne-label">墨尔本</h4>
+      <h4 data-i18n="contact-melbourne-label">澧ㄥ皵鏈?/h4>
       <p data-i18n="contact-melbourne">U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia</p>
-      <p class="contact-phone" data-i18n="contact-melbourne-phone">+61 422 501 811</p>
     </div>
     <div class="contact-item">
-      <h4 data-i18n="contact-shanghai-label">上海</h4>
-      <p data-i18n="contact-shanghai">中国 上海市<br>苏州南路 1295 号</p>
-      <p class="contact-phone" data-i18n="contact-shanghai-phone">+86 159 0199 9004</p>
+      <h4 data-i18n="contact-shanghai-label">涓婃捣</h4>
+      <p data-i18n="contact-shanghai">涓浗 涓婃捣甯?br>鑻忓窞鍗楄矾 1295 鍙?/p>
     </div>
   </div>
 
   <div class="contact-meta">
     <div class="contact-item">
-      <h4 data-i18n="contact-email-label">邮箱</h4>
+      <h4 data-i18n="contact-email-label">閭</h4>
       <p><a href="mailto:studio@habitasdesign.com" data-i18n="contact-email">studio@habitasdesign.com</a></p>
     </div>
     <div class="contact-item">
-      <h4 data-i18n="contact-web-label">社交媒体链接</h4>
+      <h4 data-i18n="contact-web-label">绀句氦濯掍綋閾炬帴</h4>
       <div class="contact-social-links" aria-label="Social media">
         <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -603,63 +632,61 @@
   </div>
 </section>
 
-<!-- 页脚 -->
+<!-- 椤佃剼 -->
 <footer class="footer">
   <span data-i18n="footer-copy">&copy; 2026 Habitas Design. All rights reserved.</span>
 </footer>
 
 <script>
-/* ── i18n ── */
+/* 鈹€鈹€ i18n 鈹€鈹€ */
 const t = {
   'hero-title':       ['Habitas Design', 'Habitas Design'],
-  'hero-tagline':     ['空间为生活而存在 &nbsp;/&nbsp; 设计为体验而思考', 'Space for living &nbsp;/&nbsp; Design through experience'],
-  'hero-scroll':      ['↓ 向下浏览', '↓ Scroll'],
-  'philosophy-title': ['空间 · 场所 · 生活', 'Space · Place · Life'],
-  'philosophy-body':  ['每一个项目都始于对土地的阅读。我们相信建筑不是强加于场地的物体，而是从环境中生长出来的存在。光线、材料、尺度——这些最根本的元素，构成了我们设计语言的基石。',
-                       'Every project begins with reading the land. We believe architecture is not an object imposed on a site, but something that grows from its surroundings. Light, material, scale — these fundamental elements form the foundation of our design language.'],
-  'story-title':      ['匠心独运<br>卓越设计屡获殊荣', 'Crafted with intent<br>Recognised by design'],
-  'story-sub':        ['我们的故事', 'Our Story'],
-  'works-label':      ['精选作品', 'Selected Works'],
-  'section-about':    ['关于我们', 'About Us'],
-  'about-p1':         ['我们从一个注重协作的小团队开始，逐渐成长为墨尔本备受信赖的定制住宅建造团队之一，以将创造力与精准执行相结合而闻名。', 'What started as a small team focused on collaboration has grown into one of Melbourne\'s most trusted custom home builders, known for blending creativity with precision.'],
-  'about-p2':         ['我们的成功建立在关系之上。客户的信任、合作伙伴的用心，以及团队的投入，共同塑造了我们交付的每一座住宅。每一座住宅都讲述着一个故事，而我们的故事始于一个信念：建造的过程应当和最终成果一样被细致对待。', 'Our success is built on relationships. The trust of our clients, the care of our partners and the dedication of our team shape every home we deliver. Every home tells a story. Ours began with a belief that the journey should feel as considered as the result.'],
-  'section-contact':  ['联系', 'Contact'],
-  'contact-melbourne-label': ['墨尔本', 'Melbourne'],
+  'hero-tagline':     ['绌洪棿涓虹敓娲昏€屽瓨鍦?&nbsp;/&nbsp; 璁捐涓轰綋楠岃€屾€濊€?, 'Space for living &nbsp;/&nbsp; Design through experience'],
+  'hero-scroll':      ['鈫?鍚戜笅娴忚', '鈫?Scroll'],
+  'philosophy-title': ['绌洪棿 路 鍦烘墍 路 鐢熸椿', 'Space 路 Place 路 Life'],
+  'philosophy-body':  ['姣忎竴涓」鐩兘濮嬩簬瀵瑰湡鍦扮殑闃呰銆傛垜浠浉淇″缓绛戜笉鏄己鍔犱簬鍦哄湴鐨勭墿浣擄紝鑰屾槸浠庣幆澧冧腑鐢熼暱鍑烘潵鐨勫瓨鍦ㄣ€傚厜绾裤€佹潗鏂欍€佸昂搴︹€斺€旇繖浜涙渶鏍规湰鐨勫厓绱狅紝鏋勬垚浜嗘垜浠璁¤瑷€鐨勫熀鐭炽€?,
+                       'Every project begins with reading the land. We believe architecture is not an object imposed on a site, but something that grows from its surroundings. Light, material, scale 鈥?these fundamental elements form the foundation of our design language.'],
+  'story-title':      ['鍖犲績鐙繍<br>鍗撹秺璁捐灞¤幏娈婅崳', 'Crafted with intent<br>Recognised by design'],
+  'story-sub':        ['鎴戜滑鐨勬晠浜?, 'Our Story'],
+  'works-label':      ['绮鹃€変綔鍝?, 'Selected Works'],
+  'section-about':    ['鍏充簬鎴戜滑', 'About Us'],
+  'about-p1':         ['鎴戜滑浠庝竴涓敞閲嶅崗浣滅殑灏忓洟闃熷紑濮嬶紝閫愭笎鎴愰暱涓哄ⅷ灏旀湰澶囧彈淇¤禆鐨勫畾鍒朵綇瀹呭缓閫犲洟闃熶箣涓€锛屼互灏嗗垱閫犲姏涓庣簿鍑嗘墽琛岀浉缁撳悎鑰岄椈鍚嶃€?, 'What started as a small team focused on collaboration has grown into one of Melbourne\'s most trusted custom home builders, known for blending creativity with precision.'],
+  'about-p2':         ['鎴戜滑鐨勬垚鍔熷缓绔嬪湪鍏崇郴涔嬩笂銆傚鎴风殑淇′换銆佸悎浣滀紮浼寸殑鐢ㄥ績锛屼互鍙婂洟闃熺殑鎶曞叆锛屽叡鍚屽閫犱簡鎴戜滑浜や粯鐨勬瘡涓€搴т綇瀹呫€傛瘡涓€搴т綇瀹呴兘璁茶堪鐫€涓€涓晠浜嬶紝鑰屾垜浠殑鏁呬簨濮嬩簬涓€涓俊蹇碉細寤洪€犵殑杩囩▼搴斿綋鍜屾渶缁堟垚鏋滀竴鏍疯缁嗚嚧瀵瑰緟銆?, 'Our success is built on relationships. The trust of our clients, the care of our partners and the dedication of our team shape every home we deliver. Every home tells a story. Ours began with a belief that the journey should feel as considered as the result.'],
+  'section-contact':  ['鑱旂郴', 'Contact'],
+  'contact-melbourne-label': ['澧ㄥ皵鏈?, 'Melbourne'],
   'contact-melbourne':       ['U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia', 'U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia'],
-  'contact-melbourne-phone': ['+61 422 501 811', '+61 422 501 811'],
-  'contact-shanghai-label':  ['上海', 'Shanghai'],
-  'contact-shanghai':        ['中国 上海市<br>苏州南路 1295 号', '1295 Suzhou South Road<br>Shanghai, China'],
-  'contact-shanghai-phone':  ['+86 159 0199 9004', '+86 159 0199 9004'],
-  'contact-email-label':     ['邮箱', 'Email'],
+  'contact-shanghai-label':  ['涓婃捣', 'Shanghai'],
+  'contact-shanghai':        ['涓浗 涓婃捣甯?br>鑻忓窞鍗楄矾 1295 鍙?, '1295 Suzhou South Road<br>Shanghai, China'],
+  'contact-email-label':     ['閭', 'Email'],
   'contact-email':           ['studio@habitasdesign.com', 'studio@habitasdesign.com'],
-  'contact-web-label':       ['社交媒体链接', 'Social Media'],
+  'contact-web-label':       ['绀句氦濯掍綋閾炬帴', 'Social Media'],
   'footer-copy':             ['&copy; 2026 Habitas Design. All rights reserved.', '&copy; 2026 Habitas Design. All rights reserved.']
 };
 
 const worksProjects = [
   {
-    image: 'images/lovell-house/精选卡/秋天perspective.png',
+    image: 'images/lovell-house/绮鹃€夊崱/绉嬪ぉperspective.png',
     title:  { cn: 'Lovell House', en: 'Lovell House' },
-    info:   { cn: '住宅 · 2024',  en: 'Residence · 2024' },
-    status: { cn: '已完工',       en: 'COMPLETED' },
+    info:   { cn: '浣忓畢 路 2024',  en: 'Residence 路 2024' },
+    status: { cn: '宸插畬宸?,       en: 'COMPLETED' },
   },
   {
     image: 'images/web-01.jpg',
-    title:  { cn: 'Brighton 住宅', en: 'Brighton Residence' },
-    info:   { cn: '住宅 · 2023', en: 'Residence · 2023' },
-    status: { cn: '已完工',  en: 'COMPLETED' },
+    title:  { cn: 'Brighton 浣忓畢', en: 'Brighton Residence' },
+    info:   { cn: '浣忓畢 路 2023', en: 'Residence 路 2023' },
+    status: { cn: '宸插畬宸?,  en: 'COMPLETED' },
   },
   {
     image: 'images/web-02.webp',
-    title:  { cn: 'Kew 商业空间', en: 'Kew Commercial' },
-    info:   { cn: '商业 · 2023', en: 'Commercial · 2023' },
-    status: { cn: '已完工',  en: 'COMPLETED' },
+    title:  { cn: 'Kew 鍟嗕笟绌洪棿', en: 'Kew Commercial' },
+    info:   { cn: '鍟嗕笟 路 2023', en: 'Commercial 路 2023' },
+    status: { cn: '宸插畬宸?,  en: 'COMPLETED' },
   },
   {
     image: 'images/web-05.png',
-    title:  { cn: 'Glen Waverley 住宅', en: 'Glen Waverley Residence' },
-    info:   { cn: '住宅 · 2026', en: 'Residence · 2026' },
-    status: { cn: '进行中',  en: 'IN PROGRESS' },
+    title:  { cn: 'Glen Waverley 浣忓畢', en: 'Glen Waverley Residence' },
+    info:   { cn: '浣忓畢 路 2026', en: 'Residence 路 2026' },
+    status: { cn: '杩涜涓?,  en: 'IN PROGRESS' },
   },
 ];
 
@@ -706,7 +733,7 @@ function applyLang() {
 applyLang();
 renderWorks();
 
-/* ── 滚动渐入 ── */
+/* 鈹€鈹€ 婊氬姩娓愬叆 鈹€鈹€ */
 (() => {
   const targets = document.querySelectorAll('.scroll-reveal');
   if (!targets.length) return;

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -10,6 +10,37 @@
   }
 </script>
 <style>
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-Medium.otf") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-DemiBold.otf") format("opentype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirExpanded-Black.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
   *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -24,7 +55,7 @@
   }
 
   body {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     color: #1a1a1a;
     background: #f4efe6;
     line-height: 1.8;
@@ -314,17 +345,19 @@
   }
   .hero h1 {
     font-size: clamp(36px, 7vw, 80px);
-    font-weight: normal;
-    letter-spacing: 8px;
+    font-weight: 600;
+    letter-spacing: 2px;
     margin-bottom: 28px;
     opacity: 0;
     animation: heroFadeIn 4s ease-out forwards;
   }
   .hero .tagline {
     font-size: clamp(14px, 2vw, 18px);
-    letter-spacing: 6px;
+    letter-spacing: 1px;
     color: rgba(250,250,248,0.55);
     max-width: 480px;
+    text-align: center;
+    line-height: 1.7;
     opacity: 0;
     animation: heroFadeIn 4s ease-out forwards;
   }
@@ -649,11 +682,12 @@
   }
   .story-title {
     font-size: clamp(30px, 3.2vw, 46px);
-    font-weight: normal;
-    letter-spacing: 6px;
-    line-height: 1.2;
-    margin-bottom: 52px;
-    white-space: nowrap;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.16;
+    max-width: 900px;
+    margin: 0 auto 52px;
+    white-space: normal;
   }
   .arrow-cta {
     position: relative;
@@ -764,7 +798,7 @@
   }
   .works-slogan {
     font-size: clamp(30px, 2.35vw, 42px);
-    font-weight: normal;
+    font-weight: 600;
     letter-spacing: 0;
     margin: 0;
     line-height: 1.34;
@@ -833,9 +867,9 @@
     gap: 4px;
   }
   .works-card-title {
-    font-size: clamp(20px, 2vw, 28px);
-    font-weight: normal;
-    letter-spacing: 3px;
+    font-size: clamp(20px, 2vw, 26px);
+    font-weight: 500;
+    letter-spacing: 0;
     line-height: 1.12;
     margin: 0;
     overflow-wrap: break-word;
@@ -1109,7 +1143,7 @@
     }
     .story-title {
       margin-bottom: 38px;
-      letter-spacing: 4px;
+      letter-spacing: 0;
       white-space: normal;
     }
     .works-feature {
@@ -1152,7 +1186,7 @@
       gap: 32px;
     }
     .hero h1 {
-      letter-spacing: 4px;
+      letter-spacing: 2px;
     }
   }
 </style>
@@ -1212,7 +1246,7 @@
     <source src="videos/hero.mp4" type="video/mp4">
   </video>
   <h1 data-i18n="hero-title">Habitas Design</h1>
-  <p class="tagline" data-i18n="hero-tagline">空间为生活而存在 &nbsp;/&nbsp; 设计为体验而思考</p>
+  <p class="tagline" data-i18n="hero-tagline">空间为生活而存在<br>设计为体验而思考</p>
   <span class="scroll-hint" data-i18n="hero-scroll">↓ 向下浏览</span>
   <a class="hero-journey" href="process.html">
     <span>START YOUR JOURNEY</span>
@@ -1245,7 +1279,7 @@
 <!-- 故事板块（黑色叙事条） -->
 <section class="story-band scroll-reveal">
   <div class="story-band-inner">
-    <h2 class="story-title" data-i18n="story-title">匠心独运 卓越设计屡获殊荣</h2>
+    <h2 class="story-title" data-i18n="story-title">匠心独运<br>卓越设计屡获殊荣</h2>
     <a href="story.html#team" class="arrow-cta arrow-cta--team story-cta">
       <span data-i18n="story-cta">OUR TEAM</span>
       <span class="arrow-cta-icon" aria-hidden="true">
@@ -1360,12 +1394,10 @@
     <div class="contact-item">
       <h4 data-i18n="contact-melbourne-label">墨尔本</h4>
       <p data-i18n="contact-melbourne">U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia</p>
-      <p class="contact-phone" data-i18n="contact-melbourne-phone">+61 422 501 811</p>
     </div>
     <div class="contact-item">
       <h4 data-i18n="contact-shanghai-label">上海</h4>
       <p data-i18n="contact-shanghai">中国 上海市<br>苏州南路 1295 号</p>
-      <p class="contact-phone" data-i18n="contact-shanghai-phone">+86 159 0199 9004</p>
     </div>
   </div>
 
@@ -1432,9 +1464,9 @@ const t = {
                       'We believe in the power of design that promotes healthy living, creating lasting collaborations and Buildings that leave the world better than how we found it.'],
   'service-cta':     ['服务流程',                'OUR PROCESS'],
   'hero-title':      ['Habitas Design', 'Habitas Design'],
-  'hero-tagline':    ['空间为生活而存在 &nbsp;/&nbsp; 设计为体验而思考', 'Space for living &nbsp;/&nbsp; Design through experience'],
+  'hero-tagline':    ['空间为生活而存在<br>设计为体验而思考', 'Space for living<br>Design through experience'],
   'hero-scroll':     ['↓ 向下浏览', '↓ Scroll'],
-  'story-title':     ['匠心独运 卓越设计屡获殊荣', 'Crafted with intent Recognised by design'],
+  'story-title':     ['匠心独运<br>卓越设计屡获殊荣', 'Crafted with intent<br>Recognised by design'],
   'story-cta':       ['OUR TEAM', 'OUR TEAM'],
   'works-kicker':    ['Luxury home builders for Melbourne’s most discerning addresses', 'Luxury home builders for Melbourne’s most discerning addresses'],
   'works-slogan':    ['Partnering with your architect or ours, we are bespoke home builders delivering without compromise.', 'Partnering with your architect or ours, we are bespoke home builders delivering without compromise.'],
@@ -1447,10 +1479,8 @@ const t = {
   'section-contact': ['联系', 'Contact'],
   'contact-melbourne-label': ['墨尔本', 'Melbourne'],
   'contact-melbourne':       ['U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia', 'U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia'],
-  'contact-melbourne-phone': ['+61 422 501 811', '+61 422 501 811'],
   'contact-shanghai-label':  ['上海', 'Shanghai'],
   'contact-shanghai':        ['中国 上海市<br>苏州南路 1295 号', '1295 Suzhou South Road<br>Shanghai, China'],
-  'contact-shanghai-phone':  ['+86 159 0199 9004', '+86 159 0199 9004'],
   'contact-email-label':     ['邮箱', 'Email'],
   'contact-email':           ['studio@habitasdesign.com', 'studio@habitasdesign.com'],
   'contact-web-label':       ['社交媒体链接', 'Social Media'],

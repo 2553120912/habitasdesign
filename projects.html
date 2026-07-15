@@ -1,10 +1,41 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects | Habitas Design</title>
 <style>
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-Medium.otf") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-DemiBold.otf") format("opentype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirExpanded-Black.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
   *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -18,7 +49,7 @@
   }
 
   body {
-    font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     color: #1a1a1a;
     background: #f4efe6;
     line-height: 1.8;
@@ -275,6 +306,7 @@
 
   .projects-kicker {
     font-size: clamp(36px, 6vw, 72px);
+    font-weight: 600;
     letter-spacing: 6px;
     color: #fafaf8;
     margin-bottom: 32px;
@@ -296,8 +328,8 @@
     border: none;
     color: rgba(250, 250, 248, 0.45);
     font-family: inherit;
-    font-size: 16px;
-    letter-spacing: 3px;
+    font-size: 25px;
+    letter-spacing: 1px;
     padding: 0 0 6px;
     cursor: pointer;
     position: relative;
@@ -324,15 +356,15 @@
 
   .projects-grid-wrap {
     background: #f4efe6;
-    padding: 100px clamp(48px, 10vw, 250px) 64px 72px;
+    padding: 100px clamp(48px, 5vw, 96px) 64px;
   }
 
   .projects-grid {
     width: 100%;
-    max-width: 1500px;
-    margin: 0;
+    max-width: 2250px;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 48px clamp(32px, 5vw, 100px);
   }
 
@@ -363,19 +395,25 @@
     transform: scale(1.05);
   }
 
+  .project-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
   .project-title {
-    font-size: clamp(20px, 1.8vw, 26px);
-    font-weight: normal;
-    letter-spacing: 3px;
-    line-height: 1.3;
-    text-transform: uppercase;
+    font-size: clamp(20px, 2vw, 26px);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.12;
     margin: 0;
     overflow-wrap: break-word;
   }
 
   .project-info {
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 2px;
+    line-height: 1.2;
     color: #666;
     margin: 0;
   }
@@ -462,6 +500,9 @@
     .projects-grid-wrap {
       padding: 72px 40px 80px;
     }
+    .projects-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   @media (max-width: 768px) {
@@ -498,7 +539,6 @@
 
     .projects-filters {
       gap: 28px;
-      font-size: 14px;
       padding-bottom: 16px;
     }
 
@@ -583,10 +623,10 @@
   <div class="projects-hero-inner">
     <p class="projects-kicker" data-i18n="projects-kicker">所有项目</p>
     <nav class="projects-filters" aria-label="Project filters">
-      <button class="filter-btn is-active" data-filter="all"      data-i18n="filter-all">全部</button>
-      <button class="filter-btn"           data-filter="built"    data-i18n="filter-built">已建成</button>
-      <button class="filter-btn"           data-filter="progress" data-i18n="filter-progress">进行中</button>
-      <button class="filter-btn"           data-filter="concept"  data-i18n="filter-concept">概念</button>
+      <button class="filter-btn is-active" data-filter="all"          data-i18n="filter-all">All</button>
+      <button class="filter-btn"           data-filter="contemporary" data-i18n="filter-contemporary">Contemporary</button>
+      <button class="filter-btn"           data-filter="heritage"     data-i18n="filter-heritage">Heritage</button>
+      <button class="filter-btn"           data-filter="commercial"   data-i18n="filter-commercial">Commercial</button>
     </nav>
   </div>
 </header>
@@ -620,33 +660,33 @@ const t = {
   'nav-contact': ['联系我们', 'Contact'],
   'nav-stories': ['团队', 'People'],
   'projects-kicker': ['所有项目', 'PORTFOLIO'],
-  'filter-all':      ['全部', 'All'],
-  'filter-built':    ['已建成', 'Built'],
-  'filter-progress': ['进行中', 'In Progress'],
-  'filter-concept':  ['概念', 'Concept'],
+  'filter-all':          ['All', 'All'],
+  'filter-contemporary': ['Contemporary', 'Contemporary'],
+  'filter-heritage':     ['Heritage', 'Heritage'],
+  'filter-commercial':   ['Commercial', 'Commercial'],
   'back-home': ['返回首页', 'Back to Home'],
   'footer-copy': ['&copy; 2026 Habitas Design. All rights reserved.', '&copy; 2026 Habitas Design. All rights reserved.']
 };
 
 const projects = [
-  { id: 'lovell-house',  category: 'built',    image: 'images/lovell-house/精选卡/秋天perspective.png', href: 'lovell-house.html',
+  { id: 'lovell-house',  category: 'heritage', image: 'images/lovell-house/精选卡/秋天perspective.png', href: 'lovell-house.html',
     title: { cn: 'Lovell House', en: 'Lovell House' },
-    info:  { cn: '住宅 · 2024',  en: 'Residence · 2024' } },
-  { id: 'myrtle-house',  category: 'built',    image: 'images/myrtle-house/精选卡/side elevation.png', imagePosition: '54% center', href: 'myrtle-house.html',
+    info:  { cn: '2024',  en: '2024' } },
+  { id: 'myrtle-house',  category: 'contemporary', image: 'images/myrtle-house/精选卡/side elevation.png', imagePosition: '54% center', href: 'myrtle-house.html',
     title: { cn: 'Myrtle House', en: 'Myrtle House' },
-    info:  { cn: '住宅 · 2025',  en: 'Residence · 2025' } },
-  { id: 'knutsford-house', category: 'built',  image: 'images/knutsford-house/精选卡/1.png', href: 'knutsford-house.html',
+    info:  { cn: '2025',  en: '2025' } },
+  { id: 'knutsford-house', category: 'contemporary', image: 'images/knutsford-house/精选卡/1.png', href: 'knutsford-house.html',
     title: { cn: 'Knutsford House', en: 'Knutsford House' },
-    info:  { cn: '住宅 · 2025',  en: 'Residence · 2025' } },
-  { id: 'zhongji-cantonese-restaurant', category: 'built', image: 'images/Zhongji Cantonese Restaurant/Portfolio卡/1.png', href: 'zhongji-cantonese-restaurant.html',
+    info:  { cn: '2025',  en: '2025' } },
+  { id: 'zhongji-cantonese-restaurant', category: 'commercial', image: 'images/Zhongji Cantonese Restaurant/Portfolio卡/1.png', href: 'zhongji-cantonese-restaurant.html',
     title: { cn: 'Zhongji Cantonese Restaurant', en: 'Zhongji Cantonese Restaurant' },
-    info:  { cn: '餐饮空间 · 待定', en: 'Hospitality · TBD' } },
-  { id: 'in-here-beauty-salon', category: 'built', image: 'images/In Here Beauty Salon/Portfolio卡/1.png', href: 'in-here-beauty-salon.html',
+    info:  { cn: 'TBD', en: 'TBD' } },
+  { id: 'in-here-beauty-salon', category: 'commercial', image: 'images/In Here Beauty Salon/Portfolio卡/1.png', href: 'in-here-beauty-salon.html',
     title: { cn: 'In Here Beauty Salon', en: 'In Here Beauty Salon' },
-    info:  { cn: '美容空间 · 待定', en: 'Beauty Salon · TBD' } },
-  { id: '32-myers-avenue-single-dwelling', category: 'built', image: 'images/32 Myers Avenue  Single Dwelling/Portfolio卡/1.png', href: '32-myers-avenue-single-dwelling.html',
+    info:  { cn: 'TBD', en: 'TBD' } },
+  { id: '32-myers-avenue-single-dwelling', category: 'contemporary', image: 'images/32 Myers Avenue  Single Dwelling/Portfolio卡/1.png', href: '32-myers-avenue-single-dwelling.html',
     title: { cn: '32 Myers Avenue Single Dwelling', en: '32 Myers Avenue Single Dwelling' },
-    info:  { cn: '住宅 · 待定', en: 'Residence · TBD' } },
+    info:  { cn: 'TBD', en: 'TBD' } },
 ];
 
 let activeFilter = 'all';
@@ -660,8 +700,10 @@ function renderProjects() {
   grid.innerHTML = list.map(p => `
     <a class="project-card" href="${p.href}" data-id="${p.id}">
       <div class="project-image"><img src="${p.image}" alt="${p.title.en}" style="object-position: ${p.imagePosition || 'center center'}"></div>
-      <h2 class="project-title">${p.title[lang]}</h2>
-      <p class="project-info">${p.info[lang]}</p>
+      <div class="project-meta">
+        <h2 class="project-title">${p.title[lang]}</h2>
+        <p class="project-info">${p.info[lang]}</p>
+      </div>
     </a>
   `).join('');
 }
