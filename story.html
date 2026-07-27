@@ -269,7 +269,8 @@
     color: #fafaf8;
     text-decoration: none;
     font-size: 24px;
-    letter-spacing: 4px;
+    letter-spacing: 0;
+    font-weight: 500;
     display: inline-block;
   }
 
@@ -345,7 +346,7 @@
 
   .story-main {
     background: var(--story-bg);
-    padding: 0 0 120px;
+    padding: 0;
   }
 
   .story-tabs {
@@ -412,7 +413,7 @@
     width: 100%;
     padding: 0 64px 0 100px;
     display: grid;
-    grid-template-columns: 1200px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1200px) minmax(320px, 1fr);
     gap: 64px;
     align-items: stretch;
     min-height: 68vh;
@@ -520,7 +521,7 @@
   .story-title {
     font-size: clamp(24px, 3vw, 36px);
     line-height: 1.4;
-    letter-spacing: 1px;
+    letter-spacing: 0;
     font-weight: 600;
     color: var(--story-text);
     margin-bottom: 0;
@@ -541,9 +542,164 @@
     margin-bottom: 0;
   }
 
+  .capability-banner {
+    width: 100%;
+    min-height: clamp(320px, 28vw, 380px);
+    margin-top: clamp(140px, 12vw, 220px);
+    padding: clamp(56px, 4.6vw, 72px) 48px clamp(44px, 3.8vw, 60px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 36px;
+    color: #fafaf8;
+    background: #1a1a1a;
+  }
+
+  .capability-title {
+    width: min(100%, 720px);
+    color: inherit;
+    font-size: clamp(30px, 3.2vw, 46px);
+    font-weight: 600;
+    line-height: 1.16;
+    letter-spacing: 0;
+    text-align: center;
+  }
+
+  html[lang="en"] .capability-title {
+    white-space: nowrap;
+  }
+
+  .capability-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    color: inherit;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 2px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
+  }
+
+  .capability-link[aria-disabled="true"] {
+    cursor: default;
+  }
+
+  .capability-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 2em;
+    bottom: -0.09em;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.35s ease;
+  }
+
+  .capability-link:hover,
+  .capability-link:focus-visible {
+    opacity: 0.68;
+  }
+
+  .capability-link:hover::after,
+  .capability-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .capability-link-icon {
+    width: 1.45em;
+    height: 1.45em;
+    flex: 0 0 1.45em;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  .capability-link-icon svg {
+    display: block;
+    width: 0.9em;
+    height: 0.9em;
+  }
+
+  .capability-link:hover .capability-link-icon,
+  .capability-link:focus-visible .capability-link-icon {
+    transform: translateX(0.18em);
+  }
+
+  .about-features {
+    width: min(1360px, calc(100% - 96px));
+    margin: clamp(140px, 12vw, 220px) auto 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(120px, 16vw, 300px);
+    align-items: start;
+  }
+
+  .about-feature {
+    width: min(100%, 460px);
+  }
+
+  .about-feature:first-child {
+    justify-self: start;
+  }
+
+  .about-feature:last-child {
+    justify-self: end;
+  }
+
+  .about-feature-heading {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .about-feature-eyebrow {
+    color: var(--story-muted);
+    font-size: 15px;
+    line-height: 1.5;
+    letter-spacing: 0.2px;
+  }
+
+  .about-feature-title {
+    margin-top: 10px;
+    color: var(--story-text);
+    font-size: clamp(24px, 2vw, 32px);
+    line-height: 1.35;
+    letter-spacing: 0;
+    font-weight: 500;
+  }
+
+  .about-feature-media {
+    width: 100%;
+    aspect-ratio: 1 / 1.18;
+    background: #ded8ce;
+  }
+
+  .about-feature:last-child .about-feature-media {
+    aspect-ratio: 1 / 1.36;
+  }
+
+  .about-feature-copy {
+    margin: 34px auto 0;
+    max-width: 430px;
+    color: #55504b;
+    font-size: 18px;
+    line-height: 1.55;
+    letter-spacing: 0;
+    text-align: center;
+  }
+
   .team-section {
     width: 100%;
-    padding: 0 48px;
+    padding: 0 48px 120px;
   }
 
   .team-grid {
@@ -798,12 +954,12 @@
   .story-closing {
     display: flex;
     justify-content: center;
-    padding: 0 24px 96px;
-    background: var(--story-bg);
+    padding: 96px 24px;
+    background: #1a1a1a;
   }
   .process-home-link {
     position: relative;
-    color: #222;
+    color: #fafaf8;
     display: inline-flex;
     align-items: center;
     gap: 0.55em;
@@ -870,7 +1026,7 @@
     }
 
     .story-main {
-      padding-bottom: 96px;
+      padding-bottom: 0;
     }
 
     .story-tabs {
@@ -883,12 +1039,13 @@
       grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
       gap: 48px;
       min-height: 58vh;
-      transform: translateX(-2vw);
+      transform: none;
     }
 
     .team-section {
       padding-left: 48px;
       padding-right: 48px;
+      padding-bottom: 96px;
     }
 
     .team-grid {
@@ -968,6 +1125,24 @@
     .story-copy {
       padding-bottom: 0;
     }
+
+    .capability-banner {
+      min-height: 340px;
+    }
+
+    .about-features {
+      width: min(calc(100% - 64px), 620px);
+      margin-top: 112px;
+      grid-template-columns: 1fr;
+      row-gap: 96px;
+    }
+
+    .about-feature,
+    .about-feature:first-child,
+    .about-feature:last-child {
+      width: 100%;
+      justify-self: center;
+    }
   }
 
   @media (max-width: 768px) {
@@ -1002,7 +1177,7 @@
     }
 
     .story-main {
-      padding: 0 0 84px;
+      padding: 0;
     }
 
     .story-tabs {
@@ -1018,6 +1193,7 @@
     .team-section {
       padding-left: 24px;
       padding-right: 24px;
+      padding-bottom: 84px;
     }
 
     .story-tab {
@@ -1026,7 +1202,7 @@
     }
 
     .story-title {
-      letter-spacing: 0.8px;
+      letter-spacing: 0;
       margin-bottom: 30px;
     }
 
@@ -1034,6 +1210,53 @@
       font-size: 15px;
       line-height: 1.9;
       margin-bottom: 22px;
+    }
+
+    .capability-banner {
+      min-height: 280px;
+      margin-top: 88px;
+      padding: 44px 24px 40px;
+      gap: 36px;
+    }
+
+    .capability-title {
+      max-width: 400px;
+      font-size: 26px;
+      line-height: 1.18;
+    }
+
+    html[lang="en"] .capability-title {
+      white-space: normal;
+    }
+
+    .capability-link {
+      white-space: normal;
+      text-align: center;
+    }
+
+    .about-features {
+      width: calc(100% - 48px);
+      margin-top: 88px;
+      row-gap: 72px;
+    }
+
+    .about-feature-heading {
+      margin-bottom: 24px;
+    }
+
+    .about-feature-eyebrow {
+      font-size: 14px;
+    }
+
+    .about-feature-title {
+      margin-top: 8px;
+    }
+
+    .about-feature-copy {
+      margin-top: 26px;
+      padding: 0 8px;
+      font-size: 16px;
+      line-height: 1.65;
     }
 
     .team-grid {
@@ -1069,6 +1292,10 @@
       font-size: 16px;
     }
 
+    .capability-title {
+      font-size: 22px;
+    }
+
   }
 
   @media (max-width: 560px) {
@@ -1076,6 +1303,292 @@
       height: 280px;
       min-height: 0;
       transform: none;
+    }
+  }
+
+  /* ── START THE JOURNEY 联系表单区（关于我们底部，黑底白字） ── */
+  .journey {
+    width: 100%;
+    margin-top: clamp(140px, 12vw, 220px);
+    padding: clamp(64px, 6vw, 104px) clamp(48px, 7vw, 140px) clamp(72px, 6vw, 112px);
+    background: #1a1a1a;
+    color: #fafaf8;
+  }
+
+  .journey-inner {
+    width: min(1680px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(56px, 8vw, 160px);
+    align-items: stretch;
+  }
+
+  .journey-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .journey-title {
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: 0;
+    margin-bottom: 28px;
+  }
+
+  .journey-intro {
+    max-width: 420px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(250, 250, 248, 0.72);
+    margin-bottom: clamp(48px, 6vw, 88px);
+  }
+
+  .journey-blocks {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px 30px;
+    margin-top: auto;
+  }
+
+  .journey-block h4 {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 14px;
+  }
+
+  .journey-block p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.9;
+    letter-spacing: 1px;
+    color: #fafaf8;
+  }
+
+  .journey-block a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+
+  .journey-block a:hover {
+    opacity: 0.6;
+  }
+
+  .journey-social {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-top: 2px;
+  }
+
+  .journey-social a {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+  }
+
+  .journey-social svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+
+  /* 右侧咨询表单：结构照搬 contact 页，配色改为适配黑底 */
+  .journey-form {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .journey-form .form-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px 30px;
+  }
+
+  .journey-form .form-field {
+    display: grid;
+    gap: 7px;
+  }
+
+  .journey-form .form-field.full {
+    grid-column: 1 / -1;
+  }
+
+  .journey-form .form-field label {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 3px;
+    color: #999;
+    text-transform: uppercase;
+  }
+
+  .journey-form .form-field input,
+  .journey-form .form-field textarea {
+    width: 100%;
+    min-width: 0;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+    background: transparent;
+    color: #fafaf8;
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.35;
+    padding: 0 0 10px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .journey-form .form-field textarea {
+    resize: vertical;
+    min-height: 104px;
+  }
+
+  .journey-form .message-field textarea {
+    height: 150px;
+    align-self: start;
+  }
+
+  .journey-form .form-field input:focus,
+  .journey-form .form-field textarea:focus {
+    border-bottom-color: #fafaf8;
+  }
+
+  .journey-form .form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 26px;
+  }
+
+  .journey-form .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(100%, 380px);
+    min-height: 64px;
+    gap: 24px;
+    border: none;
+    background: #fafaf8;
+    color: #1a1a1a;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 0 42px;
+    transition: background-color 0.3s ease;
+  }
+
+  .journey-form .submit-btn:hover,
+  .journey-form .submit-btn:focus-visible {
+    background: #e5e5e5;
+    outline: none;
+  }
+
+  .journey-form .submit-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+  }
+
+  .journey-form .cta-arrow {
+    width: 14px;
+    height: 14px;
+    display: block;
+  }
+
+  .journey-form .form-feedback {
+    position: relative;
+    width: min(100%, 380px);
+    min-height: 18px;
+  }
+
+  .journey-form .form-assurance,
+  .journey-form .form-status {
+    width: 100%;
+    color: #999;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: opacity 0.35s ease;
+  }
+
+  .journey-form .form-assurance {
+    display: grid;
+    grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr);
+    align-items: center;
+    gap: 12px;
+  }
+
+  .journey-form .form-assurance::before,
+  .journey-form .form-assurance::after {
+    content: '';
+    height: 1px;
+    background: rgba(255, 255, 255, 0.24);
+  }
+
+  .journey-form .form-status {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+  }
+
+  .journey-form .form-feedback.is-submitted .form-assurance {
+    opacity: 0;
+  }
+
+  .journey-form .form-status.is-visible {
+    opacity: 1;
+  }
+
+  @media (max-width: 900px) {
+    .journey-inner {
+      grid-template-columns: 1fr;
+      gap: 56px;
+    }
+
+    .journey-intro {
+      margin-bottom: 40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .journey {
+      margin-top: 96px;
+      padding: clamp(48px, 8vw, 72px) 24px;
+    }
+
+    .journey-form .form-fields {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .journey-form .submit-btn,
+    .journey-form .form-feedback {
+      width: 100%;
+      max-width: 360px;
     }
   }
 </style>
@@ -1106,9 +1619,9 @@
 <aside class="sidebar" id="sidebar" aria-hidden="true">
   <ul class="sidebar-links">
     <li><a href="index.html" data-i18n="nav-home" onclick="closeMenu()">首页</a></li>
-    <li><a href="story.html" class="is-active" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
+    <li><a href="about.html" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
     <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
-    <li><a href="story.html#team" data-i18n="nav-stories" onclick="closeMenu()">团队</a></li>
+    <li><a href="team.html" data-i18n="nav-stories" onclick="closeMenu()">团队</a></li>
     <li><a href="projects.html" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
     <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
   </ul>
@@ -1178,6 +1691,119 @@
       <p data-i18n="about-p1">Habitas Design 植根于当代设计的理念，同时坚守对经典特质的追求。我们希望在每一个项目中，找到隽永气质与建筑表达之间的平衡。</p>
       <p data-i18n="about-p2">3000 Corporation 与 Habitas Design 携手合作，汇聚了 35 年商业建筑经验与 20 年住宅设计经验。我们以家族对设计的执着、专注的客户服务，以及对品质的坚守，在墨尔本打造高端豪宅。</p>
       <p data-i18n="about-p3">我们亦携手墨尔本最具创意的建筑师、室内与产品设计师、景观设计师及营造团队，为您提供量身定制的设计与建造一体化服务。</p>
+    </div>
+  </section>
+
+  <section class="capability-banner" data-story-panel="about" aria-labelledby="capability-title">
+    <h2 class="capability-title" id="capability-title" data-i18n="capability-title">点击下方下载我们的企业能力说明书。</h2>
+    <span class="capability-link" aria-disabled="true">
+      <span data-i18n="capability-link">下载企业能力说明书</span>
+      <span class="capability-link-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <polyline points="14,6 20,12 14,18"></polyline>
+        </svg>
+      </span>
+    </span>
+  </section>
+
+  <section class="about-features" data-story-panel="about" aria-label="Our strengths">
+    <article class="about-feature">
+      <div class="about-feature-heading">
+        <p class="about-feature-eyebrow" data-i18n="feature-design-eyebrow">我们的优势</p>
+        <h2 class="about-feature-title" data-i18n="feature-design-title">定制化设计</h2>
+      </div>
+      <div class="about-feature-media" aria-hidden="true"></div>
+      <p class="about-feature-copy" data-i18n="feature-design-copy">每一个住宅都由我们的团队与知名建筑师、室内设计师精诚合作而筑造，旨在为您最终呈现一个写满向往、灯火可亲的意中之家。</p>
+    </article>
+
+    <article class="about-feature">
+      <div class="about-feature-heading">
+        <p class="about-feature-eyebrow" data-i18n="feature-build-eyebrow">我们的专长</p>
+        <h2 class="about-feature-title" data-i18n="feature-build-title">专注建造</h2>
+      </div>
+      <div class="about-feature-media" aria-hidden="true"></div>
+      <p class="about-feature-copy" data-i18n="feature-build-copy">凭借几十年的协作经验，我们的建筑团队以独到的建造眼光著称，精心打造每一个细节。成熟的筑建体系、高效的运作流程、至臻的住宅出品令我们脱颖而出，成为业内声誉卓著的建造商之一。</p>
+    </article>
+  </section>
+
+  <section class="journey" data-story-panel="about" aria-labelledby="journey-title">
+    <div class="journey-inner">
+      <div class="journey-info">
+        <h2 class="journey-title" id="journey-title" data-i18n="journey-title">START THE JOURNEY</h2>
+        <p class="journey-intro" data-i18n="journey-intro">Contact us today to discover how we can bring your vision to life, together.</p>
+        <div class="journey-blocks">
+          <div class="journey-block">
+            <h4 data-i18n="journey-office-label">Visit our Head Office</h4>
+            <p data-i18n="journey-office">U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia</p>
+          </div>
+          <div class="journey-block">
+            <h4 data-i18n="journey-enquire-label">Enquire</h4>
+            <p><a href="mailto:studio@habitasdesign.com" data-i18n="journey-email">studio@habitasdesign.com</a></p>
+          </div>
+          <div class="journey-block">
+            <h4 data-i18n="journey-connect-label">Connect</h4>
+            <div class="journey-social" aria-label="Social media">
+              <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect width="20" height="20" x="2" y="2" rx="5.5"></rect>
+                  <circle cx="12" cy="12" r="4.75"></circle>
+                  <circle cx="17.75" cy="6.25" r="0.85" fill="currentColor" stroke="none"></circle>
+                </svg>
+              </a>
+              <a href="https://x.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="X">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="journey-form" id="journey-form">
+        <div class="form-fields">
+          <div class="form-field">
+            <label for="journey-first-name" data-i18n="form-first-name">名</label>
+            <input id="journey-first-name" name="firstName" type="text" autocomplete="given-name" required>
+          </div>
+          <div class="form-field">
+            <label for="journey-last-name" data-i18n="form-last-name">姓</label>
+            <input id="journey-last-name" name="lastName" type="text" autocomplete="family-name" required>
+          </div>
+          <div class="form-field">
+            <label for="journey-phone" data-i18n="form-phone">手机</label>
+            <input id="journey-phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+          <div class="form-field">
+            <label for="journey-email" data-i18n="form-email">邮箱</label>
+            <input id="journey-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="form-field full">
+            <label for="journey-budget" data-i18n="form-budget">预算</label>
+            <input id="journey-budget" name="budget" type="text" inputmode="text">
+          </div>
+          <div class="form-field full message-field">
+            <label for="journey-message" data-i18n="form-message">留言</label>
+            <textarea id="journey-message" name="message" required></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="submit-btn" type="submit">
+            <span data-i18n="form-submit">提交咨询</span>
+            <span class="submit-circle" aria-hidden="true">
+              <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="4" y1="12" x2="20" y2="12"/>
+                <polyline points="14,6 20,12 14,18"/>
+              </svg>
+            </span>
+          </button>
+          <div class="form-feedback">
+            <p class="form-assurance" data-i18n="form-assurance">我们会尽快与您联系</p>
+            <p class="form-status" id="journey-form-status" data-i18n="form-success" aria-live="polite">已收到，我们会尽快与您联系。</p>
+          </div>
+        </div>
+      </form>
     </div>
   </section>
 
@@ -1286,12 +1912,20 @@ const t = {
   'nav-about': ['关于我们', 'About'],
   'nav-contact': ['联系我们', 'Contact'],
   'nav-stories': ['团队', 'People'],
-  'tab-about': ['关于我们', 'About Us'],
-  'tab-team': ['团队', 'Team'],
-  'story-title': ['40年匠心独运 缔造品质之家', '40 Years of Craft Creating Quality Homes'],
+  'tab-about': ['关于我们', 'ABOUT US'],
+  'tab-team': ['团队', 'TEAM'],
+  'story-title': ['40年匠心独运 缔造品质之家', 'DESIGNING EXQUISITE<br>HOMES FOR 43 YEARS<br>IN PURSUIT OF<br>UNPARALLELED PERFECTION.'],
   'about-p1': ['Habitas Design 植根于当代设计的理念，同时坚守对经典特质的追求。我们希望在每一个项目中，找到隽永气质与建筑表达之间的平衡。', 'Habitas Design is grounded in the values of contemporary design whilst maintaining a commitment to Classic characteristics. We wish to find the balance of timeless qualities and Architectural expression in each project.'],
   'about-p2': ['3000 Corporation 与 Habitas Design 携手合作，汇聚了 35 年商业建筑经验与 20 年住宅设计经验。我们以家族对设计的执着、专注的客户服务，以及对品质的坚守，在墨尔本打造高端豪宅。', '3000 Corporation and Habitas Design are bringing together 35 years of commercial construction experience and 20 years of residential architecture experience through a family commitment to design, dedicated client service and quality construction of luxury homes in Melbourne.'],
   'about-p3': ['我们亦携手墨尔本最具创意的建筑师、室内与产品设计师、景观设计师及营造团队，为您提供量身定制的设计与建造一体化服务。', 'We also collaborate with some of Melbourne\'s most creative architects, interior and product designers, landscape architects and builders to offer a personalized design and build service.'],
+  'capability-title': ['点击下方下载我们的企业能力说明书。', 'Click below to download<br>our Capability Statement.'],
+  'capability-link': ['下载企业能力说明书', 'DOWNLOAD CAPABILITY STATEMENT'],
+  'feature-design-eyebrow': ['我们的优势', 'Our Difference'],
+  'feature-design-title': ['定制化设计', 'PERSONALISED DESIGN'],
+  'feature-design-copy': ['每一个住宅都由我们的团队与知名建筑师、室内设计师精诚合作而筑造，旨在为您最终呈现一个写满向往、灯火可亲的意中之家。', 'Each home is architecturally designed by our team, or in partnership with renowned architects and interior designers. The result is a thoughtfully planned, personalised and beautiful home to call your own.'],
+  'feature-build-eyebrow': ['我们的专长', 'Our Expertise'],
+  'feature-build-title': ['专注建造', 'DEDICATED CONSTRUCTION'],
+  'feature-build-copy': ['凭借几十年的协作经验，我们的建筑团队以独到的建造眼光著称，精心打造每一个细节。成熟的筑建体系、高效的运作流程、至臻的住宅出品令我们脱颖而出，成为业内声誉卓著的建造商之一。', 'With decades of collective experience, our construction team have the discerning eye for nuanced builds. Our efficient processes, quality assurance and attention to detail set us apart, establishing Englehart as one of the most reputable in the industry.'],
   'team-name-01': ['徐 圣杰 RAIA', 'Jonathan Xu RAIA'],
   'team-role-01': ['主持建筑师', 'Principal Architect'],
   'team-name-02': ['郭 瑞城', 'Ruicheng Guo'],
@@ -1327,7 +1961,23 @@ const t = {
   'team-quote-07': ['引述待定', 'Quote TBD'],
   'team-edu-07': ['学历待定', 'Education TBD'],
   'team-bio-07': ['<p>个人简介待定。</p>', '<p>Bio TBD.</p>'],
-  'back-home': ['返回首页', 'Back to Home']
+  'back-home': ['返回首页', 'Back to Home'],
+  'journey-title': ['开启您的旅程', 'START THE JOURNEY'],
+  'journey-intro': ['即刻与我们联系，一起探讨如何将您心中的构想变为现实。', 'Contact us today to discover how we can bring your vision to life, together.'],
+  'journey-office-label': ['总部地址', 'Visit our Head Office'],
+  'journey-office': ['U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia', 'U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia'],
+  'journey-enquire-label': ['咨询', 'Enquire'],
+  'journey-email': ['studio@habitasdesign.com', 'studio@habitasdesign.com'],
+  'journey-connect-label': ['关注我们', 'Connect'],
+  'form-first-name': ['名', 'First Name'],
+  'form-last-name': ['姓', 'Last Name'],
+  'form-phone': ['手机', 'Phone'],
+  'form-email': ['邮箱', 'Email'],
+  'form-budget': ['预算', 'Budget'],
+  'form-message': ['留言', 'Message'],
+  'form-submit': ['提交咨询', 'SUBMIT ENQUIRY'],
+  'form-assurance': ['我们会尽快与您联系', 'WE\'LL BE IN TOUCH SOON'],
+  'form-success': ['已收到，我们会尽快与您联系。', 'Thank you. We will be in touch soon.']
 };
 
 let lang = localStorage.getItem('hb-lang') || 'en';
@@ -1560,6 +2210,19 @@ document.addEventListener('keydown', e => {
   }, { passive: true });
 
   scheduleAutoHide();    // 首次加载后静止 2 秒也自动收起
+})();
+
+// ===== START THE JOURNEY 表单：仅前端提示，不真实提交 =====
+(() => {
+  const form = document.getElementById('journey-form');
+  if (!form) return;
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const feedback = form.querySelector('.form-feedback');
+    const status = form.querySelector('.form-status');
+    if (feedback) feedback.classList.add('is-submitted');
+    if (status) status.classList.add('is-visible');
+  });
 })();
 </script>
 

@@ -50,7 +50,8 @@
 
   :root {
     --contact-content-width: 1200px;
-    --contact-side-padding: 64px;
+    --contact-side-padding-left: 64px;
+    --contact-side-padding-right: 48px;
   }
 
   body {
@@ -263,7 +264,8 @@
     color: #fafaf8;
     text-decoration: none;
     font-size: 24px;
-    letter-spacing: 4px;
+    letter-spacing: 0;
+    font-weight: 500;
     display: inline-block;
   }
 
@@ -322,13 +324,12 @@
   .contact-hero {
     background: #1a1a1a;
     color: #fafaf8;
-    padding: 176px var(--contact-side-padding) 96px;
+    padding: 176px var(--contact-side-padding-right) 96px var(--contact-side-padding-left);
     min-height: 56vh;
   }
 
   .contact-hero-inner {
-    max-width: var(--contact-content-width);
-    margin: 0 auto;
+    width: 100%;
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: clamp(64px, 8vw, 104px);
@@ -414,52 +415,69 @@
   }
 
   .contact-form-section {
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
     background: #f4efe6;
-    padding: 96px var(--contact-side-padding) 120px;
+    padding: clamp(64px, 4.5vw, 76px) var(--contact-side-padding-right) 120px var(--contact-side-padding-left);
   }
 
   .form-inner {
-    max-width: var(--contact-content-width);
-    margin: 0 auto;
+    width: 100%;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(48px, 6vw, 80px);
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(48px, 4vw, 80px);
     align-items: stretch;
   }
 
   .form-header {
-    display: grid;
-    grid-template-rows: auto minmax(0, 1fr);
-    align-content: stretch;
     min-height: 100%;
   }
 
   .form-copy {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+    display: block;
+  }
+
+  .form-kicker {
+    color: #777;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .form-kicker::after {
+    content: '';
+    display: block;
+    width: 42px;
+    height: 1px;
+    margin-top: 14px;
+    background: rgba(26, 26, 26, 0.38);
   }
 
   .form-title {
-    font-size: clamp(36px, 6vw, 60px);
-    font-weight: 600;
-    letter-spacing: 1px;
-    line-height: 1.1;
-    white-space: nowrap;
+    margin-top: 22px;
+    font-size: clamp(58px, 5vw, 82px);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.02;
+    white-space: normal;
   }
 
   .form-intro {
+    margin-top: 18px;
     color: #555;
     font-size: 16px;
-    line-height: 2;
-    max-width: 560px;
+    font-weight: 400;
+    line-height: 1.65;
+    max-width: none;
+    white-space: nowrap;
   }
 
   .contact-carousel {
     margin-top: 34px;
     position: relative;
-    min-height: 0;
-    height: 430px;
+    width: 92%;
+    aspect-ratio: 5 / 3;
   }
 
   .contact-carousel-frame {
@@ -496,17 +514,19 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
-    gap: 26px;
-    padding-top: 58px;
-    height: 100%;
+    gap: 36px;
+    padding-top: 0;
+    height: auto;
     min-height: 0;
+    aspect-ratio: 5 / 3;
+    align-self: end;
   }
 
   .form-fields {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-content: space-between;
-    gap: 22px 36px;
+    gap: 30px 30px;
     min-height: 0;
   }
 
@@ -521,9 +541,10 @@
 
   .form-field label {
     font-size: 12px;
+    font-weight: 400;
     line-height: 1;
     letter-spacing: 3px;
-    color: #777;
+    color: #555;
     text-transform: uppercase;
   }
 
@@ -532,20 +553,21 @@
     width: 100%;
     min-width: 0;
     border: none;
-    border-bottom: 1px solid rgba(26,26,26,0.24);
+    border-bottom: 1px solid rgba(26,26,26,0.48);
     background: transparent;
     color: #1a1a1a;
-    font: inherit;
+    font-family: inherit;
     font-size: 17px;
+    font-weight: 400;
     line-height: 1.35;
-    padding: 0 0 8px;
+    padding: 0 0 10px;
     outline: none;
     transition: border-color 0.3s;
   }
 
   .form-field textarea {
     resize: vertical;
-    min-height: 118px;
+    min-height: 104px;
   }
 
   .message-field,
@@ -558,7 +580,7 @@
   }
 
   .message-field textarea {
-    height: 118px;
+    height: 104px;
     align-self: start;
   }
 
@@ -569,34 +591,45 @@
 
   .form-actions {
     display: flex;
-    align-items: center;
-    gap: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 26px;
     align-self: end;
   }
 
   .submit-btn {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    justify-content: space-between;
+    width: min(100%, 310px);
+    min-height: 64px;
+    gap: 24px;
     border: none;
-    background: transparent;
-    color: #1a1a1a;
+    background: #1a1a1a;
+    color: #fafaf8;
     cursor: pointer;
     font-family: inherit;
     font-size: 13px;
+    font-weight: 400;
     letter-spacing: 3px;
     text-transform: uppercase;
-    padding: 8px 0;
+    padding: 0 42px;
+    transition: background-color 0.3s ease;
+  }
+
+  .submit-btn:hover,
+  .submit-btn:focus-visible {
+    background: #333;
+    outline: none;
   }
 
   .submit-circle {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #1a1a1a;
-    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
   }
 
   .cta-arrow {
@@ -605,12 +638,50 @@
     display: block;
   }
 
+  .form-feedback {
+    position: relative;
+    width: min(100%, 310px);
+    min-height: 18px;
+  }
+
+  .form-assurance,
   .form-status {
+    width: 100%;
     color: #555;
-    font-size: 14px;
-    letter-spacing: 1px;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: opacity 0.35s ease;
+  }
+
+  .form-assurance {
+    display: grid;
+    grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr);
+    align-items: center;
+    gap: 12px;
+  }
+
+  .form-assurance::before,
+  .form-assurance::after {
+    content: '';
+    height: 1px;
+    background: rgba(26, 26, 26, 0.24);
+  }
+
+  .form-status {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     opacity: 0;
-    transition: opacity 0.35s;
+  }
+
+  .form-feedback.is-submitted .form-assurance {
+    opacity: 0;
   }
 
   .form-status.is-visible {
@@ -683,7 +754,8 @@
 
   @media (max-width: 1100px) {
     :root {
-      --contact-side-padding: 40px;
+      --contact-side-padding-left: 32px;
+      --contact-side-padding-right: 32px;
     }
 
     .contact-hero {
@@ -692,11 +764,14 @@
     }
     .contact-hero-inner,
     .form-inner {
-      gap: 56px;
+      gap: 48px;
     }
     .contact-form-section {
-      padding-top: 88px;
+      padding-top: 72px;
       padding-bottom: 104px;
+    }
+    .form-intro {
+      white-space: normal;
     }
   }
 
@@ -713,19 +788,22 @@
     }
 
     .contact-carousel {
+      width: 100%;
       height: auto;
     }
 
     .contact-carousel-frame {
       height: auto;
       min-height: 0;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 5 / 3;
     }
 
     .contact-form {
       height: auto;
       padding-top: 0;
       grid-template-rows: none;
+      aspect-ratio: auto;
+      align-self: stretch;
     }
 
     .form-fields {
@@ -735,7 +813,8 @@
 
   @media (max-width: 768px) {
     :root {
-      --contact-side-padding: 24px;
+      --contact-side-padding-left: 24px;
+      --contact-side-padding-right: 24px;
     }
 
     .nav {
@@ -776,7 +855,8 @@
     }
 
     .form-title {
-      letter-spacing: 3px;
+      font-size: 46px;
+      letter-spacing: 0;
     }
 
     .contact-info-grid,
@@ -799,7 +879,7 @@
     }
 
     .contact-form {
-      gap: 22px;
+      gap: 36px;
     }
 
     .form-fields {
@@ -808,8 +888,14 @@
     }
 
     .form-actions {
-      display: grid;
-      gap: 18px;
+      width: 100%;
+      gap: 22px;
+    }
+
+    .submit-btn,
+    .form-feedback {
+      width: 100%;
+      max-width: 360px;
     }
 
     .contact-home-link {
@@ -850,9 +936,9 @@
 <aside class="sidebar" id="sidebar" aria-hidden="true">
   <ul class="sidebar-links">
     <li><a href="index.html" data-i18n="nav-home" onclick="closeMenu()">首页</a></li>
-    <li><a href="story.html" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
+    <li><a href="about.html" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
     <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
-    <li><a href="story.html#team" data-i18n="nav-stories" onclick="closeMenu()">团队</a></li>
+    <li><a href="team.html" data-i18n="nav-stories" onclick="closeMenu()">团队</a></li>
     <li><a href="projects.html" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
     <li><a href="contact.html" class="is-active" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
   </ul>
@@ -917,6 +1003,7 @@
     <div class="form-inner">
       <div class="form-header">
         <div class="form-copy">
+          <p class="form-kicker" data-i18n="form-kicker">让我们携手合作</p>
           <h2 class="form-title" data-i18n="form-title">项目咨询</h2>
           <p class="form-intro" data-i18n="form-intro">留下您的联系方式与项目想法，我们会尽快与您沟通下一步。</p>
         </div>
@@ -944,40 +1031,43 @@
         <div class="form-fields">
           <div class="form-field">
             <label for="first-name" data-i18n="form-first-name">名</label>
-            <input id="first-name" name="firstName" type="text" autocomplete="given-name" required>
+            <input id="first-name" name="firstName" type="text" autocomplete="given-name" placeholder="Jonathan" required>
           </div>
           <div class="form-field">
             <label for="last-name" data-i18n="form-last-name">姓</label>
-            <input id="last-name" name="lastName" type="text" autocomplete="family-name" required>
+            <input id="last-name" name="lastName" type="text" autocomplete="family-name" placeholder="Xu" required>
           </div>
           <div class="form-field">
             <label for="phone" data-i18n="form-phone">手机</label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel">
+            <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="0400 000 000">
           </div>
           <div class="form-field">
             <label for="email" data-i18n="form-email">邮箱</label>
-            <input id="email" name="email" type="email" autocomplete="email" required>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="jonathan.xu@example.com" required>
           </div>
           <div class="form-field full">
             <label for="budget" data-i18n="form-budget">预算</label>
-            <input id="budget" name="budget" type="text" inputmode="text">
+            <input id="budget" name="budget" type="text" inputmode="text" placeholder="Approx. $1.5M">
           </div>
           <div class="form-field full message-field">
             <label for="message" data-i18n="form-message">留言</label>
-            <textarea id="message" name="message" required></textarea>
+            <textarea id="message" name="message" placeholder="Tell us about your site, your timeline, or just where you're up to." required></textarea>
           </div>
         </div>
         <div class="form-actions">
           <button class="submit-btn" type="submit">
             <span data-i18n="form-submit">提交</span>
             <span class="submit-circle" aria-hidden="true">
-              <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="6" y1="12" x2="18" y2="12"/>
-                <polyline points="13,7 18,12 13,17"/>
+              <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="4" y1="12" x2="20" y2="12"/>
+                <polyline points="14,6 20,12 14,18"/>
               </svg>
             </span>
           </button>
-          <p class="form-status" id="form-status" data-i18n="form-success" aria-live="polite">已收到，我们会尽快与您联系。</p>
+          <div class="form-feedback">
+            <p class="form-assurance" data-i18n="form-assurance">我们会尽快与您联系</p>
+            <p class="form-status" id="form-status" data-i18n="form-success" aria-live="polite">已收到，我们会尽快与您联系。</p>
+          </div>
         </div>
       </form>
       <a class="contact-home-link" href="index.html">
@@ -1014,6 +1104,7 @@ const t = {
   'contact-email-label': ['邮箱', 'Email'],
   'contact-email': ['studio@habitasdesign.com', 'studio@habitasdesign.com'],
   'contact-web-label': ['社交媒体链接', 'Social Media'],
+  'form-kicker': ['让我们携手合作', 'LET’S COLLABORATE'],
   'form-title': ['项目咨询', 'PROJECT ENQUIRY'],
   'form-intro': ['留下您的联系方式与项目想法，我们会尽快与您沟通下一步。', 'Share your contact details and project ideas, and we will get back to you soon.'],
   'form-first-name': ['名', 'First Name'],
@@ -1022,7 +1113,8 @@ const t = {
   'form-email': ['邮箱', 'Email'],
   'form-budget': ['预算', 'Budget'],
   'form-message': ['留言', 'Message'],
-  'form-submit': ['提交', 'Submit'],
+  'form-submit': ['提交咨询', 'SUBMIT ENQUIRY'],
+  'form-assurance': ['我们会尽快与您联系', 'WE’LL BE IN TOUCH SOON'],
   'form-success': ['已收到，我们会尽快与您联系。', 'Thank you. We will be in touch soon.'],
   'back-home': ['返回首页', 'Back to Home'],
   'footer-copy': ['&copy; 2026 Habitas Design. All rights reserved.', '&copy; 2026 Habitas Design. All rights reserved.']
@@ -1090,6 +1182,7 @@ document.addEventListener('keydown', e => {
 
 document.getElementById('contact-form').addEventListener('submit', e => {
   e.preventDefault();
+  document.querySelector('.form-feedback').classList.add('is-submitted');
   document.getElementById('form-status').classList.add('is-visible');
 });
 

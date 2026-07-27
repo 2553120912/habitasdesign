@@ -1,0 +1,2081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Story | Habitas Design</title>
+<style>
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-Medium.otf") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirText-DemiBold.otf") format("opentype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Halenoir";
+    src: url("halenoir/HalenoirExpanded-Black.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+  }
+
+  :root {
+    --story-bg: #f4efe6;
+    --story-surface: #f7f2e8;
+    --story-text: #181818;
+    --story-muted: #77706a;
+    --story-line: rgba(24, 24, 24, 0.16);
+    --story-content-width: min(1500px, calc(100vw - 56px));
+  }
+
+  body {
+    font-family: "Halenoir", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+    color: var(--story-text);
+    background: var(--story-bg);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 110;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    color: #fafaf8;
+    background: #1a1a1a;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    transition: transform 0.4s ease;
+  }
+
+  body.header-hidden .nav {
+    transform: translateY(-100%);
+  }
+
+  .nav-logo {
+    display: block;
+    line-height: 0;
+  }
+
+  .nav-logo img {
+    display: block;
+    height: 44px;
+    width: auto;
+    filter: invert(1);
+    transition: opacity 0.3s;
+  }
+
+  .nav-logo:hover img {
+    opacity: 0.7;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .lang-switch {
+    display: flex;
+    gap: 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .lang-switch button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: inherit;
+    padding: 0 4px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+    font-size: 13px;
+  }
+
+  .lang-switch button.active {
+    opacity: 1;
+  }
+
+  .lang-switch button:hover {
+    opacity: 0.8;
+  }
+
+  .lang-switch span {
+    opacity: 0.25;
+  }
+
+  .nav-toggle {
+    position: fixed;
+    top: 20px;
+    right: 48px;
+    z-index: 140;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    transition: background 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  body.header-hidden .nav-toggle {
+    background: #1a1a1a;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  }
+
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    width: 22px;
+    background: #fafaf8;
+    transition: transform 0.35s ease, opacity 0.25s ease;
+    transform-origin: center;
+  }
+
+  .nav-toggle.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .nav-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 340px;
+    max-width: 100%;
+    height: 100vh;
+    background: rgba(42, 42, 42, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fafaf8;
+    z-index: 130;
+    padding: 120px 48px 48px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, 0, 0);
+    transition: visibility 0s linear 1.5s;
+    will-change: opacity;
+    backface-visibility: hidden;
+    contain: paint;
+  }
+
+  .sidebar.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    animation: sidebarFadeIn 1.5s cubic-bezier(0.19, 1, 0.22, 1) both;
+    transition: visibility 0s;
+  }
+
+  @keyframes sidebarFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    z-index: 120;
+  }
+
+  .sidebar-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .sidebar-links {
+    opacity: 0;
+    transition: opacity 1.1s cubic-bezier(0.19, 1, 0.22, 1) 0.15s;
+    will-change: opacity;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .sidebar.is-open .sidebar-links {
+    opacity: 1;
+  }
+
+  .sidebar-links a {
+    position: relative;
+    color: #fafaf8;
+    text-decoration: none;
+    font-size: 24px;
+    letter-spacing: 0;
+    font-weight: 500;
+    display: inline-block;
+  }
+
+  .sidebar-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 1px;
+    background: #fafaf8;
+    transition: width 0.4s ease;
+  }
+
+  .sidebar-links a:hover::after,
+  .sidebar-links a.is-active::after {
+    width: 100%;
+  }
+
+  .sidebar-social {
+    margin-top: auto;
+    padding-top: 28px;
+    border-top: 1px solid rgba(250, 250, 248, 0.18);
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    opacity: 0;
+    transition: opacity 1.1s cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
+    will-change: opacity;
+  }
+
+  .sidebar.is-open .sidebar-social {
+    opacity: 1;
+  }
+
+  .sidebar-social a {
+    width: 24px;
+    height: 24px;
+    color: rgba(250, 250, 248, 0.62);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.25s ease;
+  }
+
+  .sidebar-social a:hover,
+  .sidebar-social a:focus-visible {
+    color: #fafaf8;
+  }
+
+  .sidebar-social svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  .story-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow: hidden;
+    background: #e7e2da;
+    color: #fafaf8;
+  }
+
+  .story-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+  }
+
+  .story-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.44);
+    pointer-events: none;
+  }
+
+  .story-hero-title {
+    position: absolute;
+    left: 48px;
+    bottom: 64px;
+    z-index: 2;
+    max-width: 800px;
+    color: inherit;
+    font-family: "Halenoir", sans-serif;
+    font-size: 46px;
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .story-scroll-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 32px;
+    z-index: 2;
+    transform: translateX(-50%);
+    color: rgba(250, 250, 248, 0.78);
+    font-family: "Halenoir", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .story-main {
+    background: var(--story-bg);
+    padding: 0;
+  }
+
+  [data-story-panel][hidden] {
+    display: none !important;
+  }
+
+  .story-content {
+    width: 100%;
+    margin-top: clamp(96px, 9vw, 160px);
+    padding: 0 64px 0 100px;
+    display: grid;
+    grid-template-columns: minmax(0, 1200px) minmax(320px, 1fr);
+    gap: 64px;
+    align-items: stretch;
+    min-height: 68vh;
+    transform: none;
+  }
+
+  .story-content > * {
+    min-width: 0;
+  }
+
+  .story-carousel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    overflow: visible;
+    justify-self: end;
+    width: 100%;
+  }
+
+  .story-carousel-frame {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    background:
+      linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,0,0,0.1)),
+      #211d19;
+    overflow: hidden;
+  }
+
+  .story-carousel-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  .story-carousel-slide.is-active {
+    opacity: 1;
+  }
+
+  .story-carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .story-carousel-placeholder {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 24% 18%, rgba(255,255,255,0.05), transparent 28%),
+      linear-gradient(145deg, rgba(255,255,255,0.04), rgba(0,0,0,0.14)),
+      #211d19;
+  }
+
+  .story-carousel-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    margin-top: 8px;
+    min-height: 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .story-carousel-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: none;
+    border: none;
+    padding: 0;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    font-family: inherit;
+  }
+
+  .story-carousel-btn:hover {
+    opacity: 0.45;
+  }
+
+  .story-carousel-btn svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .story-carousel-btn:disabled {
+    opacity: 0.25;
+    cursor: default;
+  }
+
+  .story-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 32px;
+  }
+
+  .story-title {
+    font-size: clamp(24px, 3vw, 36px);
+    line-height: 1.4;
+    letter-spacing: 0;
+    font-weight: 600;
+    color: var(--story-text);
+    margin-bottom: 0;
+    overflow-wrap: break-word;
+  }
+
+  .story-copy p {
+    max-width: 650px;
+    font-size: 20px;
+    line-height: 1.9;
+    letter-spacing: 0.4px;
+    color: #888;
+    margin-bottom: 0;
+    overflow-wrap: break-word;
+  }
+
+  .story-copy p:last-child {
+    margin-bottom: 0;
+  }
+
+  .capability-banner {
+    width: 100%;
+    min-height: clamp(320px, 28vw, 380px);
+    margin-top: clamp(140px, 12vw, 220px);
+    padding: clamp(56px, 4.6vw, 72px) 48px clamp(44px, 3.8vw, 60px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 36px;
+    color: #fafaf8;
+    background: #1a1a1a;
+  }
+
+  .capability-title {
+    width: min(100%, 720px);
+    color: inherit;
+    font-size: clamp(30px, 3.2vw, 46px);
+    font-weight: 600;
+    line-height: 1.16;
+    letter-spacing: 0;
+    text-align: center;
+  }
+
+  html[lang="en"] .capability-title {
+    white-space: nowrap;
+  }
+
+  .capability-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    color: inherit;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 2px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
+  }
+
+  .capability-link[aria-disabled="true"] {
+    cursor: default;
+  }
+
+  .capability-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 2em;
+    bottom: -0.09em;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.35s ease;
+  }
+
+  .capability-link:hover,
+  .capability-link:focus-visible {
+    opacity: 0.68;
+  }
+
+  .capability-link:hover::after,
+  .capability-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .capability-link-icon {
+    width: 1.45em;
+    height: 1.45em;
+    flex: 0 0 1.45em;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  .capability-link-icon svg {
+    display: block;
+    width: 0.9em;
+    height: 0.9em;
+  }
+
+  .capability-link:hover .capability-link-icon,
+  .capability-link:focus-visible .capability-link-icon {
+    transform: translateX(0.18em);
+  }
+
+  .about-features {
+    width: min(1360px, calc(100% - 96px));
+    margin: clamp(140px, 12vw, 220px) auto 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(120px, 16vw, 300px);
+    align-items: start;
+  }
+
+  .about-feature {
+    width: min(100%, 460px);
+  }
+
+  .about-feature:first-child {
+    justify-self: start;
+  }
+
+  .about-feature:nth-of-type(2) {
+    justify-self: end;
+  }
+
+  .about-feature-heading {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .about-feature-eyebrow {
+    color: var(--story-muted);
+    font-size: 15px;
+    line-height: 1.5;
+    letter-spacing: 0.2px;
+  }
+
+  .about-feature-title {
+    margin-top: 10px;
+    color: var(--story-text);
+    font-size: clamp(24px, 2vw, 32px);
+    line-height: 1.35;
+    letter-spacing: 0;
+    font-weight: 500;
+  }
+
+  .about-feature-media {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1.18;
+    background: #ded8ce;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .about-feature:nth-of-type(2) .about-feature-media {
+    aspect-ratio: 1 / 1.36;
+  }
+
+  .about-feature-copy {
+    margin: 34px auto 0;
+    max-width: 430px;
+    color: #55504b;
+    font-size: 18px;
+    line-height: 1.55;
+    letter-spacing: 0;
+    text-align: center;
+  }
+
+  .about-service-cta {
+    position: relative;
+    grid-column: 1 / -1;
+    justify-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    margin-top: clamp(56px, 5vw, 88px);
+    color: var(--story-text);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .about-service-cta::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 2em;
+    bottom: -0.09em;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.35s ease;
+  }
+
+  .about-service-cta:hover,
+  .about-service-cta:focus-visible {
+    opacity: 0.68;
+    outline: none;
+  }
+
+  .about-service-cta:hover::after,
+  .about-service-cta:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .about-service-cta-icon {
+    width: 1.45em;
+    height: 1.45em;
+    flex: 0 0 1.45em;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  .about-service-cta-icon svg {
+    display: block;
+    width: 0.9em;
+    height: 0.9em;
+  }
+
+  .about-service-cta:hover .about-service-cta-icon,
+  .about-service-cta:focus-visible .about-service-cta-icon {
+    transform: translateX(0.18em);
+  }
+
+  .team-section {
+    width: 100%;
+    padding: 0 48px 120px;
+  }
+
+  .team-grid {
+    --team-card-size: clamp(320px, 38vw, 728px);
+    --team-row-gap: clamp(120px, 14vw, 220px);
+    --team-meta-height: 73px;
+    max-width: 1820px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: clamp(96px, 14vw, 220px);
+    align-items: start;
+  }
+
+  .team-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--team-row-gap);
+    min-width: 0;
+  }
+
+  .team-column--left {
+    align-items: flex-start;
+  }
+
+  .team-column--right {
+    align-items: flex-end;
+    padding-top: clamp(120px, 13vw, 200px);
+  }
+
+  .team-card {
+    width: var(--team-card-size);
+    color: var(--story-text);
+  }
+
+  .team-pair {
+    align-self: flex-end;
+    display: flex;
+    justify-content: flex-end;
+    gap: clamp(18px, 2vw, 32px);
+    width: max-content;
+  }
+
+  .team-pair .team-card {
+    flex: 0 0 var(--team-card-size);
+  }
+
+  .team-card-spacer {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .team-card--fifth {
+    margin-top: clamp(120px, 13vw, 200px);
+    transform: translateX(clamp(72px, 9vw, 160px));
+  }
+
+  .team-card--sixth {
+    margin-top: calc(var(--team-card-size) + var(--team-meta-height) + var(--team-row-gap));
+    transform: translateX(clamp(-160px, -9vw, -72px));
+  }
+
+  .team-card--seventh {
+    transform: translateX(-30px);
+  }
+
+  .team-photo {
+    aspect-ratio: 1 / 1;
+    background:
+      linear-gradient(145deg, rgba(255,255,255,0.16), rgba(24,24,24,0.08)),
+      #ded8ce;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(24, 24, 24, 0.08);
+  }
+
+  .team-card[data-member="01"] .team-photo { background-image: url('images/Our Story/成员相册/1/1.png'); background-position: center 20%; }
+  .team-card[data-member="02"] .team-photo { background-image: url('images/Our Story/成员相册/2/2.png'); }
+  .team-card[data-member="03"] .team-photo { background-image: url('images/Our Story/成员相册/3/3.png'); background-position: center 15%; }
+  .team-card[data-member="04"] .team-photo { background-image: url('images/Our Story/成员相册/4/4.png'); background-position: center 20%; }
+  .team-card[data-member="05"] .team-photo { background-image: url('images/Our Story/成员相册/5/5.png'); background-position: center 20%; }
+
+  .team-meta {
+    padding-top: 18px;
+  }
+
+  .team-name {
+    font-size: clamp(18px, 1.7vw, 24px);
+    line-height: 1.35;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  .team-role {
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 1.4;
+    letter-spacing: 1.6px;
+    color: var(--story-muted);
+    text-transform: uppercase;
+  }
+
+  /* ===== 团队成员详情面板 ===== */
+  .team-card[data-member] {
+    cursor: pointer;
+  }
+  .team-card[data-member] .team-photo {
+    transition: filter 0.4s ease, transform 0.4s ease;
+  }
+  .team-card[data-member]:hover .team-photo {
+    filter: brightness(0.94);
+  }
+  .team-card[data-member]:focus-visible {
+    outline: 2px solid var(--story-text);
+    outline-offset: 6px;
+  }
+
+  .member-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 1200;
+  }
+  .member-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .member-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50vw;
+    height: 100vh;
+    background: var(--story-surface);
+    color: var(--story-text);
+    z-index: 1210;
+    transform: translateX(100%);
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: -24px 0 60px rgba(0, 0, 0, 0.12);
+  }
+  .member-panel.is-open {
+    transform: translateX(0);
+  }
+
+  .member-scroll {
+    height: 100%;
+    overflow-y: auto;
+    padding: 72px 56px 80px;
+  }
+
+  .member-close {
+    position: absolute;
+    top: 28px;
+    right: 40px;
+    z-index: 2;
+    background: rgba(247, 242, 232, 0.85);
+    border: none;
+    padding: 8px 4px;
+    font: inherit;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    color: var(--story-text);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  .member-close:hover {
+    opacity: 0.6;
+  }
+
+  .member-photo {
+    width: 50%;
+    aspect-ratio: 1 / 1;
+    background:
+      linear-gradient(145deg, rgba(255,255,255,0.16), rgba(24,24,24,0.08)),
+      #ded8ce;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(24, 24, 24, 0.08);
+  }
+
+  .member-quote {
+    position: relative;
+    margin: 40px 0 0;
+    padding-left: 4px;
+    font-family: Georgia, 'Noto Serif SC', 'Source Han Serif SC', serif;
+    font-size: clamp(22px, 2vw, 30px);
+    line-height: 1.5;
+    font-weight: 400;
+    color: var(--story-text);
+  }
+  .member-quote::before {
+    content: '\201C';
+    display: block;
+    font-family: Georgia, serif;
+    font-size: 72px;
+    line-height: 0.6;
+    color: var(--story-line);
+    margin-bottom: 8px;
+  }
+  .member-quote:empty {
+    display: none;
+  }
+
+  .member-divider {
+    border: 0;
+    border-top: 1px solid var(--story-line);
+    margin: 36px 0 28px;
+  }
+
+  .member-name {
+    font-size: clamp(22px, 1.8vw, 28px);
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    line-height: 1.3;
+  }
+  .member-role {
+    margin-top: 8px;
+    font-size: 13px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--story-muted);
+  }
+  .member-edu {
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--story-muted);
+  }
+
+  .member-bio {
+    margin-top: 28px;
+    font-family: Georgia, 'Noto Serif SC', 'Source Han Serif SC', serif;
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--story-text);
+  }
+  .member-bio p {
+    margin: 0 0 18px;
+  }
+  .member-bio p:last-child {
+    margin-bottom: 0;
+  }
+
+  body.panel-open {
+    overflow: hidden;
+  }
+
+  .story-closing {
+    display: flex;
+    justify-content: center;
+    padding: 96px 24px;
+    background: #1a1a1a;
+  }
+  .process-home-link {
+    position: relative;
+    color: #fafaf8;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    text-decoration: none;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: opacity 0.3s ease;
+  }
+  .process-home-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 2em;
+    bottom: -0.09em;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.35s ease;
+  }
+  .process-home-link:hover,
+  .process-home-link:focus-visible {
+    opacity: 0.68;
+  }
+  .process-home-link:hover::after,
+  .process-home-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+  .process-home-link-icon {
+    width: 1.45em;
+    height: 1.45em;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  .process-home-link-icon svg {
+    width: 0.9em;
+    height: 0.9em;
+    display: block;
+  }
+  .process-home-link:hover .process-home-link-icon,
+  .process-home-link:focus-visible .process-home-link-icon {
+    transform: translateX(0.18em);
+  }
+
+  .footer {
+    padding: 36px 48px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #666;
+    text-align: center;
+    background: #1a1a1a;
+    font-weight: 600;
+  }
+
+  @media (max-width: 1100px) {
+    :root {
+      --story-content-width: min(1500px, calc(100vw - 48px));
+    }
+
+    .story-main {
+      padding-bottom: 0;
+    }
+
+    .story-content {
+      padding-left: 48px;
+      padding-right: 48px;
+      grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+      gap: 48px;
+      min-height: 58vh;
+      transform: none;
+    }
+
+    .team-section {
+      padding-left: 48px;
+      padding-right: 48px;
+      padding-bottom: 96px;
+    }
+
+    .team-grid {
+      column-gap: clamp(64px, 10vw, 140px);
+    }
+
+    .story-carousel {
+      min-height: 0;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .story-content {
+      grid-template-columns: 1fr;
+      padding-left: 32px;
+      padding-right: 32px;
+      gap: 44px;
+      min-height: 0;
+      transform: none;
+    }
+
+    .team-section {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+
+    .team-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 72px;
+      max-width: 620px;
+    }
+
+    .team-column {
+      display: contents;
+    }
+
+    .team-pair {
+      display: contents;
+    }
+
+    .team-card-spacer {
+      display: none;
+    }
+
+    .team-card--fifth {
+      margin-top: 0;
+      transform: none;
+    }
+
+    .team-card--sixth,
+    .team-card--seventh {
+      margin-top: 0;
+      transform: none;
+    }
+
+    .team-column--right {
+      padding-top: 0;
+    }
+
+    .team-card {
+      width: 100%;
+      order: var(--team-order);
+    }
+
+    .story-carousel {
+      aspect-ratio: 4 / 3;
+      justify-self: stretch;
+    }
+
+    .story-copy {
+      padding-bottom: 0;
+    }
+
+    .capability-banner {
+      min-height: 340px;
+    }
+
+    .about-features {
+      width: min(calc(100% - 64px), 620px);
+      margin-top: 112px;
+      grid-template-columns: 1fr;
+      row-gap: 96px;
+    }
+
+    .about-feature,
+    .about-feature:first-child,
+    .about-feature:nth-of-type(2) {
+      width: 100%;
+      justify-self: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    :root {
+      --story-content-width: min(1500px, calc(100vw - 48px));
+    }
+
+    .nav {
+      padding: 20px 24px;
+    }
+
+    .nav-logo img {
+      height: 32px;
+    }
+
+    .nav-left {
+      gap: 24px;
+    }
+
+    .nav-toggle {
+      top: 20px;
+      right: 24px;
+    }
+
+    .sidebar {
+      width: 100%;
+      padding: 100px 32px 40px;
+    }
+
+    .sidebar-links a {
+      font-size: 20px;
+    }
+
+    .story-main {
+      padding: 0;
+    }
+
+    .story-content {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .team-section {
+      padding-left: 24px;
+      padding-right: 24px;
+      padding-bottom: 84px;
+    }
+
+    .story-title {
+      letter-spacing: 0;
+      margin-bottom: 30px;
+    }
+
+    .story-copy p {
+      font-size: 15px;
+      line-height: 1.9;
+      margin-bottom: 22px;
+    }
+
+    .story-hero-title {
+      left: 24px;
+      right: 24px;
+      bottom: 48px;
+      max-width: none;
+      font-size: 30px;
+      line-height: 1.12;
+      white-space: normal;
+    }
+
+    .story-hero-title br {
+      display: none;
+    }
+
+    .story-scroll-hint {
+      bottom: 20px;
+      font-size: 12px;
+    }
+
+    .capability-banner {
+      min-height: 280px;
+      margin-top: 88px;
+      padding: 44px 24px 40px;
+      gap: 36px;
+    }
+
+    .capability-title {
+      max-width: 400px;
+      font-size: 26px;
+      line-height: 1.18;
+    }
+
+    html[lang="en"] .capability-title {
+      white-space: normal;
+    }
+
+    .capability-link {
+      white-space: normal;
+      text-align: center;
+    }
+
+    .about-features {
+      width: calc(100% - 48px);
+      margin-top: 88px;
+      row-gap: 72px;
+    }
+
+    .about-feature-heading {
+      margin-bottom: 24px;
+    }
+
+    .about-feature-eyebrow {
+      font-size: 14px;
+    }
+
+    .about-feature-title {
+      margin-top: 8px;
+    }
+
+    .about-feature-copy {
+      margin-top: 26px;
+      padding: 0 8px;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .team-grid {
+      gap: 56px;
+    }
+
+    .team-meta {
+      padding-top: 14px;
+    }
+
+    .member-panel {
+      width: 100vw;
+    }
+    .member-scroll {
+      padding: 64px 24px 56px;
+    }
+    .member-close {
+      top: 22px;
+      right: 24px;
+    }
+
+    .footer {
+      padding: 32px 24px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    :root {
+      --story-content-width: min(1500px, calc(100vw - 36px));
+    }
+
+    .capability-title {
+      font-size: 22px;
+    }
+
+    .story-hero-title {
+      font-size: 26px;
+    }
+
+  }
+
+  /* ── START THE JOURNEY 联系表单区（关于我们底部，黑底白字） ── */
+  .journey {
+    width: 100%;
+    margin-top: clamp(140px, 12vw, 220px);
+    padding: clamp(64px, 6vw, 104px) clamp(48px, 7vw, 140px) clamp(72px, 6vw, 112px);
+    background: #1a1a1a;
+    color: #fafaf8;
+  }
+
+  .journey-inner {
+    width: min(1680px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(56px, 8vw, 160px);
+    align-items: stretch;
+  }
+
+  .journey-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .journey-title {
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: 0;
+    margin-bottom: 28px;
+  }
+
+  .journey-intro {
+    max-width: 420px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(250, 250, 248, 0.72);
+    margin-bottom: clamp(48px, 6vw, 88px);
+  }
+
+  .journey-blocks {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px 30px;
+    margin-top: auto;
+  }
+
+  .journey-block h4 {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 14px;
+  }
+
+  .journey-block p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.9;
+    letter-spacing: 1px;
+    color: #fafaf8;
+  }
+
+  .journey-block a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+
+  .journey-block a:hover {
+    opacity: 0.6;
+  }
+
+  .journey-social {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-top: 2px;
+  }
+
+  .journey-social a {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+  }
+
+  .journey-social svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+
+  /* 右侧咨询表单：结构照搬 contact 页，配色改为适配黑底 */
+  .journey-form {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .journey-form .form-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px 30px;
+  }
+
+  .journey-form .form-field {
+    display: grid;
+    gap: 7px;
+  }
+
+  .journey-form .form-field.full {
+    grid-column: 1 / -1;
+  }
+
+  .journey-form .form-field label {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 3px;
+    color: #999;
+    text-transform: uppercase;
+  }
+
+  .journey-form .form-field input,
+  .journey-form .form-field textarea {
+    width: 100%;
+    min-width: 0;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+    background: transparent;
+    color: #fafaf8;
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.35;
+    padding: 0 0 10px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .journey-form .form-field textarea {
+    resize: vertical;
+    min-height: 104px;
+  }
+
+  .journey-form .message-field textarea {
+    height: 150px;
+    align-self: start;
+  }
+
+  .journey-form .form-field input:focus,
+  .journey-form .form-field textarea:focus {
+    border-bottom-color: #fafaf8;
+  }
+
+  .journey-form .form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 26px;
+  }
+
+  .journey-form .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(100%, 380px);
+    min-height: 64px;
+    gap: 24px;
+    border: none;
+    background: #fafaf8;
+    color: #1a1a1a;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 0 42px;
+    transition: background-color 0.3s ease;
+  }
+
+  .journey-form .submit-btn:hover,
+  .journey-form .submit-btn:focus-visible {
+    background: #e5e5e5;
+    outline: none;
+  }
+
+  .journey-form .submit-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+  }
+
+  .journey-form .cta-arrow {
+    width: 14px;
+    height: 14px;
+    display: block;
+  }
+
+  .journey-form .form-feedback {
+    position: relative;
+    width: min(100%, 380px);
+    min-height: 18px;
+  }
+
+  .journey-form .form-assurance,
+  .journey-form .form-status {
+    width: 100%;
+    color: #999;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: opacity 0.35s ease;
+  }
+
+  .journey-form .form-assurance {
+    display: grid;
+    grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr);
+    align-items: center;
+    gap: 12px;
+  }
+
+  .journey-form .form-assurance::before,
+  .journey-form .form-assurance::after {
+    content: '';
+    height: 1px;
+    background: rgba(255, 255, 255, 0.24);
+  }
+
+  .journey-form .form-status {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+  }
+
+  .journey-form .form-feedback.is-submitted .form-assurance {
+    opacity: 0;
+  }
+
+  .journey-form .form-status.is-visible {
+    opacity: 1;
+  }
+
+  @media (max-width: 900px) {
+    .journey-inner {
+      grid-template-columns: 1fr;
+      gap: 56px;
+    }
+
+    .journey-intro {
+      margin-bottom: 40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .journey {
+      margin-top: 96px;
+      padding: clamp(48px, 8vw, 72px) 24px;
+    }
+
+    .journey-form .form-fields {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .journey-form .submit-btn,
+    .journey-form .form-feedback {
+      width: 100%;
+      max-width: 360px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-logo" aria-label="Habitas Design">
+      <img src="images/logo.png" alt="Habitas Design">
+    </a>
+    <div class="lang-switch">
+      <button id="btn-en" class="active" onclick="switchLang('en')">EN</button>
+      <span>/</span>
+      <button id="btn-cn" onclick="switchLang('cn')">中</button>
+    </div>
+  </div>
+</nav>
+
+<button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="toggleMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<div class="sidebar-overlay" onclick="closeMenu()" aria-hidden="true"></div>
+
+<aside class="sidebar" id="sidebar" aria-hidden="true">
+  <ul class="sidebar-links">
+    <li><a href="index.html" data-i18n="nav-home" onclick="closeMenu()">首页</a></li>
+    <li><a href="about.html" class="is-active" data-i18n="nav-about" onclick="closeMenu()">关于我们</a></li>
+    <li><a href="process.html" data-i18n="nav-process" onclick="closeMenu()">服务流程</a></li>
+    <li><a href="team.html" data-i18n="nav-stories" onclick="closeMenu()">团队</a></li>
+    <li><a href="projects.html" data-i18n="nav-works" onclick="closeMenu()">作品</a></li>
+    <li><a href="contact.html" data-i18n="nav-contact" onclick="closeMenu()">联系我们</a></li>
+  </ul>
+  <div class="sidebar-social" aria-label="Social media">
+    <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect width="20" height="20" x="2" y="2" rx="5.5"></rect>
+        <circle cx="12" cy="12" r="4.75"></circle>
+        <circle cx="17.75" cy="6.25" r="0.85" fill="currentColor" stroke="none"></circle>
+      </svg>
+    </a>
+    <a href="https://x.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="X">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+      </svg>
+    </a>
+  </div>
+</aside>
+
+<header class="story-hero" aria-labelledby="about-hero-title">
+  <img src="images/ABOUT US/顶部图/1.png" alt="Contemporary home in Melbourne">
+  <h1 class="story-hero-title" id="about-hero-title" data-i18n="about-hero-title">Crafting bespoke homes <br>across Melbourne's inner east <br>and south locations</h1>
+  <span class="story-scroll-hint" data-i18n="about-scroll">Scroll down</span>
+</header>
+
+<main class="story-main">
+  <section class="story-content" data-story-panel="about" aria-labelledby="story-title">
+    <div class="story-carousel" aria-label="About us carousel">
+      <div class="story-carousel-frame">
+        <div class="story-carousel-slide is-active">
+          <img src="images/Our Story/about us轮播图/1.png?v=20260715" alt="About us image 1">
+        </div>
+        <div class="story-carousel-slide">
+          <img src="images/Our Story/about us轮播图/2.png?v=20260715" alt="About us image 2">
+        </div>
+        <div class="story-carousel-slide">
+          <img src="images/Our Story/about us轮播图/3.png?v=20260715" alt="About us image 3">
+        </div>
+        <div class="story-carousel-slide">
+          <img src="images/Our Story/about us轮播图/4.png?v=20260715" alt="About us image 4">
+        </div>
+        <div class="story-carousel-slide">
+          <img src="images/Our Story/about us轮播图/5.png?v=20260715" alt="About us image 5">
+        </div>
+      </div>
+      <div class="story-carousel-controls">
+        <button class="story-carousel-btn" id="story-carousel-prev" type="button" aria-label="Previous">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+            <line x1="4" y1="16" x2="26" y2="16"/>
+            <polyline points="14,8 4,16 14,24"/>
+          </svg>
+        </button>
+        <button class="story-carousel-btn" id="story-carousel-next" type="button" aria-label="Next">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+            <line x1="6" y1="16" x2="28" y2="16"/>
+            <polyline points="18,8 28,16 18,24"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="story-copy">
+      <h2 class="story-title" id="story-title" data-i18n="story-title">40年匠心独运 缔造品质之家</h2>
+      <p data-i18n="about-p1">Habitas Design 植根于当代设计的理念，同时坚守对经典特质的追求。我们希望在每一个项目中，找到隽永气质与建筑表达之间的平衡。</p>
+      <p data-i18n="about-p2">3000 Corporation 与 Habitas Design 携手合作，汇聚了 35 年商业建筑经验与 20 年住宅设计经验。我们以家族对设计的执着、专注的客户服务，以及对品质的坚守，在墨尔本打造高端豪宅。</p>
+      <p data-i18n="about-p3">我们亦携手墨尔本最具创意的建筑师、室内与产品设计师、景观设计师及营造团队，为您提供量身定制的设计与建造一体化服务。</p>
+    </div>
+  </section>
+
+  <section class="capability-banner" data-story-panel="about" aria-labelledby="capability-title">
+    <h2 class="capability-title" id="capability-title" data-i18n="capability-title">点击下方下载我们的企业能力说明书。</h2>
+    <span class="capability-link" aria-disabled="true">
+      <span data-i18n="capability-link">下载企业能力说明书</span>
+      <span class="capability-link-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <polyline points="14,6 20,12 14,18"></polyline>
+        </svg>
+      </span>
+    </span>
+  </section>
+
+  <section class="about-features" data-story-panel="about" aria-label="Our strengths">
+    <article class="about-feature">
+      <div class="about-feature-heading">
+        <p class="about-feature-eyebrow" data-i18n="feature-design-eyebrow">我们的优势</p>
+        <h2 class="about-feature-title" data-i18n="feature-design-title">定制化设计</h2>
+      </div>
+      <img class="about-feature-media" src="images/ABOUT US/our differnece图/1.png" alt="Architect sketching a bespoke home design" loading="lazy" decoding="async">
+      <p class="about-feature-copy" data-i18n="feature-design-copy">每一个住宅都由我们的团队与知名建筑师、室内设计师精诚合作而筑造，旨在为您最终呈现一个写满向往、灯火可亲的意中之家。</p>
+    </article>
+
+    <article class="about-feature">
+      <div class="about-feature-heading">
+        <p class="about-feature-eyebrow" data-i18n="feature-build-eyebrow">我们的专长</p>
+        <h2 class="about-feature-title" data-i18n="feature-build-title">专注建造</h2>
+      </div>
+      <img class="about-feature-media" src="images/ABOUT US/our expertise图/1.png" alt="Construction team reviewing building plans on site" loading="lazy" decoding="async">
+      <p class="about-feature-copy" data-i18n="feature-build-copy">凭借几十年的协作经验，我们的建筑团队以独到的建造眼光著称，精心打造每一个细节。成熟的筑建体系、高效的运作流程、至臻的住宅出品令我们脱颖而出，成为业内声誉卓著的建造商之一。</p>
+    </article>
+    <a class="about-service-cta" href="process.html">
+      <span data-i18n="about-service">服务流程</span>
+      <span class="about-service-cta-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <polyline points="14,6 20,12 14,18"></polyline>
+        </svg>
+      </span>
+    </a>
+  </section>
+
+  <section class="journey" data-story-panel="about" aria-labelledby="journey-title">
+    <div class="journey-inner">
+      <div class="journey-info">
+        <h2 class="journey-title" id="journey-title" data-i18n="journey-title">START THE JOURNEY</h2>
+        <p class="journey-intro" data-i18n="journey-intro">Contact us today to discover how we can bring your vision to life, together.</p>
+        <div class="journey-blocks">
+          <div class="journey-block">
+            <h4 data-i18n="journey-office-label">Visit our Head Office</h4>
+            <p data-i18n="journey-office">U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia</p>
+          </div>
+          <div class="journey-block">
+            <h4 data-i18n="journey-enquire-label">Enquire</h4>
+            <p><a href="mailto:studio@habitasdesign.com" data-i18n="journey-email">studio@habitasdesign.com</a></p>
+          </div>
+          <div class="journey-block">
+            <h4 data-i18n="journey-connect-label">Connect</h4>
+            <div class="journey-social" aria-label="Social media">
+              <a href="https://www.instagram.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect width="20" height="20" x="2" y="2" rx="5.5"></rect>
+                  <circle cx="12" cy="12" r="4.75"></circle>
+                  <circle cx="17.75" cy="6.25" r="0.85" fill="currentColor" stroke="none"></circle>
+                </svg>
+              </a>
+              <a href="https://x.com/squarespace" target="_blank" rel="noopener noreferrer" aria-label="X">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="journey-form" id="journey-form">
+        <div class="form-fields">
+          <div class="form-field">
+            <label for="journey-first-name" data-i18n="form-first-name">名</label>
+            <input id="journey-first-name" name="firstName" type="text" autocomplete="given-name" required>
+          </div>
+          <div class="form-field">
+            <label for="journey-last-name" data-i18n="form-last-name">姓</label>
+            <input id="journey-last-name" name="lastName" type="text" autocomplete="family-name" required>
+          </div>
+          <div class="form-field">
+            <label for="journey-phone" data-i18n="form-phone">手机</label>
+            <input id="journey-phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+          <div class="form-field">
+            <label for="journey-email" data-i18n="form-email">邮箱</label>
+            <input id="journey-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="form-field full">
+            <label for="journey-budget" data-i18n="form-budget">预算</label>
+            <input id="journey-budget" name="budget" type="text" inputmode="text">
+          </div>
+          <div class="form-field full message-field">
+            <label for="journey-message" data-i18n="form-message">留言</label>
+            <textarea id="journey-message" name="message" required></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="submit-btn" type="submit">
+            <span data-i18n="form-submit">提交咨询</span>
+            <span class="submit-circle" aria-hidden="true">
+              <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="4" y1="12" x2="20" y2="12"/>
+                <polyline points="14,6 20,12 14,18"/>
+              </svg>
+            </span>
+          </button>
+          <div class="form-feedback">
+            <p class="form-assurance" data-i18n="form-assurance">我们会尽快与您联系</p>
+            <p class="form-status" id="journey-form-status" data-i18n="form-success" aria-live="polite">已收到，我们会尽快与您联系。</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<section class="story-closing" aria-label="Back to home">
+  <a class="process-home-link" href="index.html">
+    <span data-i18n="back-home">返回首页</span>
+    <span class="process-home-link-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="4" y1="12" x2="20" y2="12"/>
+        <polyline points="14,6 20,12 14,18"/>
+      </svg>
+    </span>
+  </a>
+</section>
+
+<footer class="footer">&copy; 2026 Habitas Design. All rights reserved.</footer>
+
+<script>
+const t = {
+  'nav-home': ['首页', 'Home'],
+  'nav-works': ['作品', 'Our Work'],
+  'nav-process': ['服务流程', 'Service'],
+  'nav-about': ['关于我们', 'About'],
+  'nav-contact': ['联系我们', 'Contact'],
+  'nav-stories': ['团队', 'People'],
+  'about-hero-title': ['匠心定制住宅<br>遍布墨尔本内东区<br>及南部地区', 'Crafting bespoke homes <br>across Melbourne\'s inner east <br>and south locations'],
+  'about-scroll': ['向下滚动', 'Scroll down'],
+  'story-title': ['40年匠心独运 缔造品质之家', 'DESIGNING EXQUISITE<br>HOMES FOR 43 YEARS<br>IN PURSUIT OF<br>UNPARALLELED PERFECTION.'],
+  'about-p1': ['Habitas Design 植根于当代设计的理念，同时坚守对经典特质的追求。我们希望在每一个项目中，找到隽永气质与建筑表达之间的平衡。', 'Habitas Design is grounded in the values of contemporary design whilst maintaining a commitment to Classic characteristics. We wish to find the balance of timeless qualities and Architectural expression in each project.'],
+  'about-p2': ['3000 Corporation 与 Habitas Design 携手合作，汇聚了 35 年商业建筑经验与 20 年住宅设计经验。我们以家族对设计的执着、专注的客户服务，以及对品质的坚守，在墨尔本打造高端豪宅。', '3000 Corporation and Habitas Design are bringing together 35 years of commercial construction experience and 20 years of residential architecture experience through a family commitment to design, dedicated client service and quality construction of luxury homes in Melbourne.'],
+  'about-p3': ['我们亦携手墨尔本最具创意的建筑师、室内与产品设计师、景观设计师及营造团队，为您提供量身定制的设计与建造一体化服务。', 'We also collaborate with some of Melbourne\'s most creative architects, interior and product designers, landscape architects and builders to offer a personalized design and build service.'],
+  'capability-title': ['点击下方下载我们的企业能力说明书。', 'Click below to download<br>our Capability Statement.'],
+  'capability-link': ['下载企业能力说明书', 'DOWNLOAD CAPABILITY STATEMENT'],
+  'feature-design-eyebrow': ['我们的优势', 'Our Difference'],
+  'feature-design-title': ['定制化设计', 'PERSONALISED DESIGN'],
+  'feature-design-copy': ['每一个住宅都由我们的团队与知名建筑师、室内设计师精诚合作而筑造，旨在为您最终呈现一个写满向往、灯火可亲的意中之家。', 'Each home is architecturally designed by our team, or in partnership with renowned architects and interior designers. The result is a thoughtfully planned, personalised and beautiful home to call your own.'],
+  'feature-build-eyebrow': ['我们的专长', 'Our Expertise'],
+  'feature-build-title': ['专注建造', 'DEDICATED CONSTRUCTION'],
+  'feature-build-copy': ['凭借几十年的协作经验，我们的建筑团队以独到的建造眼光著称，精心打造每一个细节。成熟的筑建体系、高效的运作流程、至臻的住宅出品令我们脱颖而出，成为业内声誉卓著的建造商之一。', 'With decades of collective experience, our construction team have the discerning eye for nuanced builds. Our efficient processes, quality assurance and attention to detail set us apart, establishing Englehart as one of the most reputable in the industry.'],
+  'about-service': ['服务流程', 'OUR SERVICE'],
+  'back-home': ['返回首页', 'Back to Home'],
+  'journey-title': ['开启您的旅程', 'START THE JOURNEY'],
+  'journey-intro': ['即刻与我们联系，一起探讨如何将您心中的构想变为现实。', 'Contact us today to discover how we can bring your vision to life, together.'],
+  'journey-office-label': ['总部地址', 'Visit our Head Office'],
+  'journey-office': ['U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia', 'U2 5 Aristoc Road<br>Glen Waverley, VIC<br>Australia'],
+  'journey-enquire-label': ['咨询', 'Enquire'],
+  'journey-email': ['studio@habitasdesign.com', 'studio@habitasdesign.com'],
+  'journey-connect-label': ['关注我们', 'Connect'],
+  'form-first-name': ['名', 'First Name'],
+  'form-last-name': ['姓', 'Last Name'],
+  'form-phone': ['手机', 'Phone'],
+  'form-email': ['邮箱', 'Email'],
+  'form-budget': ['预算', 'Budget'],
+  'form-message': ['留言', 'Message'],
+  'form-submit': ['提交咨询', 'SUBMIT ENQUIRY'],
+  'form-assurance': ['我们会尽快与您联系', 'WE\'LL BE IN TOUCH SOON'],
+  'form-success': ['已收到，我们会尽快与您联系。', 'Thank you. We will be in touch soon.']
+};
+
+let lang = localStorage.getItem('hb-lang') || 'en';
+
+function switchLang(l) {
+  if (l === lang) return;
+  lang = l;
+  localStorage.setItem('hb-lang', lang);
+  applyLang();
+}
+
+function applyLang() {
+  const idx = lang === 'cn' ? 0 : 1;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.innerHTML = t[key][idx];
+  });
+  document.getElementById('btn-cn').classList.toggle('active', lang === 'cn');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang === 'cn' ? 'zh-CN' : 'en';
+}
+
+applyLang();
+
+(() => {
+  const slides = document.querySelectorAll('.story-carousel-slide');
+  const prev = document.getElementById('story-carousel-prev');
+  const next = document.getElementById('story-carousel-next');
+  if (!slides.length || !prev || !next) return;
+
+  let current = 0;
+  let timer = null;
+  const INTERVAL = 5000;
+
+  function show(i) {
+    current = (i + slides.length) % slides.length;
+    slides.forEach((slide, idx) => slide.classList.toggle('is-active', idx === current));
+  }
+
+  function startAuto() {
+    stopAuto();
+    if (slides.length > 1) timer = setInterval(() => show(current + 1), INTERVAL);
+  }
+
+  function stopAuto() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  }
+
+  if (slides.length <= 1) {
+    prev.disabled = true;
+    next.disabled = true;
+    return;
+  }
+
+  prev.addEventListener('click', () => { show(current - 1); startAuto(); });
+  next.addEventListener('click', () => { show(current + 1); startAuto(); });
+
+  startAuto();
+})();
+
+function toggleMenu() {
+  const isOpen = document.body.classList.toggle('menu-open');
+  const toggle = document.querySelector('.nav-toggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.querySelector('.sidebar-overlay');
+  toggle.classList.toggle('is-open', isOpen);
+  toggle.setAttribute('aria-expanded', isOpen);
+  sidebar.classList.toggle('is-open', isOpen);
+  sidebar.setAttribute('aria-hidden', !isOpen);
+  overlay.classList.toggle('is-open', isOpen);
+  overlay.setAttribute('aria-hidden', !isOpen);
+}
+
+function closeMenu() {
+  if (document.body.classList.contains('menu-open')) {
+    toggleMenu();
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeMenu();
+});
+
+// ===== 顶栏：下滑隐藏 / 上滑出现 + 停顿 2 秒自动消失 =====
+(() => {
+  let lastY = window.scrollY;
+  let ticking = false;
+  let hideTimer = null;
+  const TOP_ZONE = 80;   // 接近顶部时始终显示
+  const DELTA = 5;       // 抖动阈值
+  const IDLE_MS = 2000;  // 静止 2 秒后自动收起
+
+  function autoHide() {
+    if (!document.body.classList.contains('menu-open')) {
+      document.body.classList.add('header-hidden');
+    }
+  }
+
+  function scheduleAutoHide() {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(autoHide, IDLE_MS);
+  }
+
+  function show() {
+    document.body.classList.remove('header-hidden');
+    scheduleAutoHide();
+  }
+
+  function update() {
+    ticking = false;
+    const y = window.scrollY;
+
+    // 菜单打开时不隐藏顶栏
+    if (document.body.classList.contains('menu-open')) {
+      document.body.classList.remove('header-hidden');
+      lastY = y;
+      return;
+    }
+
+    if (y <= TOP_ZONE) {
+      show();                                           // 接近顶部：显示，并重启计时
+    } else if (y > lastY + DELTA) {
+      document.body.classList.add('header-hidden');     // 向下滚：立即隐藏
+      clearTimeout(hideTimer);
+    } else if (y < lastY - DELTA) {
+      show();                                           // 向上滚：显示，并重启计时
+    }
+    lastY = y;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  scheduleAutoHide();    // 首次加载后静止 2 秒也自动收起
+})();
+
+// ===== START THE JOURNEY 表单：仅前端提示，不真实提交 =====
+(() => {
+  const form = document.getElementById('journey-form');
+  if (!form) return;
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const feedback = form.querySelector('.form-feedback');
+    const status = form.querySelector('.form-status');
+    if (feedback) feedback.classList.add('is-submitted');
+    if (status) status.classList.add('is-visible');
+  });
+})();
+</script>
+
+</body>
+</html>
