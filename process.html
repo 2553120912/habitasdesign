@@ -957,7 +957,7 @@
   <section class="process-closing" aria-label="Process commitment">
     <p class="process-closing-text" data-i18n="closing-statement">作为值得信赖的建造商，<br>Habitas Design 的专业管理与周到服务将一直与您的筑宅之路相伴同行。<br>我们不遗余力，达成您对于"家"的所有期盼。</p>
     <a class="process-home-link" href="index.html">
-      <span data-i18n="back-home">返回首页</span>
+      <span data-i18n="go-back">返回</span>
       <span class="process-home-link-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
           <line x1="4" y1="12" x2="20" y2="12"/>
@@ -1002,7 +1002,7 @@ const t = {
   'step-07-title': ['售后服务', 'Aftercare'],
   'step-07-copy': ['交付并不是服务的终点。入住后我们持续回应维护、调整与使用反馈，让新家在真实生活中保持舒适、可靠与完整。', 'Handover is not the end of our care. After move-in, we respond to maintenance, adjustments and feedback so the home remains comfortable, reliable and complete.'],
   'closing-statement': ['作为值得信赖的建造商，<br>Habitas Design 的专业管理与周到服务将一直与您的筑宅之路相伴同行。<br>我们不遗余力，达成您对于"家"的所有期盼。', 'As a trusted builder,<br>Habitas Design brings professional management and thoughtful service to every step of your home-building journey.<br>We spare no effort in realising every expectation you hold for home.'],
-  'back-home': ['返回首页', 'Back to Home'],
+  'go-back': ['返回', 'GO BACK'],
   'footer-copy': ['&copy; 2026 Habitas Design. All rights reserved.', '&copy; 2026 Habitas Design. All rights reserved.']
 };
 
@@ -1056,6 +1056,31 @@ document.querySelectorAll('.accordion-trigger').forEach(trigger => {
     trigger.setAttribute('aria-expanded', String(isOpen));
   });
 });
+
+const processBackLink = document.querySelector('.process-home-link');
+const processSource = new URLSearchParams(window.location.search).get('from');
+
+if (processSource === 'about') {
+  processBackLink.href = 'about.html';
+  processBackLink.addEventListener('click', event => {
+    let referrer;
+
+    try {
+      referrer = document.referrer ? new URL(document.referrer) : null;
+    } catch {
+      referrer = null;
+    }
+
+    const cameFromAbout = referrer
+      && referrer.origin === window.location.origin
+      && referrer.pathname.endsWith('/about.html');
+
+    if (cameFromAbout && window.history.length > 1) {
+      event.preventDefault();
+      window.history.back();
+    }
+  });
+}
 
 applyLang();
 
