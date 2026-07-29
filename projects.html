@@ -630,9 +630,9 @@
     <p class="projects-kicker" data-i18n="projects-kicker">所有项目</p>
     <nav class="projects-filters" aria-label="Project filters">
       <button class="filter-btn is-active" data-filter="all"                         data-i18n="filter-all">All</button>
-      <button class="filter-btn"           data-filter="interior-design"             data-i18n="filter-interior-design">Interior Design</button>
-      <button class="filter-btn"           data-filter="single-dwelling-residential" data-i18n="filter-single-dwelling">Single Dwelling Residential</button>
-      <button class="filter-btn"           data-filter="multi-residential"            data-i18n="filter-multi-residential">Multi-Residential</button>
+      <button class="filter-btn"           data-filter="contemporary" data-i18n="filter-contemporary">Contemporary</button>
+      <button class="filter-btn"           data-filter="heritage"     data-i18n="filter-heritage">Heritage</button>
+      <button class="filter-btn"           data-filter="commerial"    data-i18n="filter-commerial">Commerial</button>
     </nav>
   </div>
 </header>
@@ -667,30 +667,30 @@ const t = {
   'nav-stories': ['团队', 'People'],
   'projects-kicker': ['所有项目', 'PORTFOLIO'],
   'filter-all':               ['All', 'All'],
-  'filter-interior-design':   ['Interior Design', 'Interior Design'],
-  'filter-single-dwelling':   ['Single Dwelling Residential', 'Single Dwelling Residential'],
-  'filter-multi-residential': ['Multi-Residential', 'Multi-Residential'],
+  'filter-contemporary': ['Contemporary', 'Contemporary'],
+  'filter-heritage':     ['Heritage', 'Heritage'],
+  'filter-commerial':    ['Commerial', 'Commerial'],
   'back-home': ['返回首页', 'Back to Home'],
   'footer-copy': ['&copy; 2026 Habitas Design. All rights reserved.', '&copy; 2026 Habitas Design. All rights reserved.']
 };
 
 const projects = [
-  { id: 'lovell-house',  category: 'single-dwelling-residential', image: 'images/lovell-house/精选卡/秋天perspective.png', href: 'lovell-house.html',
+  { id: 'lovell-house',  category: 'contemporary', image: 'images/lovell-house/精选卡/秋天perspective.png', href: 'lovell-house.html',
     title: { cn: 'Lovell House', en: 'Lovell House' },
     info:  { cn: '2024',  en: '2024' } },
-  { id: 'myrtle-house',  category: 'single-dwelling-residential', image: 'images/myrtle-house/精选卡/side elevation.png', imagePosition: '54% center', href: 'myrtle-house.html',
+  { id: 'myrtle-house',  category: 'commerial', image: 'images/myrtle-house/精选卡/side elevation.png', imagePosition: '54% center', href: 'myrtle-house.html',
     title: { cn: 'Myrtle House', en: 'Myrtle House' },
     info:  { cn: '2025',  en: '2025' } },
-  { id: 'knutsford-house', category: 'single-dwelling-residential', image: 'images/knutsford-house/精选卡/1.png', href: 'knutsford-house.html',
+  { id: 'knutsford-house', category: 'commerial', image: 'images/knutsford-house/精选卡/1.png', href: 'knutsford-house.html',
     title: { cn: 'Knutsford House', en: 'Knutsford House' },
     info:  { cn: '2025',  en: '2025' } },
-  { id: 'zhongji-cantonese-restaurant', category: 'interior-design', image: 'images/Zhongji Cantonese Restaurant/Portfolio卡/1.png', href: 'zhongji-cantonese-restaurant.html',
+  { id: 'zhongji-cantonese-restaurant', category: 'commerial', image: 'images/Zhongji Cantonese Restaurant/Portfolio卡/1.png', href: 'zhongji-cantonese-restaurant.html',
     title: { cn: 'Zhongji Cantonese Restaurant', en: 'Zhongji Cantonese Restaurant' },
     info:  { cn: 'TBD', en: 'TBD' } },
-  { id: 'in-here-beauty-salon', category: 'interior-design', image: 'images/In Here Beauty Salon/Portfolio卡/1.png', href: 'in-here-beauty-salon.html',
+  { id: 'in-here-beauty-salon', category: 'commerial', image: 'images/In Here Beauty Salon/Portfolio卡/1.png', href: 'in-here-beauty-salon.html',
     title: { cn: 'In Here Beauty Salon', en: 'In Here Beauty Salon' },
     info:  { cn: 'TBD', en: 'TBD' } },
-  { id: '32-myers-avenue-single-dwelling', category: 'single-dwelling-residential', image: 'images/32 Myers Avenue  Single Dwelling/Portfolio卡/1.png', href: '32-myers-avenue-single-dwelling.html',
+  { id: '32-myers-avenue-single-dwelling', category: 'heritage', image: 'images/32 Myers Avenue  Single Dwelling/Portfolio卡/1.png', href: '32-myers-avenue-single-dwelling.html',
     title: { cn: '32 Myers Avenue Single Dwelling', en: '32 Myers Avenue Single Dwelling' },
     info:  { cn: 'TBD', en: 'TBD' } },
 ];
