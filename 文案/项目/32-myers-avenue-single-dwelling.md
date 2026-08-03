@@ -1,6 +1,6 @@
-# 项目文案：32 Myers Avenue Single Dwelling（32-myers-avenue-single-dwelling.html）
+# 项目文案：32 Myers Avenue（32-myers-avenue-single-dwelling.html）
 
-> 这份文件对应作品「**32 Myers Avenue Single Dwelling**」的详情页 `32-myers-avenue-single-dwelling.html`。
+> 这份文件对应作品「**32 Myers Avenue**」的详情页 `32-myers-avenue-single-dwelling.html`。
 > ⚠️ 目前只是**空骨架**，内容都还没填。等你给资料，我再逐条补上并同步到页面。
 > 每条按「中文 / 英文」对照（中文在前、英文在后）。
 > 导航、联系区、页脚是多页共用的，见 [通用文案](../通用文案.md)。作品列表见 [作品集](../页面/作品集.md)。
