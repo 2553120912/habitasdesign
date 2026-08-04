@@ -1,7 +1,7 @@
 # 项目文案：Nio Commercial Fitout（nio-commercial-fitout.html）
 
 > 这份文件对应作品「**Nio Commercial Fitout**」的详情页 `nio-commercial-fitout.html`。
-> 当前页面根据已有视觉素材填写了简短介绍；地点、年份、面积和状态仍待补充。
+> 当前页面根据已有视觉素材填写了简短介绍，并已补充项目基础信息。
 > 每条按「中文 / 英文」对照（中文在前、英文在后）。
 
 ---
@@ -19,10 +19,10 @@
 
 | 字段 | 中文 | 英文 |
 | --- | --- | --- |
-| 地点 Location | 【待补】 | 【待补】 |
-| 年份 Year | 【待补】 | 【待补】 |
-| 面积 Area | 【待补】 | 【待补】 |
-| 状态 Status | 【待补】 | 【待补】 |
+| 地点 Location | 上海 | Shanghai |
+| 年份 Year | 2025 | 2025 |
+| 面积 Area | 2,950 平方米 | 2,950 m² |
+| 状态 Status | 已完成 | Completed |
 | 类型 Typology | 商业室内 | Commercial Fitout |
 
 ## 图片画廊

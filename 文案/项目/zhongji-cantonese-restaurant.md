@@ -1,7 +1,7 @@
 # 项目文案：Yuexihui Zhongji Building（zhongji-cantonese-restaurant.html）
 
 > 这份文件对应作品「**Yuexihui Zhongji Building**」的详情页 `zhongji-cantonese-restaurant.html`。
-> ⚠️ 目前只是**空骨架**，内容都还没填。等你给资料，我再逐条补上并同步到页面。
+> 项目基础信息已补充，副标题和项目简介仍待完善。
 > 每条按「中文 / 英文」对照（中文在前、英文在后）。
 > 导航、联系区、页脚是多页共用的，见 [通用文案](../通用文案.md)。作品列表见 [作品集](../页面/作品集.md)。
 
@@ -19,10 +19,10 @@
 
 | 字段 | 中文 | 英文 |
 | --- | --- | --- |
-| 地点 Location | 【待补】 | 【待补】 |
-| 年份 Year | 【待补】 | 【待补】 |
-| 面积 Area | 【待补】 | 【待补】 |
-| 状态 Status | 【待补】 | 【待补】 |
+| 地点 Location | 上海 | Shanghai |
+| 年份 Year | 2025 | 2025 |
+| 面积 Area | 2,950 平方米 | 2,950 m² |
+| 状态 Status | 已完成 | Completed |
 | 类型 Typology | 【待补】 | 【待补】 |
 
 ## 图片画廊
