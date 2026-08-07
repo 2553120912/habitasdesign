@@ -558,6 +558,32 @@
     opacity: 0.86;
   }
 
+  .project-gallery-more-wrap { display: flex; justify-content: center; margin-top: 18px; }
+  .project-gallery-more-toggle {
+    position: relative; display: inline-flex; align-items: center; gap: 10px; padding: 0;
+    border: 0; background: none; color: var(--text); font-family: inherit; font-size: 13px;
+    letter-spacing: 1.8px; text-transform: uppercase; font-weight: 400; cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  .project-gallery-more-toggle::after { content: ''; position: absolute; left: 0; right: 0; bottom: -8px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: center; transition: transform 0.35s ease; }
+  .project-gallery-more-toggle:hover { opacity: 0.68; }
+  .project-gallery-more-toggle:hover::after { transform: scaleX(1); }
+  .project-gallery-more-icon { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border: 1px solid currentColor; border-radius: 50%; }
+  .project-gallery-more-icon svg { display: block; width: 12px; height: 12px; }
+  .project-gallery-more-toggle:hover .project-gallery-more-icon svg { transform: translateY(2px); }
+  @media (max-width: 768px) {
+    .project-gallery-more-wrap { margin-top: 16px; }
+    .project-gallery-more-toggle { font-size: 12.5px; letter-spacing: 1.4px; }
+    .project-gallery-more-icon { width: 23px; height: 23px; }
+    .project-gallery-more-icon svg { width: 11.5px; height: 11.5px; }
+  }
+  @media (max-width: 768px) {
+    .project-gallery-more-wrap { margin-top: 16px; }
+    .project-gallery-more-toggle { font-size: 12.5px; letter-spacing: 1.4px; }
+    .project-gallery-more-icon { width: 23px; height: 23px; }
+    .project-gallery-more-icon svg { width: 11.5px; height: 11.5px; }
+  }
+
   .kh-lightbox {
     position: fixed;
     inset: 0;
@@ -1013,6 +1039,7 @@
       <figure class="kh-gallery-item kh-gallery-trigger" data-index="0" style="grid-column: 1 / -1; aspect-ratio: 16 / 9;"><img src="images/项目/knutsford/展示图/1.png" alt="Knutsford House view 1"></figure>
       <figure class="kh-gallery-item kh-gallery-trigger" data-index="1" style="grid-column: 1 / -1; aspect-ratio: 16 / 9;"><img src="images/项目/knutsford/展示图/2.png" alt="Knutsford House view 2"></figure>
     </div>
+    <div class="project-gallery-more-wrap"><button class="project-gallery-more-toggle" type="button" aria-haspopup="dialog"><span>CLICK FOR MORE</span><span class="project-gallery-more-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="18"/><polyline points="6,12 12,18 18,12"/></svg></span></button></div>
   </section>
 
   <div class="kh-back-link-wrap">
@@ -1165,7 +1192,7 @@ document.addEventListener('keydown', e => {
 });
 
 (function lightbox() {
-  const images = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png'];
+  const images = ['1.png', '2.png', '3.png', '4.png?v=20260807', '5.png', '6.png', '7.png'];
   const basePath = 'images/项目/knutsford/展示图/';
   const box = document.querySelector('.kh-lightbox');
   const img = box.querySelector('.kh-lightbox-stage img');
@@ -1197,6 +1224,7 @@ document.addEventListener('keydown', e => {
   document.querySelectorAll('.kh-gallery-trigger').forEach(el => {
     el.addEventListener('click', () => open(parseInt(el.dataset.index, 10)));
   });
+  document.querySelector('.project-gallery-more-toggle').addEventListener('click', () => open(0));
   box.querySelector('.kh-lightbox-close').addEventListener('click', close);
   box.querySelector('.kh-lightbox-prev').addEventListener('click', prev);
   box.querySelector('.kh-lightbox-next').addEventListener('click', next);
